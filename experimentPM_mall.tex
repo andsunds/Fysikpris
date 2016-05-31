@@ -1,0 +1,144 @@
+%Mall skapad av Andréas Sundström, Göteborg, 2015-02-28.
+%Neders i filen finns lite påminnelser om hur man använder vissa
+%kommandon. 
+
+%Grunden är baserad på Christian von Schults mall.
+\documentclass[12pt,a4paper]{article}
+\pdfoutput=1
+%%%%%%%%%%%%%%%%%%%%%%%vons grund%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel} %OBS! Se till att vi får rätt språk.
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{units}
+\usepackage{icomma}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{bbm}
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%Egna tillägg%%%%%%%%%%%%%%%%%%%%%%%
+
+%%Partiell derivata
+\newcommand{\pd}{\ensuremath{\partial}}
+%%Följer ISO-8601 oberoende av språk.
+\usepackage{datetime} 
+\newdateformat{specialdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+%%Göra grader Celcius
+\newcommand{\degC}{\ensuremath{\,^\circ\mathrm{C}}}
+%%Figurreferenser
+\newcommand{\Figref}{\figurename~\ref} %Stor bokstav i början
+\newcommand{\figref}{\MakeLowercase{\figurename}~\ref} 
+%%Tabellreferenser
+\newcommand{\Tabref}{\tablename~\ref} %Stor bokstav i början
+\newcommand{\tabref}{\MakeLowercase{\tablename}~\ref}
+%%Ohm enhetskommando
+\newcommand{\ohm}{\ifmmode \Omega \else $\Omega$ \fi}
+%%Varepsilon är det enda rätta epsilon
+\renewcommand{\epsilon}{\varepsilon}
+
+
+%%%%%%%%%%%%%%%%%%Övriga matnyttiga paket%%%%%%%%%%%%%%%%%
+
+%%För att kunna inkludera andra PDF-dokument
+\usepackage{pdfpages}
+%%För att kunna ha roterade bilder
+\usepackage{rotating}
+%%För att inkludera MATLABkod. 
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+%\usepackage{listings} 
+%\lstloadlanguages{matlab} 
+%\lstset{language=matlab} 
+%\lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
+%  {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
+
+
+%%För att själv bestämma marginalerna. 
+%\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+%]{geometry}
+
+
+
+
+%Fixar typstorleken i \section så att den inte blir för stor
+\usepackage{sectsty}
+\sectionfont{\fontsize{13}{0}\selectfont}
+
+\begin{document}
+\title{}
+\author{}
+\date{2015-03-20}%Datum för experimentfinal 2015
+\maketitle
+
+%Jag tänker mig att numrering är onödig
+\section*{Bakgrund} 
+%Det kan vara bra med en kort bakrund (typ 50-75 ord).
+%Ska det vara några bilder här? Det känns mest störiga.
+
+\section*{Uppgift}
+%Ha med relevanta bilder
+
+%Tilltal i singular: ''Din uppgift är att ...''
+
+
+\section*{Materiel}
+%Lista all utrustning. Vid behöv förklara den.
+%Här måste vi ha med bilder på all utrustning!
+
+%En punktlista med all materiel.
+%Listan bör innehålla: <antal>, <sak>, <ev. förklaring hur den
+%används>
+
+\begin{itemize}
+\item 
+\end{itemize}
+
+%En längre förklaring om hur något används kan kanske läggas här,
+%efter listan. 
+
+\end{document}
+%%%%%%%%Påminnelser om hur man använder vissa kommandon%%%%%%%%%%
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+%%För att referera till till tidigare fotnot:
+%\footnotemark[\value{footnote}]
+
+%% Inkludera PDF-dokument
+%\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+%\begin{figure}\centering
+%\centerline{ %centrerar även större bilder
+%\includegraphics[width=1\textwidth]{filnamn.pdf}
+%}
+%\caption{\label{figuren} Perioden $T$ som funktion av pendellängden.}
+%\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+%\begin{figure}\centering
+%\input{filnamn.pdf_t}
+%\caption{\label{finafiguren} Perioden $T$ som funktion av
+%  pendellängden.}
+%\end{figure}
+
+
+%% Figurer roterade 90 grader
+%\begin{sidewaysfigure}\centering
+%\centerline{ %centrerar även större bilder
+%\includegraphics[width=1\textwidth]{filnamn.pdf}
+%}
+%\caption{\label{figuren} Perioden $T$ som funktion av pendellängden.}
+%\end{sidewaysfigure}
