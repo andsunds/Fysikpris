@@ -1,0 +1,11 @@
+#Tar gömmer saker för git som jag inte vill ha med.
+#Onödig LaTeX-output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+
+#Onödig xfig
+*.fig.bak
