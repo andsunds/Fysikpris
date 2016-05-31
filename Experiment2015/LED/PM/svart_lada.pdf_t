@@ -1,0 +1,23 @@
+\begin{picture}(0,0)%
+\includegraphics{svart_lada.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(4378,2775)(3991,-4399)
+\put(7799,-2603){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$1\,\mathrm{k\Omega}$}%
+}}}}
+\put(7650,-3272){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,1}Bl\aa}%
+}}}}
+\put(6535,-3272){\makebox(0,0)[lb]{\smash{{\SetFigFont{12}{14.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{1,0,0}R\"o{}d}%
+}}}}
+\put(6684,-2603){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$1\,\mathrm{k\Omega}$}%
+}}}}
+\put(4006,-3012){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Svart l\aa{}da}%
+}}}}
+\end{picture}%
