@@ -1,0 +1,149 @@
+\documentclass[11pt,a4paper, english, swedish
+]{article}
+\pdfoutput=1
+
+\usepackage{custom_as}
+
+\graphicspath{ {figurer/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{ Behandling av experimentella resultat\\ 
+\Large En introduktion för fysikstudenter till hur man ska hantera
+mätresultat och feluppskattningar}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\subsection*{Förord}
+\small
+Det här kompendiet är skrivet som en introduktion till
+feluppskattningar för det svenska IPhO-laget. Jag har försökt fatta
+mig kort, men jag har en tendens att kunna dra iväg när jag
+skriver. 
+
+Det viktigaste innehållet finns i avsnitt~\ref{sec:feluppskattningar},
+men jag tyckte att det behövs en liten teoretisk bakgrund också, den
+finns i avsnitt~\ref{sec:statistik}. Det avsnittet ska man läsa om man
+vill få en lite klarare bild om varför feluppskattningarna på det ena
+eller andra viset. Sedan finns har jag även lagt till ett avsnitt om
+approximationer. Detta avsnitt hör inte så mycket ihop med resten av
+det här kompendiet, men det är matnyttigt att kunna göra
+uppskattningar både för teoretiska och experimentella beräkningar. 
+\begin{flushright}
+Andréas Sunsdtröm\\ Göteborg, 2016-06-10
+\end{flushright}
+\normalsize
+
+\addtocounter{section}{-1}
+\section{Approximationer}
+
+
+\section{Statistik}\label{sec:statistik}
+När man gör mätningar vill man oftast ta reda på någon storhets värde
+-- exempelvis periodtiden på en pendel. Med en mätning kan man dock
+inte säga något om hur bra mätningen var. Men med flera mätningar kan
+vi börja göra statistik över dem. Då 
+
+Jag vill även betona vikten av statistik i framtida vetenskapliga och
+tekniska karriärer. \emph{Statistik är ett mycket kraftfullt verktyg.}
+Statistiken, när man börjar behärska den, är mycket mer än bara
+''medelvärden och standardavvikelser''; den spelar en väsentlig roll i
+mer eller mindre all experimentell vetenskap -- särskilt vid
+feluppskattningar. 
+
+\subsection{Sannolikhetsfördelningar och täthetsfunktioner}
+Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
+fördet mesta vara diskret (och ändlig). Alltså att det finns ett
+ändligt antal möjliga utfall och varje utfall är distikt. Exempel på
+detta är tärningskast, lottdragning och kortlekar. 
+
+Verkligheten är dock oftast mer komplicerad än så. När man gör
+mätningar handrar det oftas om mätnigar av en reellvärd
+storhet som t.ex. en längd\footnotemark{}. Detta betyder att längden
+kommer att anta ett reellt antal milimetrar och inte vara begränsad
+till ett ändligt antal möjliga värden. För att analysera detta behövs
+statistik för kontinuerliga fördelningar. 
+\footnotetext{''Aha!'' tänker ni: atomer och kvantfysik gör att det
+  bara finns diskreta längder. ''Nähä!'' säger jag: som fysiker måste
+  man kunna hantera approximationer och veta begränsningarna i sina
+  mätningar. Med en linjal eller skujtmått finns det ingen chans i
+  världen att man skulle kunna stöta på problem orsakade av
+  kvantfysik. Man kan alltså betrakta det som om de möjliga värden
+  som längden kan anta ligger kontinuerligt.}
+
+Sannolikhetsfördelningar karakteriseras av sin täthetsfunktion, som
+brukar betecknas $f$. Täthetsfunktionen talar om hur sannolikt det är
+att få ett värde i ett visst intervall. Notera dock att den
+\emph{inte} kan ge sannolikheten att få ett specifikt värde eftersom
+det finns (ouppräknerligt) oändligt många möjliga utfall, så
+sannolikheten att få ett visst exat värde är~0.
+
+
+
+En av de vanligaste fördelningarna är \emph{normalfördelningen}. Den
+har en täthesfunktion
+\begin{equation}
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \, \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\end{equation}
+där $\mu$ är fördelningens \emph{väntevärde} och $\sigma$ är dess
+\emph{standardavvikelse}. 
+
+
+
+\section{Feluppskattningar}\label{sec:feluppskattningar}
+När man vill uppskatta hur stora experimentella fel/osäkerheter man
+har finns det två typer av fel och två typer av feluppskattningar. De
+två typerna av fel som finns är systematiska och statistiska. Sedan är
+de två typerna av feluppskattningar som man behöver kunna dels direkt
+feluppskattning (av statistiska fel), dels propagering av osäkerhet. 
+
+
+\subsection{Statistiska osäkerheter och hur man uppskattar dem}
+Säg att det finns en storhet $x$ som vi vill mäta, men att vi i varje
+mätning gör ett mätfel~$\delta{x}$. Det vi mäter blir då
+\begin{equation}
+\hat{x}=x+\delta{x}.
+\end{equation}
+Utan någon mer informationom $\delta{x}$ går det inte att säga så mycket mer
+från mätningen.
+
+\subsection{Systematiska fel}
+
+\subsection{Felpropagering}
+
+
+
+%\newpage
+%\bibliographystyle{ieeetr}
+%\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+
+
+\end{document}
+
+

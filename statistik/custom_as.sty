@@ -1,0 +1,155 @@
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]%Godtyckligt valt men inte för gammalt
+\ProvidesPackage{custom_as}[2016/05/07 Custom (Andréas)]
+
+
+%%För att inkludera MATLABkod. 
+%%OBS: mcode är ett separat paket och man måste ha mcode.sty i samma
+%%katalog som dokumentet.
+\newif\if@mcode\@mcodefalse
+\DeclareOption{mcode}{
+\@mcodetrue
+}
+\newif\if@swedish\@swedishfalse
+\DeclareOption{swedish}{
+\@swedishtrue
+}
+
+
+\ProcessOptions\relax
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel} %OBS! Se till att vi får rätt språk.
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{helvet}
+\usepackage{units}
+\usepackage{icomma}
+\usepackage{color}
+\usepackage{graphicx}
+
+\usepackage{bbm}
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\usepackage{hyperref}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%Egna tillägg%%%%%%%%%%%%%%%%%%%%%%%
+%%För att få referenser 'på svenska'
+\usepackage[fixlanguage]{babelbib}
+%\selectbiblanguage{swedish}
+%\renewcommand\btxauthorcolon{:}
+%%För att få snyggare referenser
+\usepackage{cite}
+%%För att figurtext i underfigurer
+\usepackage{subfigure} 
+%%För att kunna inkludera andra PDF-dokument
+\usepackage{pdfpages}
+%%För att kunna ha roterade bilder
+\usepackage{rotating}
+%%För att kunna byta uppräkningsvisare t.ex. [label=\alph*)]
+\usepackage{enumitem}
+%%För att kunna lägga till 'bilagor' utan sidnumrering.
+\usepackage{tocstyle}
+\usetocstyle{standard}%För att få en vanlig TOC
+                %no page numbers for part
+\settocstylefeature[-1]{pagenumberbox}{\csname @gobble\endcsname}
+\usepackage[nottoc]{tocbibind} %Puts a 'Reference' entry in the ToC.
+%%För att kunna använda bra och ket
+\usepackage{physics} %\bra{}\ket{} eller \expval{H}{\psi}
+%%För att kunna rita snygga matriser
+\usepackage{mathtools} %\begin{pmatrix*}[r] ... \end
+%%För att kunna kommentera ut större stycken
+\usepackage{comment} %\begin{comment}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%Formatering%%%%%%%%%%%%%%%%%%%%%%%%
+%%Partiell derivata
+\newcommand{\pd}{\ensuremath{\partial}}
+%%Följer ISO-8601 oberoende av språk.
+\usepackage[iso]{isodate}
+%%Göra grader Celcius
+\newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
+%%Figurreferenser
+\newcommand{\figref}{\figurename~\ref} 
+%%Tabellreferenser
+\newcommand{\tabref}{\tablename~\ref} 
+%%Bilagsreferenser
+\newcommand{\apxref}{\appendixname~\ref}
+
+%%Det ska vara ett rakt µ i prefixet
+\usepackage{upgreek}
+\newcommand{\micro}{\ifmmode\upmu\else$\upmu$\fi}
+%%Ohm enhetskommando
+\newcommand{\ohm}{\ifmmode\Upomega\else$\Upomega$\fi}
+
+%%'e' och 'i' ska vara upprätt
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+
+
+
+
+\if@swedish
+ %%Ser till att det blir rätt namn i rubriken i ToC
+ \addto\captionsswedish{
+   % Olika documentclass har olika namn på referensvariabeln.
+   \ifdefined\refname
+   \renewcommand{\refname}{Källförteckning}
+   \fi
+   \ifdefined\bibname
+   \renewcommand{\bibname}{Källförteckning}
+   \fi
+   % Det heter sammandrag på svenska
+   \renewcommand{\abstractname}{Sammandrag}
+ }
+\fi
+
+
+%% Redefines the appendix environment
+\let\oldappendix\appendix
+\renewcommand{\appendix}{
+  \oldappendix %Resets the section counter and changes it to Alph
+  \setcounter{page}{1} %Resets the pagenumbering
+  \renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
+  %Adds appendicies to the ToC
+  \makeatletter%This is needed because this code runs in the document
+  \if@swedish%if swedish is loaded
+     \iflanguage{swedish}{%if:
+        \newcommand{\apxname}{Bilagor}}{%else:
+        \newcommand{\apxname}{\appendixname} }
+     \phantomsection{}%This one is needed to make 'Appendix' show up in the TOC
+     \addcontentsline{toc}{part}{\apxname} %Makes 'Appendix' show up in the TOC
+  \else
+     \phantomsection{}%This one is needed to make 'Appendix' show up in the TOC
+     \addcontentsline{toc}{part}{\appendixname} %Makes 'Appendix' show up in the TOC
+  \fi\makeatother
+}
+
+
+
+
+%Ska mcode användas?
+\if@mcode
+   \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+   \usepackage{listings} 
+   \lstloadlanguages{matlab} 
+   \lstset{language=matlab} 
+   \lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
+           {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
+\fi
+
+
+
+\endinput
