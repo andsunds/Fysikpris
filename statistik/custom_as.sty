@@ -13,6 +13,11 @@
 \DeclareOption{swedish}{
 \@swedishtrue
 }
+\newif\if@oldint\@oldintfalse
+\DeclareOption{oldint}{
+\@oldinttrue
+}
+
 
 
 \ProcessOptions\relax
@@ -138,8 +143,6 @@
 }
 
 
-
-
 %Ska mcode användas?
 \if@mcode
    \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
@@ -148,6 +151,14 @@
    \lstset{language=matlab} 
    \lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
            {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
+\fi
+
+%var ska integralgränserna sitta?
+\if@oldint
+%Gör inget om vi vill behålla gamla integraler
+\else
+   \let\oldint\int 
+   \renewcommand{\int}{\oldint\limits}
 \fi
 
 

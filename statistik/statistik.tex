@@ -22,19 +22,21 @@
 %\renewcommand{\thesection}{...}
 
 
+\newcommand{\PP}[1]{\ensuremath\mathcal{P}\left(#1\right)}
 
 
 \begin{document}
 
-
-
+\newgeometry{top=2cm}
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
 
-\title{ Behandling av experimentella resultat\\ 
-\Large En introduktion för fysikstudenter till hur man ska hantera
+\title{ Behandling av experimentella resultat\\[2mm] 
+\Large En introduktion för fysikstudenter om hur man ska hantera
 mätresultat och feluppskattningar}
-\author{Andréas Sundström}
-\date{\today}
+\author{Andréas Sundström\footnote{Synpunkter och förslag tas gärna
+    emot till
+\href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}.}}
+\date{\today, \quad\texttt{v\,0.0}}
 
 \maketitle
 
@@ -56,15 +58,28 @@ approximationer. Detta avsnitt hör inte så mycket ihop med resten av
 det här kompendiet, men det är matnyttigt att kunna göra
 uppskattningar både för teoretiska och experimentella beräkningar. 
 \begin{flushright}
-Andréas Sunsdtröm\\ Göteborg, 2016-06-10
+Andréas Sunsdtröm\\ 
+Göteborg, 2016-06-10
 \end{flushright}
 \normalsize
 
+\tableofcontents
+\clearpage
+\restoregeometry
+
 \addtocounter{section}{-1}
-\section{Approximationer}
+\section{Approximationer -- Taylorutvecklingar}
+
+\begin{figure}
+\centering
+\input{figurer/taylor_sin.tex}
+\caption{}
+\label{fig_taylor_sin}
+\end{figure}
 
 
-\section{Statistik}\label{sec:statistik}
+
+\section{Sannolihetslära och statistik}\label{sec:statistik}
 När man gör mätningar vill man oftast ta reda på någon storhets värde
 -- exempelvis periodtiden på en pendel. Med en mätning kan man dock
 inte säga något om hur bra mätningen var. Men med flera mätningar kan
@@ -76,6 +91,8 @@ Statistiken, när man börjar behärska den, är mycket mer än bara
 ''medelvärden och standardavvikelser''; den spelar en väsentlig roll i
 mer eller mindre all experimentell vetenskap -- särskilt vid
 feluppskattningar. 
+
+\subsection{Stokastiska variabler}
 
 \subsection{Sannolikhetsfördelningar och täthetsfunktioner}
 Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
@@ -98,21 +115,80 @@ statistik för kontinuerliga fördelningar.
   som längden kan anta ligger kontinuerligt.}
 
 Sannolikhetsfördelningar karakteriseras av sin täthetsfunktion, som
-brukar betecknas $f$. Täthetsfunktionen talar om hur sannolikt det är
+brukar betecknas~$f$. Täthetsfunktionen talar om hur sannolikt det är
 att få ett värde i ett visst intervall. Notera dock att den
-\emph{inte} kan ge sannolikheten att få ett specifikt värde eftersom
-det finns (ouppräknerligt) oändligt många möjliga utfall, så
-sannolikheten att få ett visst exat värde är~0.
+\emph{inte} ger sannolikheten att få ett specifikt värde. Eftersom
+det finns (ouppräknerligt) oändligt många möjliga utfall så är
+sannolikheten att få ett visst exat värde
+\begin{equation}
+\PP{X=x}\; \text{''=''}\; \frac{1}{\infty}\; \text{''=''}\;0.
+\end{equation}
+
+För att beräkna sannolikheten att få sitt utfall $X$ i ett visst
+intervall $[a, b]$ måste man integrera:
+\begin{equation}
+\PP{a<X<b} = \int_a^b f(x) \id{x}.
+\end{equation}
+Sannolikheten att få $a<X<b$ bestäms av täthetsfunktionen och
+intevallet och motsvarar arean under $f(x)$.
 
 
 
-En av de vanligaste fördelningarna är \emph{normalfördelningen}. Den
-har en täthesfunktion
+\subsubsection{Normalfördelningen}
+En av de vanligaste fördelningarna är normalfördelningen. Den
+har täthesfunktionen
 \begin{equation}
 f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \, \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},
 \end{equation}
 där $\mu$ är fördelningens \emph{väntevärde} och $\sigma$ är dess
-\emph{standardavvikelse}. 
+\emph{standardavvikelse}. I \figref{fig:normal_dist} visas
+täthetsfunktionen för några olika val av $\mu$ och $\sigma$. Där ser
+vi att $\mu$ svarar mot var någonstans fördelnigen är centrerad, och
+att $\sigma$ svarar mot hur bred fördelningen blir. 
+
+\begin{figure}
+\centering
+\input{figurer/normal_dist.tex}
+\caption{Täthetsfunktioner till normalfördelningar med olika värden på
+väntevärdet $\mu$ och standardavvikelsen $\sigma$. Varje kurva har den
+klassiska Gau\ss{}iska klockformen.}\label{fig:normal_dist}
+\end{figure}
+
+Kvadraten i exponentialen ger täthetsfunktionen den
+klassiska klockformen hos en Gau\ss{}isk kurva, och faktorn framför
+säkerställer att den totala integralen
+\begin{equation}
+\int_{-\infty}^{\infty} f(x)\id{x} = 1.
+\end{equation}
+Detta är något som \emph{gäller för alla täthetsfunktioner}. 
+
+
+Normalfördelningen kallas just ''normal'' för att det finns en sats
+som säger att i princip alla slumpfenomen blir normalfördelade om
+samma process upprepas väldigt många gånger. Ett exempel på detta är
+om man sannolikheten att få ett visst antal ''klave'' efter flera
+slantsinglingar. Den här egenskapen gör att de allra flesta 
+\emph{mätfelen antas vara normalfördelade}.
+
+Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
+med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
+normalfördelade med väntevärde $\mu_X$ och standardavvikelse
+$\sigma_X$ respektive $\mu_Y$ och $\sigma_Y$, så är 
+\begin{equation}
+Z=\alpha X + \beta Y
+\end{equation}
+också normalfördelad med väntevärde $(\alpha\mu_X+\beta\mu_Y)$ och
+standardavvikelse $\sqrt{\alpha\sigma_X^2 + \beta\sigma_Y^2}$. 
+Med andra ord funkar väntevärdena som man kan tro och
+standardavvikelserna fungerar lite som Pythagoras sats. 
+
+
+\subsection{Väntevärden, standradavvikelser och hur man skattar dem}
+
+
+
+
+
 
 
 
@@ -124,19 +200,91 @@ de två typerna av feluppskattningar som man behöver kunna dels direkt
 feluppskattning (av statistiska fel), dels propagering av osäkerhet. 
 
 
+\subsection{Systematiska fel -- noggrannhet och precision}
+\begin{figure}
+\centering
+\input{figurer/precision_noggrannhet.pdf_t}
+\caption{Illustration av skillnaden mellan noggrannhet och
+  precision. Måltavlorna representerar en mätning, där mitten på
+  måltavlan svarar mot det ''sanna'' värdet. Fallen med låg
+  noggrannhet svarar mot systematiska fel som inte går att avhjälpa
+  med medelvärden av fler mätningar.}
+\label{fig:prec_nog}
+\end{figure}
+
+Ett systematiskt fel är något som gör att ens mätresultat hela tiden
+är lite fel åt något håll\footnotemark{}. Dessa karakteriseras av att
+det inte hälper med flera mätningar för att få bättre mätresultat.
+
+\footnotetext{Det behöver inet nödvändigtvis vara så att det är just
+  fel åt samma håll hela tiden, men oftast är ett systematiskt fel
+  något som ger en förskjutning av ens mätresultat.}
+
+Man brukar skilja på två olika typer av godhet i mätningar. Det finns
+dels noggrannhet, dels precision. Noggrannhet, eller rikighet som det
+ibland kallas, svarar mot hur nära det ''sanna'' värdet mätningarna
+kommer i medel. Prescisionen svarar å andra sida mot hur tätt
+mätresultaten hamnar, eller hur liten spridning man får i dem. De två
+koncepten illustreras i \figref{fig:prec_nog}.  
+
+Som kan ses i \figref{fig:prec_nog} svarar låg noggrannhet mot ett
+systematiskt fel som gör att medelvärdet avviker från det ''sanna''
+värdet. Vidare kan man med statistisk analys bara ta reda på
+spridningen i resultaten -- alltså hur bra precision man
+har. Tillsammans ger detta en ganska prekär situation att hantera i
+felanalys: 
+\emph{Man vill veta hur {\bf noggranna} ens mätningar är, men man kan bara
+  ta reda på hur {\bf precisa} de är.} 
+
+Sättet man löser detta på är att låtsas som att det regnar och strunta
+i eventuella systematiska fel när man redovisar sin felanalys. Detta
+förutsätter såklart att man verkligen har försökt eliminera alla
+systematiska fel; de som är kvar är dock de som man inte kände till,
+vilket betder att det i princip är omöjligt att kunna uppskatta
+storleken på dem. I praktiken redovisar man oftast bara spridingen i
+mätresultaten och säger att märosäkerheten är samma som spridningen. 
+
+\subsubsection{Hanterbara systematiska fel}
+
+
+
 \subsection{Statistiska osäkerheter och hur man uppskattar dem}
-Säg att det finns en storhet $x$ som vi vill mäta, men att vi i varje
-mätning gör ett mätfel~$\delta{x}$. Det vi mäter blir då
+För att ta reda på precisionen i mätresultaten behövs statistik. Om
+ens noggrannhet är hög, övre halvan i \figref{fig:prec_nog}, behöver
+man ändå veta hur god precision man har. Gör man bara en mätning har
+man ingen möjlighet att veta hur nära det ''sanna'' resultatet man
+kom. Det är där man måste börja använda lite statistik. 
+
+Säg att det finns en storhet $x$ som ska mätas, men att varje mätning
+har ett mätfel~$\delta{x}$. Det som mäts blir då
 \begin{equation}
 \hat{x}=x+\delta{x}.
 \end{equation}
 Utan någon mer informationom $\delta{x}$ går det inte att säga så mycket mer
-från mätningen.
+från mätningen. Men som sagts tidigare antas mätfelet $\delta{x}$ vara
+normalfördelat med $\mu=0$ fast med ett okänt $\sigma$. Det är oftas
+$\sigma$ som man tar reda på för att ge en osäkerhetsuppskattning av
+ens mätning. 
 
-\subsection{Systematiska fel}
+För att få fram ett värde på $x_0$ tar man ett medelvärdet av flera
+mätningar. Detta ger
+\begin{equation}
+\bar{x}=\frac{\hat{x}_1+\hat{x}_2 + \cdots + \hat{x}_N}{N} 
+= \frac{Nx+\delta{x}_1+\delta{x}_2 + \cdots + \delta{x}_N}{N}
+= x + \overline{\delta{x}}.
+\end{equation}
+Vi utnyttjar nu att medelvärdet
+$\overline{\delta{x}}\approx\mu=0$, vilket ger att $\bar{x}\approx x$.
+Här syns att antagandet $\mu=0$ betydet att det inte finnsnågot
+systematiskt fel som ändrar ger ett felaktigt medelvärde.
+
+
+
 
 \subsection{Felpropagering}
 
+
+\subsubsection{När det handlar om ett potenssamband}
 
 
 %\newpage
