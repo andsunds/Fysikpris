@@ -3,8 +3,8 @@ set terminal epslatex size 12cm,7cm font ',11' color
 set key box samplen 2 height .5
 set grid
 
-set ylabel '$f(x)$'
-set xlabel '$x$'
+set ylabel '\Large$f(x)$'
+set xlabel '\Large$x$'
 
 set ytic 0,.1,.4
 
@@ -23,3 +23,4 @@ exp(-(x-m2)**2/(2*s2**2))/(sqrt(2*pi)*s2) title '$\mu=0$, $\sigma=2$',\
 exp(-(x-m3)**2/(2*s3**2))/(sqrt(2*pi)*s3) title '$\mu=2$, $\sigma=1$',\
 #exp(-(x-m4)**2/(2*s4**2))/(sqrt(2*pi)*s4) title '$\mu=0$, $\sigma=2$',\
 
+set out
