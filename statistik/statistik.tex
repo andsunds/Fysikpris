@@ -24,58 +24,68 @@
 
 \newcommand{\PP}[1]{\ensuremath\mathcal{P}\left(#1\right)}
 
+\newcommand{\VAR}[1]{\ensuremath\text{var}\!\left[#1\right]}
+
 
 \begin{document}
 
-\newgeometry{top=2cm}
+%\newgeometry{top=1cm, bottom=2cm}
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
-
-\title{ Behandling av experimentella resultat\\[2mm] 
-\Large En introduktion för fysikstudenter om hur man ska hantera
+\title{\huge Behandling av experimentella resultat\\[2mm] 
+\Large En introduktion för fysikstudenter om hur man ska\\ hantera
 mätresultat och feluppskattningar}
-\author{Andréas Sundström\footnote{Synpunkter och förslag tas gärna
-    emot till
-\href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}.}}
-\date{\today, \quad\texttt{v\,0.0}}
-
+\author{
+Andréas Sundström\footnote{
+\href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
+\: Jag tar gärna emot synpunkter och förslag.}
+}
+\date{\today, \quad\texttt{v\,0.1}}
 \maketitle
-
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
-\subsection*{Förord}
+
+
+\noindent{\bf \large Förord}\\[1mm]
 \small
 Det här kompendiet är skrivet som en introduktion till
 feluppskattningar för det svenska IPhO-laget. Jag har försökt fatta
 mig kort, men jag har en tendens att kunna dra iväg när jag
-skriver. 
+skriver. Jag har försökt lägga innehållet på en nivå för att kunna
+förstås av en gymnasieelev, men det är inte alltid det går så
+bra\ldots{} Ni är de första som läser det här kompendiet. Tycker du
+att det det här var för svårförståeligt så har \textbf{jag} skrivit
+för komplicerat, och du är inte ensam om att tycka att kompediet var
+svårt. \emph{Så säg till om det var krångligt!} 
 
 Det viktigaste innehållet finns i avsnitt~\ref{sec:feluppskattningar},
 men jag tyckte att det behövs en liten teoretisk bakgrund också, den
 finns i avsnitt~\ref{sec:statistik}. Det avsnittet ska man läsa om man
-vill få en lite klarare bild om varför feluppskattningarna på det ena
-eller andra viset. Sedan finns har jag även lagt till ett avsnitt om
-approximationer. Detta avsnitt hör inte så mycket ihop med resten av
-det här kompendiet, men det är matnyttigt att kunna göra
-uppskattningar både för teoretiska och experimentella beräkningar. 
+vill få en lite klarare bild om varför feluppskattningarna beräknas på
+det ena eller andra viset. Avslutningsvis räknas ett exempel med lite
+olika feluppskattningar.
+
+Sedan har jag även lagt till en bilaga om
+Taylorutvecklingar. Den hör inte så mycket ihop med resten av det här
+kompendiet, men det är matnyttigt att kunna göra uppskattningar både
+för teoretiska och experimentella beräkningar.  
+
 \begin{flushright}
 Andréas Sunsdtröm\\ 
-Göteborg, 2016-06-10
+Göteborg, 2016-06-12
 \end{flushright}
 \normalsize
 
+
+
+\clearpage
 \tableofcontents
 \clearpage
-\restoregeometry
 
-\addtocounter{section}{-1}
-\section{Approximationer -- Taylorutvecklingar}
+%\restoregeometry
 
-\begin{figure}
-\centering
-\input{figurer/taylor_sin.tex}
-\caption{}
-\label{fig_taylor_sin}
-\end{figure}
+\setcounter{page}{1}
+%\addtocounter{section}{-1}
+
 
 
 
@@ -93,6 +103,26 @@ mer eller mindre all experimentell vetenskap -- särskilt vid
 feluppskattningar. 
 
 \subsection{Stokastiska variabler}
+Precis som vanliga variabler används stokastiska variabler för att
+beteckna något okänt. Men i fallet med stokastiska variabler saknar de
+ett värde. De är mer tänkta som ett koncept för att betecka en
+slumpartad händese eller process. Man kan gör en observation/mätning
+av en stokastisk variabel och få ett värde, men det är bara ett
+mätvärde som man kan få. 
+
+Till exempel kan man betrakta ett tärningskast. Det kan beskrivas med
+en stokastisk variabel $X$ som sen kan mätas till ett visst utfall $x$
+Alltså att själva tärningen i sig inte kan ha ett värde, men när man
+gör en observation (kastar tärningen) kan man få ett mätresultat. Den
+stokastiska veriabeln $X$ sägs ha ett visst utfallsrum, 
+$\{1, 2, 3, 4, 5, 6\}$, och varje punkt i utfallsummet har en viss
+sannolikhet, $\nicefrac{1}{6}$.
+
+Fördelen med att ha stokastiska variabler är att man, likt vanliga
+variabler, kan börja räkna med dem mer generellt än om man bara har
+vissa specialfall. I det här kompendiet kommer de att användas, men
+inte med så stor vikt. (Stokastiska variabler kommer här att betecknas
+med stora bokstäver.)
 
 \subsection{Sannolikhetsfördelningar och täthetsfunktioner}
 Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
@@ -117,20 +147,18 @@ statistik för kontinuerliga fördelningar.
 Sannolikhetsfördelningar karakteriseras av sin täthetsfunktion, som
 brukar betecknas~$f$. Täthetsfunktionen talar om hur sannolikt det är
 att få ett värde i ett visst intervall. Notera dock att den
-\emph{inte} ger sannolikheten att få ett specifikt värde. Eftersom
-det finns (ouppräknerligt) oändligt många möjliga utfall så är
-sannolikheten att få ett visst exat värde
+\emph{inte} ger sannolikheten att få ett specifikt värde. 
+Eftersom det finns (ouppräknerligt) oändligt många möjliga utfall så
+är sannolikheten att få ett visst exat värde
 \begin{equation}
 \PP{X=x}\; \text{''=''}\; \frac{1}{\infty}\; \text{''=''}\;0.
 \end{equation}
-
-För att beräkna sannolikheten att få sitt utfall $X$ i ett visst
-intervall $[a, b]$ måste man integrera:
+För att istället beräkna sannolikheten att få sitt utfall $X$ i ett
+visst intervall $[a, b]$ måste man integrera:
 \begin{equation}
 \PP{a<X<b} = \int_a^b f(x) \id{x}.
 \end{equation}
-Sannolikheten att få $a<X<b$ bestäms av täthetsfunktionen och
-intevallet och motsvarar arean under $f(x)$.
+Sannolikheten att få $a<X<b$ bestäms alltså av arean under $f(x)$.
 
 
 
@@ -145,6 +173,12 @@ där $\mu$ är fördelningens \emph{väntevärde} och $\sigma$ är dess
 täthetsfunktionen för några olika val av $\mu$ och $\sigma$. Där ser
 vi att $\mu$ svarar mot var någonstans fördelnigen är centrerad, och
 att $\sigma$ svarar mot hur bred fördelningen blir. 
+
+Som kan ses i \figref{fig:normal_dist} går sannolikhetsfördelningen
+ner och blir väldigt liten för värden långt ifrån $\mu$. Till exempel
+ligger ca 98\,\% av all sannolikhet/area under kurvan inom $\mu\pm
+2\sigma$, men sen går det snabbt -- fortsätter man uppåt så ligger
+99,99997\,\% inom $\mu\pm 5\sigma$.
 
 \begin{figure}
 \centering
@@ -170,24 +204,137 @@ om man sannolikheten att få ett visst antal ''klave'' efter flera
 slantsinglingar. Den här egenskapen gör att de allra flesta 
 \emph{mätfelen antas vara normalfördelade}.
 
-Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
-med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
-normalfördelade med väntevärde $\mu_X$ och standardavvikelse
-$\sigma_X$ respektive $\mu_Y$ och $\sigma_Y$, så är 
-\begin{equation}
-Z=\alpha X + \beta Y
+% Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
+% med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
+% normalfördelade och oberoende med väntevärde $\mu_X$ och
+% standardavvikelse $\sigma_X$ respektive $\mu_Y$ och $\sigma_Y$, så är 
+% \begin{equation}
+% Z=\alpha X + \beta Y
+% \end{equation}
+% också normalfördelad med väntevärde $(\alpha\mu_X+\beta\mu_Y)$ och
+% standardavvikelse $\sqrt{\alpha^2\sigma_X^2 + \beta^2\sigma_Y^2}$. 
+% Med andra ord funkar väntevärdena som man kan tro och
+% standardavvikelserna fungerar lite som Pythagoras sats. 
+
+
+\subsection{Väntevärden, varianser och standradavvikelser}
+De vanligaste fördelningarna har, som normalfördelningen, väntevärde
+och varians. Dessa beräknas med täthetsfunktionen. Det är också dessa
+som främst används i felanalys.
+
+Väntevärdet av den stokastiska ariabeln $X$, med täthetsfunktion $f$,
+definieras som 
+\begin{equation}\label{eq:ev}
+\ev{X} = \mu = \int_{-\infty}^\infty x f(x)\id{x}.
 \end{equation}
-också normalfördelad med väntevärde $(\alpha\mu_X+\beta\mu_Y)$ och
-standardavvikelse $\sqrt{\alpha\sigma_X^2 + \beta\sigma_Y^2}$. 
-Med andra ord funkar väntevärdena som man kan tro och
-standardavvikelserna fungerar lite som Pythagoras sats. 
+Det är inte helt kart vad tolkningen ska vara direkt från
+definitionen, men man kan jämföra väntevärdesintegralen med en slags
+tyngdpunktsberäkning. Man lägger ihop varje punkts
+''sannolikhetsmassa'', $f(x)\dd{x}$, gånger punktes avstånd, $x$, från
+origo; till slut får man den sammanlagda tyngdpunkten. Man kan
+faktiskt hitta en fördelnings väntevärde genom att kippa ut en (styv)
+pappersbit formad efter ytan under kurvan och balanseta den utklippta formen. 
 
+Sedan kan variansen definieras med hjälp av väntevärden:
+\begin{equation}\label{eq:var}
+\VAR{X} = \sigma^2 =\ev{(X-\mu)^2}. %\ev{X^2} - \mu^2.
+\end{equation}
+%Det sista ledet ovan är ett sätt som man kan skriva om variansen, men
+%det används mest i teoretiska analyser och är inte så viktigt i
+%nuläget. 
+Tolkningen av variansen är att det är ett väntevärde på hur
+mycket avvikelse man får från $\mu$, men för att ta med både positiva
+och negativa avvikelser kvadreras de innan man tar väntevärdet.
+Härifrån syns också att \emph{standardavvikelsen ges som roten ur
+variansen}. 
 
-\subsection{Väntevärden, standradavvikelser och hur man skattar dem}
+\subsubsection{Några nyttiga satser (överkurs)}
+Det viktigaste man behöver veta om väntevärden är att de är
+linjära. Alltså att
+\begin{equation}\label{eq:ev_lin}
+\Big\langle \alpha X + \beta Y + \gamma \Big\rangle 
+= \alpha\ev{X} + \beta\ev{Y} + \gamma,
+\end{equation}
+för godtyckliga stokastiska variabler $X$ och $Y$ samt några
+konstanter $\alpha$, $\beta$ och $\gamma$. Den här regen kan utvidgas
+till ett godtyckligt antal variabler. 
 
+För variansen gäller en liknande regel 
+\begin{equation}\label{eq:var_lin}
+\text{var}\!\Big[ \alpha X + \beta Y + \gamma \Big] 
+= \alpha^2\VAR{X} + \beta^2\VAR{Y}, 
+\end{equation}
+men här måste $X$ och $Y$ vara statistiskt
+oberoende\footnotemark{}. Även här kan man utvidga regeln till ett
+godtyckligt antal oberoende variabler.
+\footnotetext{Statistiskt oberoende är en ganska knepig term att
+  deffiniera. Men enkelt sett så betyder det ungefär vad magkänslan
+  säger: att resultatet av en mätning på den ena ska inte påverka
+  resultatet på den andra. }
 
+Speciellt gäller att om man har $N$ stycken oberoende stokastiska variabler
+$X_i$ med lika fördelning och man vill ta ett medelvärde 
+\begin{equation} 
+\bar{X} = \frac{X_1+X_2+\cdots+X_N}{N} = \frac{1}{N}\sum_{i=1}^N X_i
+\end{equation}
+så kan man beräkna dess väntevärde och varians med hjälp av reglerna
+ovan. 
+Väntevärdet ges då från \eqref{eq:ev_lin} som
+\begin{equation}\label{eq:ev_mean}
+\ev{\bar{X}} = \ev{\frac{1}{N} \sum_{i=1}^N X_i} 
+= \frac{1}{N} \sum_{i=1}^N \overbrace{\ev{X_i}}^{=\mu} 
+= \mu,
+\end{equation}
+där $\mu$ är väntevärdet av varje enskild variabel från den givna
+fördelningen. 
+Variansen får man med \eqref{eq:var_lin} sedan som
+\begin{equation}\label{eq:var_mean}
+\VAR{\bar{X}} = \VAR{\frac{1}{N} \sum_{i=1}^N X_i}
+= \VAR{\sum_{i=1}^N \frac{1}{N} X_i}
+= \sum_{i=1}^N \frac{1}{N^2}\overbrace{\VAR{X_i}}^{=\sigma^2}
+= \frac{\sigma^2}{N}.
+\end{equation}
+Dessa resultat kommer att användas i feluppsattningar genom att
+betrakta varje mätning som en obervarion av respektive $X_i$.
 
+\subsubsection{Skattning från mätdata}
+Har man ett stokastiskt system och vill försöka mäta dess väntevärde
+och standardavvikelse, så måste man ha många mätningar på det. Det är
+nu som statistiken kommer in i bilden -- hur man behandlar tagna
+mätningar av en stokastisk variabel. 
 
+Från \eqref{eq:ev_mean} visade det sig att väntevärdet av ett
+medelvärde är samma som väntevärdet av det man mäter på. Vidare visade
+det sig att variansen av medelvärdet minskade som
+$\nicefrac{1}{N}$. Tillsammans ger detta att \emph{ju fler mätningar
+  man gör desto större är sannolikheten att medelvärdet man får blir
+  just väntevärdet}. Detta betyder att man kan skatta väntevärdet med
+\begin{equation}\label{eq:ev_approx}
+\ev{X} = \mu \approx \bar{x} = \frac{1}{N}\sum_{i=1}^N x_i.
+\end{equation}
+Här användes små bokstäver $x_i$ för att beteckna att de är tagna
+mätvärden -- de har alltså ett fast värde. 
+
+Om nu väntevärden gick att skatta som medelvärden bör man väl kunna
+göra det samma för varianser. Definitionen av varians i \eqref{eq:var}
+består ju av två väntevärden (två stycken eftersom $\mu=\ev{X}$), så
+det borde gå att skatta variansen med medelvärdet av
+$(x_i-\bar{x})^2$. Svaret är att det  nästan går. Eftersom man bara
+får ett ungefärligt värde på $\mu$ från \eqref{eq:ev_approx} måste
+medelvärdet justeras något. Det visar sig att man ska använda
+\begin{equation}\label{eq:var_approx}
+\VAR{X} = \sigma^2 \approx s^2 = \frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2
+\end{equation}
+för att skatta variansen. Standardavvikelsen fås enkelt genom att dra
+roten ur skattningen av variansen:
+\begin{equation}\label{eq:std_approx}
+\sigma \approx s = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
+\end{equation}
+Detta kallas \emph{standradfelet} och är det namn som man har gett
+till skattningen av standardavvikelsen.
+Notera att $s$ är standradfelet i uppsättnigen av alla
+mätpunkter. För att få \emph{standardfelet i medelvärdet}
+använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
 
 
@@ -196,14 +343,16 @@ standardavvikelserna fungerar lite som Pythagoras sats.
 När man vill uppskatta hur stora experimentella fel/osäkerheter man
 har finns det två typer av fel och två typer av feluppskattningar. De
 två typerna av fel som finns är systematiska och statistiska. Sedan är
-de två typerna av feluppskattningar som man behöver kunna dels direkt
+de två typerna av feluppskattningar som man behöver kunna. Dels direkt
 feluppskattning (av statistiska fel), dels propagering av osäkerhet. 
 
 
 \subsection{Systematiska fel -- noggrannhet och precision}
 \begin{figure}
 \centering
+\resizebox{0.5\textwidth}{!}{
 \input{figurer/precision_noggrannhet.pdf_t}
+}
 \caption{Illustration av skillnaden mellan noggrannhet och
   precision. Måltavlorna representerar en mätning, där mitten på
   måltavlan svarar mot det ''sanna'' värdet. Fallen med låg
@@ -215,17 +364,21 @@ feluppskattning (av statistiska fel), dels propagering av osäkerhet.
 Ett systematiskt fel är något som gör att ens mätresultat hela tiden
 är lite fel åt något håll\footnotemark{}. Dessa karakteriseras av att
 det inte hälper med flera mätningar för att få bättre mätresultat.
-
-\footnotetext{Det behöver inet nödvändigtvis vara så att det är just
+\footnotetext{Det behöver inte nödvändigtvis vara så att det är just
   fel åt samma håll hela tiden, men oftast är ett systematiskt fel
   något som ger en förskjutning av ens mätresultat.}
 
 Man brukar skilja på två olika typer av godhet i mätningar. Det finns
 dels noggrannhet, dels precision. Noggrannhet, eller rikighet som det
-ibland kallas, svarar mot hur nära det ''sanna'' värdet mätningarna
-kommer i medel. Prescisionen svarar å andra sida mot hur tätt
-mätresultaten hamnar, eller hur liten spridning man får i dem. De två
-koncepten illustreras i \figref{fig:prec_nog}.  
+ibland kallas, svarar mot hur nära det ''sanna''\footnotemark{} värdet
+mätningarna kommer i medel. Prescisionen svarar å andra sida mot hur
+tätt mätresultaten hamnar, eller hur liten spridning man får i dem. De
+två koncepten illustreras i \figref{fig:prec_nog}.  
+\footnotetext{Jag sätter ''sanna'' inom citationstecken för att ur ett
+experimentalistiskt perspektiv finns det inget sätt att veta det
+verkligt sanna värdet -- man kan bara se var man träffade men inte
+måltavlan. Detta gör att det inte går att säga att man har fått det
+sanna värdet. }
 
 Som kan ses i \figref{fig:prec_nog} svarar låg noggrannhet mot ett
 systematiskt fel som gör att medelvärdet avviker från det ''sanna''
@@ -244,8 +397,38 @@ vilket betder att det i princip är omöjligt att kunna uppskatta
 storleken på dem. I praktiken redovisar man oftast bara spridingen i
 mätresultaten och säger att märosäkerheten är samma som spridningen. 
 
-\subsubsection{Hanterbara systematiska fel}
+\subsubsection{Mätupplösning}
+En sorts systematiska\footnotemark{} osäkerheter som man ofta kommer
+att stöta på härör från mätinstrumentents upplösning. Ett tydligt
+exempel på detta är en linjal; oavsett hur många gånger man försöker
+mäta bredden på ett hårstrå kommer man bara att få 0\,mm som
+resultat. 
+\footnotetext{Jag har valt att klassa dem som systematiska av
+  anledningen att det oftast inte hjälper att ta ett medelvärde av
+  flera mätningar. }
 
+Sättet att hantera detta på är att erkänna att man har ett
+systematiskt fel som kommer från upplösningen, och ta med det i
+beräkningarna. Detta gör man genom att själv uppskatta vad
+avrundningsfelet kan vara i mätningen. I generellt gäller att
+\begin{itemize}
+\item analoga intrument har ett avrundningsfel som är $\pm$ halva
+  avståndet mellan markörer. Alltså att en linjal som är mm-graderad
+  får en mätosäkerhet på $\pm\unit[0,5]{mm}$ (även om man tycker att
+  mätninger ser ut att vara närmare skalstecket än så).
+\item digitala intrument är ganska opålitliga i hur noggranna de
+  är. Detta betyder att osäkerheten \emph{inte} behöver vara i sista
+  siffran, utan man måste kolla manualen för att vara helt säker. 
+  \emph{I IPhO gäller dock att man får anta att osäkerhetsgränsen
+    ligger i sista siffran.} 
+\end{itemize}
+
+Dessa tumregler kan användas i fall där man bedömmer att upprepade
+mätningar inte kommer att kunna ge förändrade mätresultat. Typfall där
+detta gäller är längdmätning (av något objekt) med linjal eller
+skjutmått, och spännings- eller strömmätningmätning med multimeter. I
+andra fall är det alltid rekommenderat att göra upprepade mätningar
+(gärna upp till 10 stycken men minst 3). 
 
 
 \subsection{Statistiska osäkerheter och hur man uppskattar dem}
@@ -258,7 +441,7 @@ kom. Det är där man måste börja använda lite statistik.
 Säg att det finns en storhet $x$ som ska mätas, men att varje mätning
 har ett mätfel~$\delta{x}$. Det som mäts blir då
 \begin{equation}
-\hat{x}=x+\delta{x}.
+\hat{x}_i=x+\delta{x}_i.
 \end{equation}
 Utan någon mer informationom $\delta{x}$ går det inte att säga så mycket mer
 från mätningen. Men som sagts tidigare antas mätfelet $\delta{x}$ vara
@@ -266,7 +449,7 @@ normalfördelat med $\mu=0$ fast med ett okänt $\sigma$. Det är oftas
 $\sigma$ som man tar reda på för att ge en osäkerhetsuppskattning av
 ens mätning. 
 
-För att få fram ett värde på $x_0$ tar man ett medelvärdet av flera
+För att få fram ett värde på $x$ tar man ett medelvärdet av flera
 mätningar. Detta ger
 \begin{equation}
 \bar{x}=\frac{\hat{x}_1+\hat{x}_2 + \cdots + \hat{x}_N}{N} 
@@ -275,10 +458,33 @@ mätningar. Detta ger
 \end{equation}
 Vi utnyttjar nu att medelvärdet
 $\overline{\delta{x}}\approx\mu=0$, vilket ger att $\bar{x}\approx x$.
-Här syns att antagandet $\mu=0$ betydet att det inte finnsnågot
-systematiskt fel som ändrar ger ett felaktigt medelvärde.
+Här syns att antagandet $\mu=0$ betydet att det inte finns något
+systematiskt fel.
 
-
+För att sedan ta reda på precisionen i mätningarna behövs
+standardavvikelsen av $\delta{x}$. Denna fås enkelt som standradfelet
+från \eqref{eq:std_approx}. Men eftersom det beräknade värdet
+$\bar{x}$ är ett medelvärde betyder det att osäkerheten är mindre i
+$\bar{x}$ än i varje enskilt $\hat{x}_i$. Standardfelet från
+\eqref{eq:std_approx} ger däremot en mått på hur spridda värden man
+har fått. Som nämnts tidigare får man standardavvikelsen i
+\emph{medelvärdet} genom att dela med
+$\sqrt{N}$. Mätosäkerheten\footnotemark{} $\Delta{x}$ blir då
+\footnotetext{Notera skilnaden mellan $\delta{x}$ och $\Delta{x}$. Den
+första är felet i varje enskild mätning, medan den andra är är den
+totala osäkerheten i slutresultatet av en längre märserie.}
+\begin{equation} \label{eq:Delta_x}
+\Large
+\Delta{x} = \frac{s}{\sqrt{N}} 
+= \sqrt{\frac{1}{N(N-1)}\sum_{i=1}^N (x_i-\bar{x})^2}.
+\end{equation}
+Detta är en av de vanligaste beräkningarna man kommer att behöva göra
+i felanalys. \footnote{
+  Samtidigt känns det lite som fusk att man bara kan ''slänga in ett
+  extra $\sqrt{N}$ och så blev osäkerheten plötsligt mindre''.
+  Det här var en av de svåraste sakerna att acceptera med felanalys
+  när jag började med sånt. Men allt följer från \eqref{eq:var_mean}.
+}
 
 
 \subsection{Felpropagering}
@@ -286,11 +492,37 @@ systematiskt fel som ändrar ger ett felaktigt medelvärde.
 
 \subsubsection{När det handlar om ett potenssamband}
 
+\section{Regression}
+
+\section{Exempel på feluppskattning}
+
+\subsection{Mätning av $g$ med fritt fall}
+
+\subsection{Mätning av $g$ med pendel}
+
+
+\section{Sammanfattning}
 
 %\newpage
 %\bibliographystyle{ieeetr}
 %\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
 
+\clearpage
+\appendix
+
+
+\section{Approximationer}
+
+\subsection{Olika storleksordningar}
+
+\subsection{Taylorutvecklingar}
+
+\begin{figure}
+\centering
+\input{figurer/taylor_sin.tex}
+\caption{}
+\label{fig_taylor_sin}
+\end{figure}
 
 \end{document}
 
