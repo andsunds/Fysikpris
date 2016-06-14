@@ -7,7 +7,7 @@
 \graphicspath{ {figurer/} }
 
 %%Drar in tabell och figurtexter
-\usepackage[margin=10 pt]{caption}
+\usepackage[margin=10 pt, size=small]{caption}
 %%För att lägga in 'att göra'-noteringar i texten
 \usepackage{todonotes} %\todo{...}
 
@@ -26,6 +26,18 @@
 
 \newcommand{\VAR}[1]{\ensuremath\text{var}\!\left[#1\right]}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{exempel_counter}%[section]
+\newenvironment{exempel}
+{
+  \refstepcounter{exempel_counter}
+  \begin{quote}
+  \noindent\textbf{Exempel~\arabic{exempel_counter}:}
+}{
+  \end{quote}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -57,7 +69,8 @@ att det det här var för svårförståeligt så har \textbf{jag} skrivit
 för komplicerat, och du är inte ensam om att tycka att kompediet var
 svårt. \emph{Så säg till om det var krångligt!} 
 
-Det viktigaste innehållet finns i avsnitt~\ref{sec:feluppskattningar},
+\todo{Uppdatera }
+Det viktigaste innehållet finns i avsnitt~\ref{sec:matfel},
 men jag tyckte att det behövs en liten teoretisk bakgrund också, den
 finns i avsnitt~\ref{sec:statistik}. Det avsnittet ska man läsa om man
 vill få en lite klarare bild om varför feluppskattningarna beräknas på
@@ -88,8 +101,8 @@ Göteborg, 2016-06-12
 
 
 
-
-\section{Sannolihetslära och statistik}\label{sec:statistik}
+\setcounter{section}{-1}
+\section{Sannolihetslära och statistik (överkurs)}\label{sec:statistik}
 När man gör mätningar vill man oftast ta reda på någon storhets värde
 -- exempelvis periodtiden på en pendel. Med en mätning kan man dock
 inte säga något om hur bra mätningen var. Men med flera mätningar kan
@@ -110,13 +123,18 @@ slumpartad händese eller process. Man kan gör en observation/mätning
 av en stokastisk variabel och få ett värde, men det är bara ett
 mätvärde som man kan få. 
 
-Till exempel kan man betrakta ett tärningskast. Det kan beskrivas med
-en stokastisk variabel $X$ som sen kan mätas till ett visst utfall $x$
-Alltså att själva tärningen i sig inte kan ha ett värde, men när man
-gör en observation (kastar tärningen) kan man få ett mätresultat. Den
-stokastiska veriabeln $X$ sägs ha ett visst utfallsrum, 
-$\{1, 2, 3, 4, 5, 6\}$, och varje punkt i utfallsummet har en viss
-sannolikhet, $\nicefrac{1}{6}$.
+\begin{exempel}
+Ett tärningskast är ett exempel som kan beskrivas med en diskret
+stokastisk variabel. Låt den stokastiska variabeln $X$ beskriva
+tärningskastet. Den kan då mätas till ett visst utfall 
+$x$. I fallet med en tärning $X$ har ett utfallsrum som består av
+talen 1 till 6: $\{1, 2, 3, 4, 5, 6\}$. Varje element i utfallsrummet
+har också en viss sannolikhet, $\nicefrac{1}{6}$ i det här fallet.
+ 
+Själva variablen $X$ (tärningen) kan alltså inte i sig ha ett värde.
+Men när man gör en observation (kastar tärningen) kan man få ett
+mätresultat $x$, som (när tärningen är kastad) har ett fast värde.
+\end{exempel}
 
 Fördelen med att ha stokastiska variabler är att man, likt vanliga
 variabler, kan börja räkna med dem mer generellt än om man bara har
@@ -155,10 +173,37 @@ Eftersom det finns (ouppräknerligt) oändligt många möjliga utfall så
 \end{equation}
 För att istället beräkna sannolikheten att få sitt utfall $X$ i ett
 visst intervall $[a, b]$ måste man integrera:
-\begin{equation}
+\begin{equation}\label{eq:dist_P}
 \PP{a<X<b} = \int_a^b f(x) \id{x}.
 \end{equation}
 Sannolikheten att få $a<X<b$ bestäms alltså av arean under $f(x)$.
+
+\begin{exempel}
+Sannolikheten för en radioaktiv kärna att sönderfalla kan beskrivas
+med den så kallade exponentialfördelningen:
+\begin{equation*}
+f(t)=
+\begin{cases}
+\lambda\ee^{-\lambda t},& t>0\\
+0 ,& t\le0,
+\end{cases}
+\end{equation*}
+där $\lambda$ är en konstant som kallas isotopens
+sönderfallskonstant. 
+Vad är sannolikheten att kärnan har sönderfallit vid tiden
+$\tau=\nicefrac{\ln(2)}{\lambda}$? 
+
+Sannolikheten att en kärna sönderfaller mellan tiden $0$ och $\tau$
+ges enligt \eqref{eq:dist_P} helt enkelt av integralen
+\begin{equation*}
+\PP{0<T_\text{sönderfall}<\tau} 
+= \int_0^\tau\lambda\ee^{-\lambda t}\id{t} 
+= \lambda\,\frac{\ee^{0}-\ee^{-\lambda \tau}}{\lambda}
+= 1-\ee^{-\lambda \tau}
+=1-\frac{1}{2} = \frac{1}{2}.
+\end{equation*}
+Tiden $\nicefrac{\ln(2)}{\lambda}$ är alltså isotopens halveringstid. 
+\end{exempel}
 
 
 
@@ -248,7 +293,7 @@ och negativa avvikelser kvadreras de innan man tar väntevärdet.
 Härifrån syns också att \emph{standardavvikelsen ges som roten ur
 variansen}. 
 
-\subsubsection{Några nyttiga satser (överkurs)}
+\subsubsection{Några nyttiga satser}\label{sec:satser}
 Det viktigaste man behöver veta om väntevärden är att de är
 linjära. Alltså att
 \begin{equation}\label{eq:ev_lin}
@@ -339,7 +384,7 @@ använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
 
 
-\section{Feluppskattningar}\label{sec:feluppskattningar}
+\section{Olika typer av mätfel}\label{sec:matfel}
 När man vill uppskatta hur stora experimentella fel/osäkerheter man
 har finns det två typer av fel och två typer av feluppskattningar. De
 två typerna av fel som finns är systematiska och statistiska. Sedan är
@@ -412,7 +457,7 @@ systematiskt fel som kommer från upplösningen, och ta med det i
 beräkningarna. Detta gör man genom att själv uppskatta vad
 avrundningsfelet kan vara i mätningen. I generellt gäller att
 \begin{itemize}
-\item analoga intrument har ett avrundningsfel som är $\pm$ halva
+\item analoga intrument har ett avrundningsfel som är halva
   avståndet mellan markörer. Alltså att en linjal som är mm-graderad
   får en mätosäkerhet på $\pm\unit[0,5]{mm}$ (även om man tycker att
   mätninger ser ut att vara närmare skalstecket än så).
@@ -421,6 +466,10 @@ avrundningsfelet kan vara i mätningen. I generellt gäller att
   siffran, utan man måste kolla manualen för att vara helt säker. 
   \emph{I IPhO gäller dock att man får anta att osäkerhetsgränsen
     ligger i sista siffran.} 
+\item tidtagning med tidtagarur har en osäkerhet på \emph{minst}
+  $\pm\unit[0,1]{s}$ (även om tidtagaruret går ner till hundradels
+  sekunder). Detta är helt enkelt för att den mänskliga reaktionstiden
+  inte är snabbare än så.
 \end{itemize}
 
 Dessa tumregler kan användas i fall där man bedömmer att upprepade
@@ -470,31 +519,225 @@ $\bar{x}$ än i varje enskilt $\hat{x}_i$. Standardfelet från
 har fått. Som nämnts tidigare får man standardavvikelsen i
 \emph{medelvärdet} genom att dela med
 $\sqrt{N}$. Mätosäkerheten\footnotemark{} $\Delta{x}$ blir då
-\footnotetext{Notera skilnaden mellan $\delta{x}$ och $\Delta{x}$. Den
-första är felet i varje enskild mätning, medan den andra är är den
-totala osäkerheten i slutresultatet av en längre märserie.}
+
+{\Large
 \begin{equation} \label{eq:Delta_x}
-\Large
 \Delta{x} = \frac{s}{\sqrt{N}} 
 = \sqrt{\frac{1}{N(N-1)}\sum_{i=1}^N (x_i-\bar{x})^2}.
 \end{equation}
+}
+\footnotetext{Notera skilnaden mellan $\delta{x}$ och $\Delta{x}$. Den
+första är felet i varje enskild mätning, medan den andra är är den
+totala osäkerheten i slutresultatet av en längre märserie.}
+
 Detta är en av de vanligaste beräkningarna man kommer att behöva göra
-i felanalys. \footnote{
-  Samtidigt känns det lite som fusk att man bara kan ''slänga in ett
-  extra $\sqrt{N}$ och så blev osäkerheten plötsligt mindre''.
+i felanalys. De räknare som används på IPhO kan därför ställas in för
+att göra precis den här beräkningen, men bara nästan: man får $s$, sen
+måste man själv dela med $\sqrt{N}$. Samtidigt känns det lite som fusk
+att man bara kan ''slänga in ett extra $\sqrt{N}$ och så blev
+osäkerheten plötsligt mindre''.\footnotemark{} Men matten i
+avsnitt~\ref{sec:satser} visar att man ska göra det.
+\footnotetext{
   Det här var en av de svåraste sakerna att acceptera med felanalys
   när jag började med sånt. Men allt följer från \eqref{eq:var_mean}.
 }
 
 
-\subsection{Felpropagering}
+\section{Felpropagering}
+Oftast kan man inte mäta den eftersökta storheten direk. Man brukar
+istället mäta ett antal andra storheter och utnyttja något teoretiskt
+samband för att få värdet på den eftersökta storheten. Då kan man
+utnyttja feluppskattningarna ovan för att ta reda på felet i varje
+uppmätt värde. Men hur får man reda på osäkerheten i slutresultatet?
+Det är här som man måste använda felpropagering. 
+
+\subsection{Maxfel -- en inte så bra metod}
+Man skulle kunna göra någon insättning av största och minsta
+möjliga värde på en uppmätt storhet i sambandet för att
+få ett största och minsta värde på slutresultatet. Den här metoden
+kallas maxfel för den ger det största möjliga värdet på osäkerheten.
+
+\begin{exempel}\label{ex:maxfel}
+Tänk er att ni vill mäta arean av en rektangel och att ni har fått
+dess sidlängder som $a=\unit[5\pm1]{cm}$ och $b=\unit[8\pm2]{cm}$. Då
+blir arean $\bar{A}=\unit[40]{cm^2}$. Men maximalt skulle den kunna vara
+$A_\text{max}=\unit[6]{cm}\times\unit[10]{cm}=\unit[60]{cm^2}$ och minimalt
+$A_\text{min}=\unit[4]{cm}\times\unit[6]{cm}=\unit[24]{cm^2}$, vilket skulle ge
+ett maxfel på $\hat\Delta{A}=\unit[(60-24)]{cm^2}=\unit[36]{cm^2}$. 
+Detta är en \emph{väldig stor} osäkerhet.
+\end{exempel}
+
+Som exemplet visar så blev osäkerheten väldigt stor. Detta beror på
+att max- och minvärdena beräknas genom att låta alla mätfel dra åt
+samma håll. Alltså att både $a$ och $b$ togs till sina respektive max-
+och minvärden för att beräkna areans max- och minvärde. 
+\emph{Men mätfel antas vara slumpmässiga så det är inte särskilt sannolikt
+att båda mätningarna var felaktiga ''åt samma håll''. }
+
+\subsection{Linjärisering -- ett bättre sätt att göra det på}
+Ett annat problem med maxfelsmetoden är att den är ganska tidskrävande
+att göra för hand. Då är det lättare att anta att felen är små och
+använda en linjärapproximation (se bilaga~\ref{sec:Taylor}) av
+sambandet för att uppskatta hur mycket slutvärdet ändrar sig om man
+ändrar de uppmätta parametrarna något.
+
+Låt säga att en storhet $G$ ska bestämmas genom sambandet
+\begin{equation}\label{eq:some_function}
+F=F\big(x, y, z \big),
+\end{equation}
+där de uppmätta storheterna har varsina osäkerheter
+$x=\bar{x}+\Delta{x}$, $y=\bar{y}+\Delta{y}$ och
+$z=\bar{z}+\Delta{z}$. Då blir $\bar{F}=g(\bar{x}, \bar{y}, \bar{z})$,
+men hur uppskattar man osäkerheten?
+
+Börja med att anta att det bara finns fel i $x$ -- alltså att
+$\Delta{y}=\Delta{z}=0$. Då ger en linjär approximation att\footnotemark{} 
+\begin{equation}\label{eq:error_one_variable}
+\frac{\Delta{F}}{\Delta{x}} \approx \abs{ \pdv{F}{x} } 
+\quad\Longleftrightarrow\quad
+\Delta{F} \approx \abs{ \pdv{F}{x} } \Delta{x}.
+\end{equation}
+Härifrån ses att $\Delta{x}$ måste vara ganska litet för att
+approximationen ska vara tillförlitlig, men det är oftas inga problem. 
+\footnotetext{Notationsförklaring:
+\begin{itemize}
+\item Derivator med ''$\pd$'' används för funktioner av flera variabler,
+  och betder att man deriverar funktionen med avsenende på endast den
+  variabeln och betraktar de andra som konstanter.
+\item Jag sätter beloppstecken på derivatorna för att osäkerheterna
+  $\Delta{F}$ och $\Delta{x}$ av konvension alltid är positiva.
+% \item I \eqref{eq:error_main} betyder de nedsänkta 
+% ''$x=\bar{x}, y=\bar{y}, z=\bar{z}$'' att derivatornas värde ska
+% beräknas i just de $x$-, $y$- och $z$-värdena.
+\end{itemize}}
+
+\begin{figure}
+\centering
+\input{figurer/3D.pdf_t}
+\caption{Ett sätt att se på hur fel i flera inparametrar kan samverka
+  för att skapa ett totalt fel i slutresultatet. Alla felen drar åt
+  varsitt håll, men i varsin dimension. Detta gör att man får ett
+  resulterande fel vars storkel kan beräknas med ''Pythagoras sats''.}
+\label{fig:3D}
+\end{figure}
+
+Det här ska nu utvidgas till resten av variablerna. Detta görs genom
+att använda det andra av de två uttrycken ovan.
+Men för att inte hamna i samma situation som med maxfelet, att alla
+felen drar åt samma håll, räcker det inte med att addera ihop felen
+från varje variabel. 
+Man tänker sig ungefär istället att felen drar åt varisitt håll i
+flera dimensioner som i \figref{fig:3D}. Det totala felet i
+slutresultatet fås då som en slags ''Pythagoras sats'':
+\begin{equation}\label{eq:error_main}
+\Delta{F} \approx
+%\left(
+\sqrt{
+\left(\pdv{F}{x}\Delta{x}\right)^2
++\left(\pdv{F}{y}\Delta{y}\right)^2
++\left(\pdv{F}{z}\Delta{z}\right)^2
+}.
+%\,\right)_{x=\bar{x}, y=\bar{y}, z=\bar{z}}
+\end{equation}
+Det här uttrycket kan självklart utvidgas till vilket antal
+invariabler som helst. 
+
+När man beräknar ett propagerat fel med den här formeln ska man komma
+ihåg att alla derivatorna ska beräknas med $x=\bar{x}$, $y=\bar{y}$
+och $ z=\bar{z}$.
+
+\begin{exempel}
+Nu kan vi beräkna osäkerheten på rektangelarean från det förra
+exemplet. Eftersom $A=a\cdot b$ blir
+\[
+\pdv{A}{a}=b \quad\text{och}\quad \pdv{A}{b}=a,
+\]
+vilket med \eqref{eq:error_main} ger
+\[
+\Delta{A} = \sqrt{
+\Big(\bar{b}\,\Delta{a}\Big)^2 \!+
+\Big(\bar{a}\,\Delta{b}\Big)^2
+}
+= \sqrt{
+\Big(\unit[8]{cm}\times\unit[1]{cm}\Big)^2 \!+
+\Big(\unit[5]{cm}\times\unit[2]{cm}\Big)^2
+}
+= \unit[13]{cm^2}.
+\]
+Den här osäkerheten är betydligt mindre jämfört med maxfelet
+$\hat{\Delta}{A}=\unit[36]{cm^2}$ från exempel~\ref{ex:maxfel}. 
+
+Tittar man på de relativa\footnotemark{} osäkerheterna så ligger de på 20--25\,\% för
+$a$ och $b$, medan man får ${\Delta{A}}/{\bar{A}}=32\,\%$
+respektive ${\hat{\Delta}{A}}/{\bar{A}}=90\,\%$ som relativ osäkerhet
+i arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
+överens med hur stora fel vi hade från början.
+\footnotetext{En relativt osäkerhet är bara osäkerheten uttryckt i
+  procent istället för absoluta värden.}
+\end{exempel}
 
 
-\subsubsection{När det handlar om ett potenssamband}
+\subsubsection{Potenssamband}
+Det kanske känns som att metoden i \eqref{eq:error_main} inte är
+mycket enklare att använda än maxfelet, men den här metoden har en
+stor styrka: med rena potenssamband blir den väldigt enkel. Och ärligt
+talat så är ganska många fysikaliska samband någon form av
+potenssamband. 
+
+Antag nu att sambandet i \eqref{eq:some_function} är ett
+potenssamband:
+\begin{equation}
+F=F\big(x, y, z \big) = x^\alpha\, y^\beta \,z^\gamma.
+\end{equation}
+Då kan derivatorna skrivas
+\begin{equation}
+\pdv{F}{x} = \alpha x^{\alpha-1}\, y^\beta \,z^\gamma = \alpha\, \frac{F}{x}
+\end{equation}
+och på samma sätt för $y$ och $z$. Detta ger att
+\eqref{eq:error_one_variable} kan skrivas om till 
+(med $\Delta{y}=\Delta{z}=0$) 
+\begin{equation}
+\frac{\Delta{F}}{F} \approx \alpha\,\frac{\Delta{x}}{x}.
+\end{equation}
+Det som står här är en \emph{formel för det relativa felet}, vilket
+enkelt kan utvidgas till
+\begin{equation}\label{eq:error_rel}
+\frac{\Delta{F}}{\bar{F}} \approx
+\sqrt{
+\left(\alpha\,\frac{\Delta{x}}{\bar{x}}\right)^2
++\left(\beta\,\frac{\Delta{y}}{\bar{y}}\right)^2
++\left(\gamma\,\frac{\Delta{z}}{\bar{z}}\right)^2
+}.
+\end{equation}
+Och den här formeln är betydligt trevligare att arbeta med än någon av
+de tidigare.
+
+\begin{exempel}
+Vi tar en titt på rektangeln igen. Med \eqref{eq:error_rel} fås
+den relativa osäkerheten i arean till
+\[
+\frac{\Delta{A}}{\bar{A}} 
+= \sqrt{
+\left(1\times\frac{1}{5} \right)^2
++\left(1\times\frac{2}{8} \right)^2
+}
+= \sqrt{ 0,20^2 + 0,25^2} = 0,32 = 32\,\%,
+\]
+vilket är precis samma som vi fick i det förra exemplet. För att sen
+få den absoluta osäkerheten är det bara att multiplicera med
+$\bar{A}$:
+\[
+\Delta{A} = 0,32\times\unit[40]{cm^2}=\unit[13]{cm^2}.
+\]
+\end{exempel}
+
+
 
 \section{Regression}
 
-\section{Exempel på feluppskattning}
+
+
+\section{Exempelproblem}
 
 \subsection{Mätning av $g$ med fritt fall}
 
@@ -515,7 +758,7 @@ i felanalys. \footnote{
 
 \subsection{Olika storleksordningar}
 
-\subsection{Taylorutvecklingar}
+\subsection{Taylorutvecklingar}\label{sec:Taylor}
 
 \begin{figure}
 \centering
@@ -525,5 +768,3 @@ i felanalys. \footnote{
 \end{figure}
 
 \end{document}
-
-
