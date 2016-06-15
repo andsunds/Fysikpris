@@ -39,6 +39,9 @@
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
 \begin{document}
 
 %\newgeometry{top=1cm, bottom=2cm}
@@ -53,11 +56,12 @@ Andréas Sundström\footnote{
 }
 \date{\today, \quad\texttt{v\,0.1}}
 \maketitle
+
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 
 
-\noindent{\bf \large Förord}\\[1mm]
+\noindent{\bf\large Förord}\\[1mm]
 \small
 Det här kompendiet är skrivet som en introduktion till
 feluppskattningar för det svenska IPhO-laget. Jag har försökt fatta
@@ -89,15 +93,12 @@ Göteborg, 2016-06-12
 \normalsize
 
 
-
+\thispagestyle{empty}
 \clearpage
+\thispagestyle{empty}
 \tableofcontents
 \clearpage
-
-%\restoregeometry
-
 \setcounter{page}{1}
-%\addtocounter{section}{-1}
 
 
 
@@ -179,8 +180,8 @@ visst intervall $[a, b]$ måste man integrera:
 Sannolikheten att få $a<X<b$ bestäms alltså av arean under $f(x)$.
 
 \begin{exempel}
-Sannolikheten för en radioaktiv kärna att sönderfalla kan beskrivas
-med den så kallade exponentialfördelningen:
+Sannolikheten för att en radioaktiv kärna ska sönderfalla kan
+beskrivas med den så kallade exponentialfördelningen:
 \begin{equation*}
 f(t)=
 \begin{cases}
@@ -382,6 +383,7 @@ mätpunkter. För att få \emph{standardfelet i medelvärdet}
 använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
 
+\section{Innan man börjar felanalysen}
 
 
 \section{Olika typer av mätfel}\label{sec:matfel}
@@ -581,31 +583,33 @@ använda en linjärapproximation (se bilaga~\ref{sec:Taylor}) av
 sambandet för att uppskatta hur mycket slutvärdet ändrar sig om man
 ändrar de uppmätta parametrarna något.
 
-Låt säga att en storhet $G$ ska bestämmas genom sambandet
+Låt säga att en storhet $G$ ska bestämmas genom något godtyckligt
+samband 
 \begin{equation}\label{eq:some_function}
-F=F\big(x, y, z \big),
+G=G\big(x, y, z \big),
 \end{equation}
 där de uppmätta storheterna har varsina osäkerheter
 $x=\bar{x}+\Delta{x}$, $y=\bar{y}+\Delta{y}$ och
-$z=\bar{z}+\Delta{z}$. Då blir $\bar{F}=g(\bar{x}, \bar{y}, \bar{z})$,
+$z=\bar{z}+\Delta{z}$. Då blir $\bar{G}=g(\bar{x}, \bar{y}, \bar{z})$,
 men hur uppskattar man osäkerheten?
 
 Börja med att anta att det bara finns fel i $x$ -- alltså att
 $\Delta{y}=\Delta{z}=0$. Då ger en linjär approximation att\footnotemark{} 
 \begin{equation}\label{eq:error_one_variable}
-\frac{\Delta{F}}{\Delta{x}} \approx \abs{ \pdv{F}{x} } 
+\frac{\Delta{G}}{\Delta{x}} \approx \abs{ \pdv{G}{x} } 
 \quad\Longleftrightarrow\quad
-\Delta{F} \approx \abs{ \pdv{F}{x} } \Delta{x}.
+\Delta{G} \approx \abs{ \pdv{G}{x} } \Delta{x}.
 \end{equation}
 Härifrån ses att $\Delta{x}$ måste vara ganska litet för att
 approximationen ska vara tillförlitlig, men det är oftas inga problem. 
 \footnotetext{Notationsförklaring:
 \begin{itemize}
-\item Derivator med ''$\pd$'' används för funktioner av flera variabler,
-  och betder att man deriverar funktionen med avsenende på endast den
-  variabeln och betraktar de andra som konstanter.
+\item Derivator med krulliga d:n ($\pd$) används för funktioner av
+  flera variabler, och betder att man deriverar funktionen med
+  avsenende på endast en variabel och betraktar de andra som
+  konstanter. 
 \item Jag sätter beloppstecken på derivatorna för att osäkerheterna
-  $\Delta{F}$ och $\Delta{x}$ av konvension alltid är positiva.
+  $\Delta{G}$ och $\Delta{x}$ av konvension alltid är positiva.
 % \item I \eqref{eq:error_main} betyder de nedsänkta 
 % ''$x=\bar{x}, y=\bar{y}, z=\bar{z}$'' att derivatornas värde ska
 % beräknas i just de $x$-, $y$- och $z$-värdena.
@@ -630,12 +634,12 @@ Man tänker sig ungefär istället att felen drar åt varisitt håll i
 flera dimensioner som i \figref{fig:3D}. Det totala felet i
 slutresultatet fås då som en slags ''Pythagoras sats'':
 \begin{equation}\label{eq:error_main}
-\Delta{F} \approx
+\Delta{G} \approx
 %\left(
 \sqrt{
-\left(\pdv{F}{x}\Delta{x}\right)^2
-+\left(\pdv{F}{y}\Delta{y}\right)^2
-+\left(\pdv{F}{z}\Delta{z}\right)^2
+\left(\pdv{G}{x}\Delta{x}\right)^2
++\left(\pdv{G}{y}\Delta{y}\right)^2
++\left(\pdv{G}{z}\Delta{z}\right)^2
 }.
 %\,\right)_{x=\bar{x}, y=\bar{y}, z=\bar{z}}
 \end{equation}
@@ -667,11 +671,12 @@ vilket med \eqref{eq:error_main} ger
 Den här osäkerheten är betydligt mindre jämfört med maxfelet
 $\hat{\Delta}{A}=\unit[36]{cm^2}$ från exempel~\ref{ex:maxfel}. 
 
-Tittar man på de relativa\footnotemark{} osäkerheterna så ligger de på 20--25\,\% för
-$a$ och $b$, medan man får ${\Delta{A}}/{\bar{A}}=32\,\%$
-respektive ${\hat{\Delta}{A}}/{\bar{A}}=90\,\%$ som relativ osäkerhet
-i arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
-överens med hur stora fel vi hade från början.
+Tittar man på de relativa\footnotemark{} osäkerheterna så ligger de på
+20--25\,\% för $a$ och $b$, medan man får
+${\Delta{A}}/{\bar{A}}=32\,\%$ respektive
+${\hat{\Delta}{A}}/{\bar{A}}=90\,\%$ som relativ osäkerhet i
+arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
+överens med hur stora fel vi hade från början. 
 \footnotetext{En relativt osäkerhet är bara osäkerheten uttryckt i
   procent istället för absoluta värden.}
 \end{exempel}
@@ -687,22 +692,22 @@ potenssamband.
 Antag nu att sambandet i \eqref{eq:some_function} är ett
 potenssamband:
 \begin{equation}
-F=F\big(x, y, z \big) = x^\alpha\, y^\beta \,z^\gamma.
+G=G\big(x, y, z \big) = x^\alpha\, y^\beta \,z^\gamma.
 \end{equation}
 Då kan derivatorna skrivas
 \begin{equation}
-\pdv{F}{x} = \alpha x^{\alpha-1}\, y^\beta \,z^\gamma = \alpha\, \frac{F}{x}
+\pdv{G}{x} = \alpha x^{\alpha-1}\, y^\beta \,z^\gamma = \alpha\, \frac{G}{x}
 \end{equation}
 och på samma sätt för $y$ och $z$. Detta ger att
 \eqref{eq:error_one_variable} kan skrivas om till 
 (med $\Delta{y}=\Delta{z}=0$) 
 \begin{equation}
-\frac{\Delta{F}}{F} \approx \alpha\,\frac{\Delta{x}}{x}.
+\frac{\Delta{G}}{G} \approx \alpha\,\frac{\Delta{x}}{x}.
 \end{equation}
 Det som står här är en \emph{formel för det relativa felet}, vilket
-enkelt kan utvidgas till
+enkelt kan utvidgas till (för godtyckliga $\Delta{y}$ och $\Delta{z}$)
 \begin{equation}\label{eq:error_rel}
-\frac{\Delta{F}}{\bar{F}} \approx
+\frac{\Delta{G}}{\bar{G}} \approx
 \sqrt{
 \left(\alpha\,\frac{\Delta{x}}{\bar{x}}\right)^2
 +\left(\beta\,\frac{\Delta{y}}{\bar{y}}\right)^2
@@ -721,44 +726,242 @@ den relativa osäkerheten i arean till
 \left(1\times\frac{1}{5} \right)^2
 +\left(1\times\frac{2}{8} \right)^2
 }
-= \sqrt{ 0,20^2 + 0,25^2} = 0,32 = 32\,\%,
+= \sqrt{ 0,20^2 + 0,25^2} = 0,32 = 32\,\%.
 \]
-vilket är precis samma som vi fick i det förra exemplet. För att sen
-få den absoluta osäkerheten är det bara att multiplicera med
-$\bar{A}$:
+För att sen få den absoluta osäkerheten är det bara att multiplicera
+med $\bar{A}$:
 \[
-\Delta{A} = 0,32\times\unit[40]{cm^2}=\unit[13]{cm^2}.
+\Delta{A} = 0,32\times\unit[40]{cm^2}=\unit[13]{cm^2},
 \]
+vilket är det samma som vi fick i  det förra exemplet
 \end{exempel}
 
 
 
 \section{Regression}
+Ibland räcker det dock inte med att bara använda en mätpunkt och göra
+flera mätningar där. Då brukar man försöka göra någon form av
+kurvanpassning. Oftast försöker man göra en linjäranpassning för att
+de dels är lätta att göra med linjal, och dels är vi människor ganska
+bra på att uppskatta en trendlinje genom datapunkter. 
+Oftast vill man se till att använda ett samband så att den eftersökta
+storheten hamnar som linjens lutning. 
+
+Vidare är kurvanpassning att föredra före att beräkna ett värde från
+en datapunkt. Dels för att en kurvanpassning betyder att
+flermätpunkter har använts, dels för att det är lättare att upptäcka
+om någon enstaka mätpunkt råkade bli väldigt fel så att man kan bortse
+från den. 
+
+En annan sak att vara uppmärksam på när det gäller att mäta lutningar
+är huruvida linjen ska gå genom origo eller inte. Ifall man \emph{vet}
+att den ska göra det, så kan man utgå från en linje i origo och sen
+försöka anpassa lutningen till datapunkterna. Men om linjen inte
+behöver gå genom origo behöver man anpassa \emph{både} lutning och var
+den skär $y$-axeln. 
+
+\subsection{Olika sorts linjärisering}
+\paragraph{Logaritmering}
+En välbekant metod för att ta reda på exponenten i ett
+potenssamband. Om man vet att man har ett potenssamband
+\begin{equation}
+y=c\,x^\alpha
+\end{equation}
+så kan man få ett linjärt samband genom att logartimera båda leden
+\begin{equation}
+\log(y) = \log(c) + \alpha\,\log(x).
+\end{equation}
+Här kan ''log'' betyda vilken logaritm man vill, men den vanligaste
+att använda är den naturligalogaritlen ''ln''. 
+
+\paragraph{Konstruera ''egna'' linjära samband}
+Man ska också komma ihåg att man själv får arrangera om uttryck så att
+man får linjära samband. Det kan handla om att göra ett fiffigt val av
+vad man ska ha på axlarna. Man måste heller inte ha just exakt den
+eftersökta storheten som lutningen, utan det kan vara någon funktion
+av den.
+
+\begin{exempel}
+Ta reda på fjäderkonstanten i en spiralfjäder genom att mäta periodtidentid
+som funktion av massa. En fjäderpendels periodtid ges av
+\[
+T=2\pi\sqrt{\frac{m}{k}}.
+\]
+Om vi ska använda linjärisering vill vi skriva om uttrycket så att man
+får (nästan) $k$ som lutning på en linje. Det kan göras genom att möblera om
+uttrycket ovan till
+\[
+m=\frac{k}{2\pi}\,T^2.
+\]
+Så genom att sätta $T^2$ på $x$-axeln och $m$ på $y$-axeln, kan man få
+en linje vars lutning är $\nicefrac{k}{2\pi}$. Sedan är det bara att
+multiplicera lutningen med $2\pi$ för att få $k$.
+\end{exempel}
+
+\subsection{Osäkerhet i lutningen}
+Det är linte lika lätt att göra fenanalys på värden som man (medvetet)
+varierar för att få en linjeanpassning. Det enklaste sättet när man
+gör en analys för hand är att göra en huvudanpassning och sen försöka
+göra två som lutar så mycket/lite som det går men fortfarande passa
+någotlunda.
+
+\begin{exempel}
+Se \figref{fig:vattenparabel} hörande till exempelproblemet i
+avsnitt~\ref{sec:vattenparabel}, som är ett exempel på hur man kan
+uppskatta osäkerheten i lutningen. 
+\end{exempel}
+
 
 
 
 \section{Exempelproblem}
+Här presenteras lite större exempel än de som har förekommit tidigare
+i texten. De här problemen är ganska lätta (och mycket av fysiken
+utlämnas), men betoningen ligger här på felanalysen.
 
-\subsection{Mätning av $g$ med fritt fall}
+\subsection{Mätning av $g$ med vattenparabel}\label{sec:vattenparabel}
+Det visar sig att vattenytan i en roterande skål med vatten kommer att
+forma en parabel\footnotemark{}. Vidare gäller att en parabel kommer
+att folusera plant infallande ljus till en fokalpunkt som visar sig
+ligga på höjden
+\begin{equation}\label{eq:vattenparabel}
+h=\frac{g}{2\omega^2}.
+\end{equation}
+Här är $\omega$ rotationens vinkelhastighet.
+\footnotetext{Se \url{https://github.com/andsunds/Rotating_Bowl} för
+  en utförligare beskrivning av teorin och
+  experimentuppställningen. (Artikeln ligger under:
+  \texttt{text/Rotating\_bowl.pdf}, för att ladda ner trycker man på
+  ''\texttt{raw}''.) 
+}
 
-\subsection{Mätning av $g$ med pendel}
+Från sambandet ser vi att det är lämpligt att plotta $h$ mot
+$(2\omega^2)^{-1}$. Det är en bra idé att tänka ut detta i förväg
+innan man börja mäta så att man vet vad man som ska mätas. Sen gör man
+upp en tabell med sina ursprungliga mätvärden, t.ex. $h$ och
+periodtiden, men också vilka värden som ska plottas. I det här fallet
+blir det alltså en tabell på formen:
+\vspace{-2mm}
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+  $T$ /[s] & $(2\omega^2)^{-1}$ /[s$^2$] & $h$ /[cm]
+\\\hline
+  \vdots&  \vdots&  \vdots 
+\\\hline
+\end{tabular}
+\end{center}
+Därefter är det bara att överföra datan till en plot och göra sina
+linjäranpassningar, som i \figref{fig:vattenparabel}. 
+
+\begin{figure}
+\centering
+\input{figurer/vattenparabel.tex}
+\caption{Fokalhöjden över bottnen på en parabel formad av vattenytan i
+en roterande skål. Här ges $g$ som lutningen av linjeanpassningen; den
+undre och övre linjen svarar mot det minsta respektive största värdet
+på $g$ som den uppmätta datan tillåter. Notera också att alla linjer
+utgår från origo. }
+\label{fig:vattenparabel}
+\end{figure}
+
+För att uppskatta felet gör man en huvudanpassnig, men också en övre
+och en undre anpassning som sätter en osäkerhetsgräns på lutningen. I
+det här fallet ser det som om resultatet från den övre och undre
+gränsen blev en osäkerhet på $\Delta{g}=\unit[0,4]{m/s^2}$. Och det
+slutgiltiga svaret blir:
+\[g=\unit[9,8\pm0,4]{m/s^2}.\]
+
+\paragraph{Anmärkningar:}
+\begin{enumerate}
+\item Kom alltid ihåg \textbf{enheter} på allt som ska ha det
+  (tabellhuvuden, axlar till plottar, enstaka värden som används
+  någonstans \ldots)
+\item Man behöver inte göra livet för krångligt med enheterna. I
+  \figref{fig:vattenparabel} är $g$ angiven i enheten $\unit{cm/s^2}$
+  för att axlarnas enheter var just $\unit{cm}$ och $\unit{s^2}$. Om
+  det sen står att man ska svara i någon annan enhet kan man göra
+  enhetsomvandlingen i slutet.
+\item Försök göra tabellen så att det blir lätt att se vilka värden
+  som ska användas för plottning. I det här fallet mäts $T$ och $h$,
+  men ordningen i tabellen är $T$, $(2\omega^2)^{-1}$ och $h$ för att
+  det är de två sista som ska användas i plotten. 
+\end{enumerate}
+
+\subsection{Diod och serieresistor}
+\begin{figure}
+\centering
+\input{figurer/LED_schematics.pdf_t}
+\caption{Kopplingsschema för en diod med en serieresistor. Den
+  punktade ramen svarar mot en svart låda.}
+\label{fig:LED_schematics}
+\end{figure}
+
+En diod är en elektrisk komponent som fungerar som en backventil --
+ström kan bara flöda genom den i en riktning. Idealt skulle dioder
+kunna betrakts som att ström börjar flyta genom dem så fort spänningen
+är positiv. 
+Verkliga dioder har dock ett \emph{framspänningsfall} $V_\text{f}$,
+vilket betyder att de istället kan approximeras med att strömen börjar
+flyta så fort spänningen över dem överstiger $V_\text{f}$.
+\begin{quote}
+Antag att vi har en svart låda kopplad som i
+\figref{fig:LED_schematics}.
+Ta reda på resistansen $R$ och framspänningsfallet
+$V_\text{f}$, enbart med kännedom om $u$ och $i$.\footnote{Jämför
+  detta med finalexperimentet ''LED-karakteristik'' från Wallenbergs
+  fysikpris~2015. Mer information om detta finns på 
+  \url{https://github.com/andsunds/Fysikpris}, under
+  \texttt{Experiment2015/LED/}. } 
+\end{quote}
+
+
+
+
+
+
+\begin{figure}
+\centering
+\input{figurer/LED.tex}
+\caption{}
+\label{fig:LED}
+\end{figure}
+
+\subsection{Radioaktivt sönderfall av två silverisotoper}
+Det finns två naturligt förekommande isotoper av silver. GEnom att
+bestråla dessa med neutroner kan man skapa två nya, radioaktiva
+isotoper med varsina halveringstider.\footnote{För vidare läsning, se
+  \url{https://github.com/andsunds/Fysikpris} under \texttt{K6}, men
+  du måste själv kompilera \texttt{tex}-filen. (Jag lägger inte upp
+  pdf-filen för att göra trösken att försöka kopiera min rapport något
+  högre.) } 
+
+\begin{figure}
+\centering
+\input{figurer/silverisotoper.tex}
+\caption{}
+\label{fig:silverisotoper}
+\end{figure}
+
 
 
 \section{Sammanfattning}
 
+
+
+
+
+
+
+
+
+
 %\newpage
 %\bibliographystyle{ieeetr}
 %\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
-
 \clearpage
 \appendix
 
-
-\section{Approximationer}
-
-\subsection{Olika storleksordningar}
-
-\subsection{Taylorutvecklingar}\label{sec:Taylor}
+\section{Taylorutvecklingar}\label{sec:Taylor}
 
 \begin{figure}
 \centering
