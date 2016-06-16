@@ -1,9 +1,8 @@
-\documentclass[11pt,a4paper, english, swedish
+\documentclass[11pt,a4paper, swedish
 ]{article}
 \pdfoutput=1
 
 \usepackage{custom_as}
-
 \graphicspath{ {figurer/} }
 
 %%Drar in tabell och figurtexter
@@ -43,7 +42,6 @@
 
 
 \begin{document}
-
 %\newgeometry{top=1cm, bottom=2cm}
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
 \title{\huge Behandling av experimentella resultat\\[2mm] 
@@ -54,7 +52,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,0.1}}
+\date{\today, \quad\texttt{v\,1.1}}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -63,32 +61,35 @@ Andréas Sundström\footnote{
 
 \noindent{\bf\large Förord}\\[1mm]
 \small
-Det här kompendiet är skrivet som en introduktion till
-feluppskattningar för det svenska IPhO-laget. Jag har försökt fatta
-mig kort, men jag har en tendens att kunna dra iväg när jag
-skriver. Jag har försökt lägga innehållet på en nivå för att kunna
-förstås av en gymnasieelev, men det är inte alltid det går så
-bra\ldots{} Ni är de första som läser det här kompendiet. Tycker du
-att det det här var för svårförståeligt så har \textbf{jag} skrivit
-för komplicerat, och du är inte ensam om att tycka att kompediet var
-svårt. \emph{Så säg till om det var krångligt!} 
+Det här kompendiet är skrivet som en introduktion i experimentella
+mätningar, med fokus på feluppskattningar, för det svenska
+IPhO-laget. Jag har försökt fatta mig kort, men jag har en tendens att
+kunna dra iväg när jag skriver. Jag har försökt lägga innehållet på en
+nivå för att kunna förstås av en gymnasieelev, men det är inte alltid
+det går så bra\ldots{} Ni är de första som läser det här
+kompendiet. Tycker du att det det här var för svårförståeligt så har
+\textbf{jag} skrivit för komplicerat, och du är inte ensam om att
+tycka att kompediet var svårt. \emph{Så säg till om det var krångligt!} 
 
-\todo{Uppdatera }
-Det viktigaste innehållet finns i avsnitt~\ref{sec:matfel},
-men jag tyckte att det behövs en liten teoretisk bakgrund också, den
-finns i avsnitt~\ref{sec:statistik}. Det avsnittet ska man läsa om man
-vill få en lite klarare bild om varför feluppskattningarna beräknas på
-det ena eller andra viset. Avslutningsvis räknas ett exempel med lite
-olika feluppskattningar.
+Huvuddelen av kompendiel börjar med ett par punkter om vett och
+etikett för experimentella problem. 
+Sedan kommer huvudinnehållet, med felanalys och regression, i
+avsnitt~\ref{sec:matfel}--\ref{sec:regression}. 
+Men jag tyckte att det även kunde vara intressant med en liten
+teoretisk bakgrund till varför man gör felanalysen som man gör
+den. Bakgrunden finns i avsnitt~\ref{sec:statistik}, men man behöver
+inte läsa det för att hänga med i resten av kompendiet.
+Avslutningsvis räknas ett par exempel, med lite feluppskattning och
+regresion/linjärisering, i avsnitt~\ref{sec:exempel}
 
 Sedan har jag även lagt till en bilaga om
 Taylorutvecklingar. Den hör inte så mycket ihop med resten av det här
 kompendiet, men det är matnyttigt att kunna göra uppskattningar både
-för teoretiska och experimentella beräkningar.  
+för teoretiska och experimentella beräkningar. 
 
 \begin{flushright}
 Andréas Sunsdtröm\\ 
-Göteborg, 2016-06-12
+Göteborg, 2016-06-16
 \end{flushright}
 \normalsize
 
@@ -105,9 +106,10 @@ Göteborg, 2016-06-12
 \setcounter{section}{-1}
 \section{Sannolihetslära och statistik (överkurs)}\label{sec:statistik}
 När man gör mätningar vill man oftast ta reda på någon storhets värde
--- exempelvis periodtiden på en pendel. Med en mätning kan man dock
-inte säga något om hur bra mätningen var. Men med flera mätningar kan
-vi börja göra statistik över dem. Då 
+-- exempelvis periodtiden på en pendel. Med endast en mätning kan man
+dock inte säga något om hur bra mätningen var. Men med flera mätningar
+kan vi börja göra statistik över dem. Då kan man börja uppskatta hur
+säker man kan vara på ens resutat.
 
 Jag vill även betona vikten av statistik i framtida vetenskapliga och
 tekniska karriärer. \emph{Statistik är ett mycket kraftfullt verktyg.}
@@ -120,41 +122,42 @@ feluppskattningar.
 Precis som vanliga variabler används stokastiska variabler för att
 beteckna något okänt. Men i fallet med stokastiska variabler saknar de
 ett värde. De är mer tänkta som ett koncept för att betecka en
-slumpartad händese eller process. Man kan gör en observation/mätning
-av en stokastisk variabel och få ett värde, men det är bara ett
-mätvärde som man kan få. 
+slumpartad händelse eller process. Man kan göra en observation/mätning
+av en stokastisk variabel och få ett värde, men det är bara ett ensilt 
+mätvärde som man får och inte den stokastiska variabelns värde. 
 
 \begin{exempel}
-Ett tärningskast är ett exempel som kan beskrivas med en diskret
+Ett tärningskast är ett exempel som kan beskrivas med en (diskret)
 stokastisk variabel. Låt den stokastiska variabeln $X$ beskriva
 tärningskastet. Den kan då mätas till ett visst utfall 
-$x$. I fallet med en tärning $X$ har ett utfallsrum som består av
+$x$. I fallet med tärningen $X$ finns ett utfallsrum som består av
 talen 1 till 6: $\{1, 2, 3, 4, 5, 6\}$. Varje element i utfallsrummet
 har också en viss sannolikhet, $\nicefrac{1}{6}$ i det här fallet.
  
 Själva variablen $X$ (tärningen) kan alltså inte i sig ha ett värde.
 Men när man gör en observation (kastar tärningen) kan man få ett
-mätresultat $x$, som (när tärningen är kastad) har ett fast värde.
+mätresultat $x$, som (när tärningen är kastad) har ett fast värde för
+just det kastet. 
 \end{exempel}
 
 Fördelen med att ha stokastiska variabler är att man, likt vanliga
 variabler, kan börja räkna med dem mer generellt än om man bara har
-vissa specialfall. I det här kompendiet kommer de att användas, men
-inte med så stor vikt. (Stokastiska variabler kommer här att betecknas
-med stora bokstäver.)
+vissa specialfall. I det här avsnittet kommer de att användas för att
+uttrycka statistiska och stokastiska samband, men det läggs inte så
+stor vikt vid dem. 
 
 \subsection{Sannolikhetsfördelningar och täthetsfunktioner}
 Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
-fördet mesta vara diskret (och ändlig). Alltså att det finns ett
-ändligt antal möjliga utfall och varje utfall är distikt. Exempel på
+för det mesta vara diskret (och ändlig). Alltså att det finns ett
+ändligt antal möjliga utfall och varje utfall är distinkt. Exempel på
 detta är tärningskast, lottdragning och kortlekar. 
 
 Verkligheten är dock oftast mer komplicerad än så. När man gör
-mätningar handrar det oftas om mätnigar av en reellvärd
-storhet som t.ex. en längd\footnotemark{}. Detta betyder att längden
-kommer att anta ett reellt antal milimetrar och inte vara begränsad
-till ett ändligt antal möjliga värden. För att analysera detta behövs
-statistik för kontinuerliga fördelningar. 
+mätningar handlar det oftas om mätnigar av en reellvärd storhet som
+t.ex. en längd\footnotemark{}. Detta betyder att längden kommer att
+anta ett reellt antal milimetrar och inte vara begränsad till ett
+ändligt antal möjliga värden. För att analysera detta behövs statistik
+för kontinuerliga fördelningar.  
 \footnotetext{''Aha!'' tänker ni: atomer och kvantfysik gör att det
   bara finns diskreta längder. ''Nähä!'' säger jag: som fysiker måste
   man kunna hantera approximationer och veta begränsningarna i sina
@@ -168,7 +171,7 @@ brukar betecknas~$f$. Täthetsfunktionen talar om hur sannolikt det är
 att få ett värde i ett visst intervall. Notera dock att den
 \emph{inte} ger sannolikheten att få ett specifikt värde. 
 Eftersom det finns (ouppräknerligt) oändligt många möjliga utfall så
-är sannolikheten att få ett visst exat värde
+är sannolikheten att få ett visst exakt värde
 \begin{equation}
 \PP{X=x}\; \text{''=''}\; \frac{1}{\infty}\; \text{''=''}\;0.
 \end{equation}
@@ -203,7 +206,10 @@ ges enligt \eqref{eq:dist_P} helt enkelt av integralen
 = 1-\ee^{-\lambda \tau}
 =1-\frac{1}{2} = \frac{1}{2}.
 \end{equation*}
-Tiden $\nicefrac{\ln(2)}{\lambda}$ är alltså isotopens halveringstid. 
+Tolkningen av detta är att om man har väldigt många kärnor, så kommer
+hälften av dem att ha sönderfallit vid tiden
+$\nicefrac{\ln(2)}{\lambda}$. Detta är alltså vad man kallar isotopens
+\emph{halveringstid}.
 \end{exempel}
 
 
@@ -214,17 +220,17 @@ har täthesfunktionen
 \begin{equation}
 f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \, \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},
 \end{equation}
-där $\mu$ är fördelningens \emph{väntevärde} och $\sigma$ är dess
+där $\mu$ kallas fördelningens \emph{väntevärde} och $\sigma$ är dess
 \emph{standardavvikelse}. I \figref{fig:normal_dist} visas
 täthetsfunktionen för några olika val av $\mu$ och $\sigma$. Där ser
 vi att $\mu$ svarar mot var någonstans fördelnigen är centrerad, och
 att $\sigma$ svarar mot hur bred fördelningen blir. 
 
-Som kan ses i \figref{fig:normal_dist} går sannolikhetsfördelningen
-ner och blir väldigt liten för värden långt ifrån $\mu$. Till exempel
-ligger ca 98\,\% av all sannolikhet/area under kurvan inom $\mu\pm
-2\sigma$, men sen går det snabbt -- fortsätter man uppåt så ligger
-99,99997\,\% inom $\mu\pm 5\sigma$.
+% Som kan ses i \figref{fig:normal_dist} går sannolikhetsfördelningen
+% ner och blir väldigt liten för värden långt ifrån $\mu$. Till exempel
+% ligger ca 98\,\% av all sannolikhet/area under kurvan inom $\mu\pm
+% 2\sigma$, men sen går det snabbt -- fortsätter man uppåt så ligger
+% 99,99997\,\% inom $\mu\pm 5\sigma$.
 
 \begin{figure}
 \centering
@@ -242,13 +248,12 @@ säkerställer att den totala integralen
 \end{equation}
 Detta är något som \emph{gäller för alla täthetsfunktioner}. 
 
-
 Normalfördelningen kallas just ''normal'' för att det finns en sats
 som säger att i princip alla slumpfenomen blir normalfördelade om
 samma process upprepas väldigt många gånger. Ett exempel på detta är
 om man sannolikheten att få ett visst antal ''klave'' efter flera
 slantsinglingar. Den här egenskapen gör att de allra flesta 
-\emph{mätfelen antas vara normalfördelade}.
+mätfelen antas vara normalfördelade.
 
 % Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
 % med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
@@ -265,10 +270,11 @@ slantsinglingar. Den här egenskapen gör att de allra flesta
 
 \subsection{Väntevärden, varianser och standradavvikelser}
 De vanligaste fördelningarna har, som normalfördelningen, väntevärde
-och varians. Dessa beräknas med täthetsfunktionen. Det är också dessa
-som främst används i felanalys.
+och varians. Dessa beräknas med hjälp av täthetsfunktionen. I
+felanalys används främst den så kallade standardavvikelsen, som 
+är roten ur variansen.
 
-Väntevärdet av den stokastiska ariabeln $X$, med täthetsfunktion $f$,
+Väntevärdet av den stokastiska variabeln $X$, med täthetsfunktion $f$,
 definieras som 
 \begin{equation}\label{eq:ev}
 \ev{X} = \mu = \int_{-\infty}^\infty x f(x)\id{x}.
@@ -278,8 +284,9 @@ definitionen, men man kan jämföra väntevärdesintegralen med en slags
 tyngdpunktsberäkning. Man lägger ihop varje punkts
 ''sannolikhetsmassa'', $f(x)\dd{x}$, gånger punktes avstånd, $x$, från
 origo; till slut får man den sammanlagda tyngdpunkten. Man kan
-faktiskt hitta en fördelnings väntevärde genom att kippa ut en (styv)
-pappersbit formad efter ytan under kurvan och balanseta den utklippta formen. 
+faktiskt, om man vill, hitta en fördelnings väntevärde genom att kippa
+ut en (styv) pappersbit formad efter ytan under kurvan och balanseta
+den utklippta formen. 
 
 Sedan kan variansen definieras med hjälp av väntevärden:
 \begin{equation}\label{eq:var}
@@ -289,10 +296,15 @@ Sedan kan variansen definieras med hjälp av väntevärden:
 %det används mest i teoretiska analyser och är inte så viktigt i
 %nuläget. 
 Tolkningen av variansen är att det är ett väntevärde på hur
-mycket avvikelse man får från $\mu$, men för att ta med både positiva
-och negativa avvikelser kvadreras de innan man tar väntevärdet.
-Härifrån syns också att \emph{standardavvikelsen ges som roten ur
-variansen}. 
+mycket avvikelse man får från $\mu$, men för att inte positiva
+och negativa avvikelser ska ta utvarandra, kvadreras de innan man tar
+väntevärdet. Detta ger dock ett mått som är
+''kvadratiskt''\footnotemark{}, så för att få något som kan jämföras
+med själva värdena man får från $X$ använder man
+\emph{standardavvikelsen som är roten ur variansen}. 
+\footnotetext{Om till exempel $X$ är en sorts längd, med enhet meter,
+  bli $\VAR{X}$ en storhet som är en längd i kvadrat, med enhet
+  kvadratmeter. }
 
 \subsubsection{Några nyttiga satser}\label{sec:satser}
 Det viktigaste man behöver veta om väntevärden är att de är
@@ -340,26 +352,27 @@ Variansen får man med \eqref{eq:var_lin} sedan som
 = \sum_{i=1}^N \frac{1}{N^2}\overbrace{\VAR{X_i}}^{=\sigma^2}
 = \frac{\sigma^2}{N}.
 \end{equation}
+
 Dessa resultat kommer att användas i feluppsattningar genom att
-betrakta varje mätning som en obervarion av respektive $X_i$.
+betrakta varje $X_i$ som en mätning av en viss storhet.
 
 \subsubsection{Skattning från mätdata}
 Har man ett stokastiskt system och vill försöka mäta dess väntevärde
 och standardavvikelse, så måste man ha många mätningar på det. Det är
-nu som statistiken kommer in i bilden -- hur man behandlar tagna
-mätningar av en stokastisk variabel. 
+nu som statistiken kommer in i bilden.
 
 Från \eqref{eq:ev_mean} visade det sig att väntevärdet av ett
 medelvärde är samma som väntevärdet av det man mäter på. Vidare visade
 det sig att variansen av medelvärdet minskade som
 $\nicefrac{1}{N}$. Tillsammans ger detta att \emph{ju fler mätningar
-  man gör desto större är sannolikheten att medelvärdet man får blir
-  just väntevärdet}. Detta betyder att man kan skatta väntevärdet med
+  man gör desto större är sannolikheten att medelvärdet ligger nära
+  väntevärdet}. 
+Detta betyder att man kan skatta väntevärdet med
 \begin{equation}\label{eq:ev_approx}
 \ev{X} = \mu \approx \bar{x} = \frac{1}{N}\sum_{i=1}^N x_i.
 \end{equation}
-Här användes små bokstäver $x_i$ för att beteckna att de är tagna
-mätvärden -- de har alltså ett fast värde. 
+Här användes små bokstäver $x_i$ för att beteckna att de redan är
+uppmätta värden.
 
 Om nu väntevärden gick att skatta som medelvärden bör man väl kunna
 göra det samma för varianser. Definitionen av varians i \eqref{eq:var}
@@ -383,8 +396,53 @@ mätpunkter. För att få \emph{standardfelet i medelvärdet}
 använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
 
-\section{Innan man börjar felanalysen}
 
+
+
+
+\newpage
+\section{Innan man börjar felanalysen}
+Det finns ett par saker som är bra att tänka på innan, under och efter
+man börjar göra sina mätningar.
+\begin{itemize}
+\item \emph{Vad behöver jag mäta?} Det är alltid bra att tänka igenom
+  vilka samband som gäller och vilka parametar som behöver mätas. Allt
+  detta för att slippa göra om en mätning i onödan eller behöva göra
+  en ny mätning.
+\item \emph{Vad förväntar jag mig att få som resultat?} Det är inte
+  alltid det går att uppskatta vad man borde få för resultat, men i de
+  fall där man faktiskt kan göra det är det bra om man kan lägga några
+  minuter på att uppskatta vad man borde få för resultat. 
+\item \emph{Var behöver jag mäta?} När man håller på och tar upp en
+  mätserie är det dumt att hålla på och ta upp punkter som ligger
+  onödigt tätt. Det är oftast bättre att börja med att gå igenom
+  mätintervallet med ganska stora steg och notera var de
+  intressanta ställena ligger; sen kan du gå tillbaks dit och ta några
+  fler mätpunkter där. (I IPhO brukar de vilja att man tar minst
+  10~mätpunkter i en serie.)
+\item \emph{Blev någon mätning dålig?} Det är okej att slänga bort
+  enstaka mätvärden som är väldigt utstickande. Titta över era
+  mätningar och se om någon mätpunkt verkar ligga långt ifrån det
+  förväntade innan ni börjar med den övriga dataanalysen. (I mätningar
+  i en mätserie kan man behöva plotta ut sina mätpunkter innan man kan
+  hitta någon avvikelse.)
+\item \emph{Verkar slutresultatet rimligt?} Utöver enskilda mätvärden
+  bör man också titta på det slutgiltiga resultatet och se om det
+  verkar stämma. (Om svaret verkar helt tokigt, säg det! Ibland kanske
+  det går att få till förmildrande omständigheter om man påpekar att
+  det verkar fel.)
+\item \emph{Hur ska resultatet presenteras?} Kolla över
+  uppgiftspapprena för att se hur svaret till varje deluppgit ska
+  presenteras.
+  \begin{itemize}
+  \item OBS: Glöm inte \textbf{enheter!} (Det gäller allt:
+  tabellhuvuden, axler till grafer, uträkningar på pappret och så
+  klart i svaret.)
+  \item Tänk på hur många värdesiffror det är rimligt att ta
+    med. (Det kan ge poängavdrag i IPhO att ta med för många, eller
+    för få, värdesiffror.)
+  \end{itemize}
+\end{itemize}
 
 \section{Olika typer av mätfel}\label{sec:matfel}
 När man vill uppskatta hur stora experimentella fel/osäkerheter man
@@ -392,6 +450,10 @@ har finns det två typer av fel och två typer av feluppskattningar. De
 två typerna av fel som finns är systematiska och statistiska. Sedan är
 de två typerna av feluppskattningar som man behöver kunna. Dels direkt
 feluppskattning (av statistiska fel), dels propagering av osäkerhet. 
+
+I det här avsnittet presenteras de två typerna av fel och direkt
+feluppskattning. Efter detta kommer nästa avsnitt att handla om
+felpropagering. 
 
 
 \subsection{Systematiska fel -- noggrannhet och precision}
@@ -442,14 +504,14 @@ förutsätter såklart att man verkligen har försökt eliminera alla
 systematiska fel; de som är kvar är dock de som man inte kände till,
 vilket betder att det i princip är omöjligt att kunna uppskatta
 storleken på dem. I praktiken redovisar man oftast bara spridingen i
-mätresultaten och säger att märosäkerheten är samma som spridningen. 
+mätresultaten och säger att märosäkerheten är samma som spridningen --
+man antar alltså att det inte längre finns några systematiska fel. 
 
 \subsubsection{Mätupplösning}
 En sorts systematiska\footnotemark{} osäkerheter som man ofta kommer
-att stöta på härör från mätinstrumentents upplösning. Ett tydligt
-exempel på detta är en linjal; oavsett hur många gånger man försöker
-mäta bredden på ett hårstrå kommer man bara att få 0\,mm som
-resultat. 
+att stöta på härör från mätinstrumentents upplösning. Ett exempel på
+detta är en linjal; oavsett hur många gånger man försöker mäta bredden
+på ett hårstrå kommer man bara att få 0\,mm som resultat. 
 \footnotetext{Jag har valt att klassa dem som systematiska av
   anledningen att det oftast inte hjälper att ta ett medelvärde av
   flera mätningar. }
@@ -457,7 +519,7 @@ resultat.
 Sättet att hantera detta på är att erkänna att man har ett
 systematiskt fel som kommer från upplösningen, och ta med det i
 beräkningarna. Detta gör man genom att själv uppskatta vad
-avrundningsfelet kan vara i mätningen. I generellt gäller att
+avrundningsfelet kan vara i mätningen. Generellt gäller att
 \begin{itemize}
 \item analoga intrument har ett avrundningsfel som är halva
   avståndet mellan markörer. Alltså att en linjal som är mm-graderad
@@ -465,26 +527,27 @@ avrundningsfelet kan vara i mätningen. I generellt gäller att
   mätninger ser ut att vara närmare skalstecket än så).
 \item digitala intrument är ganska opålitliga i hur noggranna de
   är. Detta betyder att osäkerheten \emph{inte} behöver vara i sista
-  siffran, utan man måste kolla manualen för att vara helt säker. 
+  siffran, utan man måste kolla manualen för att veta hur bra de är. 
   \emph{I IPhO gäller dock att man får anta att osäkerhetsgränsen
-    ligger i sista siffran.} 
+    ligger på ''plus-mius ett'' i den sista siffran.} 
 \item tidtagning med tidtagarur har en osäkerhet på \emph{minst}
   $\pm\unit[0,1]{s}$ (även om tidtagaruret går ner till hundradels
   sekunder). Detta är helt enkelt för att den mänskliga reaktionstiden
-  inte är snabbare än så.
+  inte är snabbare än så. Dock är tidtagning något som typiskt lämpar
+  sig väl för upprepade mätningar.
 \end{itemize}
 
 Dessa tumregler kan användas i fall där man bedömmer att upprepade
-mätningar inte kommer att kunna ge förändrade mätresultat. Typfall där
-detta gäller är längdmätning (av något objekt) med linjal eller
-skjutmått, och spännings- eller strömmätningmätning med multimeter. I
-andra fall är det alltid rekommenderat att göra upprepade mätningar
-(gärna upp till 10 stycken men minst 3). 
+mätningar inte kommer att kunna ge förändrade mätresultat. Några (men
+inte alla) typfall där detta gäller är längdmätning (av något objekt)
+med linjal eller skjutmått, och spännings- eller strömmätningmätning
+med multimeter. I andra fall är det alltid rekommenderat att göra
+upprepade mätningar (gärna upp till 10 stycken men minst 3). 
 
 
 \subsection{Statistiska osäkerheter och hur man uppskattar dem}
 För att ta reda på precisionen i mätresultaten behövs statistik. Om
-ens noggrannhet är hög, övre halvan i \figref{fig:prec_nog}, behöver
+ens noggrannhet är hög (övre halvan i \figref{fig:prec_nog}) behöver
 man ändå veta hur god precision man har. Gör man bara en mätning har
 man ingen möjlighet att veta hur nära det ''sanna'' resultatet man
 kom. Det är där man måste börja använda lite statistik. 
@@ -492,18 +555,18 @@ kom. Det är där man måste börja använda lite statistik.
 Säg att det finns en storhet $x$ som ska mätas, men att varje mätning
 har ett mätfel~$\delta{x}$. Det som mäts blir då
 \begin{equation}
-\hat{x}_i=x+\delta{x}_i.
+\widetilde{x}_i=x+\delta{x}_i.
 \end{equation}
 Utan någon mer informationom $\delta{x}$ går det inte att säga så mycket mer
 från mätningen. Men som sagts tidigare antas mätfelet $\delta{x}$ vara
 normalfördelat med $\mu=0$ fast med ett okänt $\sigma$. Det är oftas
-$\sigma$ som man tar reda på för att ge en osäkerhetsuppskattning av
+$\sigma$ som man tar reda på för att sen få en osäkerhetsuppskattning av
 ens mätning. 
 
 För att få fram ett värde på $x$ tar man ett medelvärdet av flera
 mätningar. Detta ger
 \begin{equation}
-\bar{x}=\frac{\hat{x}_1+\hat{x}_2 + \cdots + \hat{x}_N}{N} 
+\bar{x}=\frac{\widetilde{x}_1+\widetilde{x}_2 + \cdots + \widetilde{x}_N}{N} 
 = \frac{Nx+\delta{x}_1+\delta{x}_2 + \cdots + \delta{x}_N}{N}
 = x + \overline{\delta{x}}.
 \end{equation}
@@ -516,7 +579,7 @@ För att sedan ta reda på precisionen i mätningarna behövs
 standardavvikelsen av $\delta{x}$. Denna fås enkelt som standradfelet
 från \eqref{eq:std_approx}. Men eftersom det beräknade värdet
 $\bar{x}$ är ett medelvärde betyder det att osäkerheten är mindre i
-$\bar{x}$ än i varje enskilt $\hat{x}_i$. Standardfelet från
+$\bar{x}$ än i varje enskilt $\widetilde{x}_i$. Standardfelet från
 \eqref{eq:std_approx} ger däremot en mått på hur spridda värden man
 har fått. Som nämnts tidigare får man standardavvikelsen i
 \emph{medelvärdet} genom att dela med
@@ -525,7 +588,7 @@ $\sqrt{N}$. Mätosäkerheten\footnotemark{} $\Delta{x}$ blir då
 {\Large
 \begin{equation} \label{eq:Delta_x}
 \Delta{x} = \frac{s}{\sqrt{N}} 
-= \sqrt{\frac{1}{N(N-1)}\sum_{i=1}^N (x_i-\bar{x})^2}.
+= \frac{1}{\sqrt{N}} \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
 \end{equation}
 }
 \footnotetext{Notera skilnaden mellan $\delta{x}$ och $\Delta{x}$. Den
@@ -553,19 +616,20 @@ utnyttja feluppskattningarna ovan för att ta reda på felet i varje
 uppmätt värde. Men hur får man reda på osäkerheten i slutresultatet?
 Det är här som man måste använda felpropagering. 
 
-\subsection{Maxfel -- en inte så bra metod}
-Man skulle kunna göra någon insättning av största och minsta
-möjliga värde på en uppmätt storhet i sambandet för att
-få ett största och minsta värde på slutresultatet. Den här metoden
-kallas maxfel för den ger det största möjliga värdet på osäkerheten.
+\subsection{Insättningsmetoden -- en inte så bra metod}
+Man skulle kunna göra en insättning av största eller minsta möjliga
+värde på de uppmätta storheterna i sambandet för att få ett största
+eller minsta värde på slutresultatet. På så sätt kan man beräkna
+mellan vilka värden slutresultatet skulle kunna variera, vilket ger en
+uppskattning av osäkerheten i det.
 
-\begin{exempel}\label{ex:maxfel}
+\begin{exempel}\label{ex:fel_insattning}
 Tänk er att ni vill mäta arean av en rektangel och att ni har fått
 dess sidlängder som $a=\unit[5\pm1]{cm}$ och $b=\unit[8\pm2]{cm}$. Då
 blir arean $\bar{A}=\unit[40]{cm^2}$. Men maximalt skulle den kunna vara
 $A_\text{max}=\unit[6]{cm}\times\unit[10]{cm}=\unit[60]{cm^2}$ och minimalt
 $A_\text{min}=\unit[4]{cm}\times\unit[6]{cm}=\unit[24]{cm^2}$, vilket skulle ge
-ett maxfel på $\hat\Delta{A}=\unit[(60-24)]{cm^2}=\unit[36]{cm^2}$. 
+en osäkerhet på $\hat\Delta{A}=\unit[(60-24)]{cm^2}=\unit[36]{cm^2}$. 
 Detta är en \emph{väldig stor} osäkerhet.
 \end{exempel}
 
@@ -577,7 +641,7 @@ och minvärden för att beräkna areans max- och minvärde.
 att båda mätningarna var felaktiga ''åt samma håll''. }
 
 \subsection{Linjärisering -- ett bättre sätt att göra det på}
-Ett annat problem med maxfelsmetoden är att den är ganska tidskrävande
+Ett annat problem med insättningsmetoden är att den är ganska tidskrävande
 att göra för hand. Då är det lättare att anta att felen är små och
 använda en linjärapproximation (se bilaga~\ref{sec:Taylor}) av
 sambandet för att uppskatta hur mycket slutvärdet ändrar sig om man
@@ -594,7 +658,14 @@ $z=\bar{z}+\Delta{z}$. Då blir $\bar{G}=g(\bar{x}, \bar{y}, \bar{z})$,
 men hur uppskattar man osäkerheten?
 
 Börja med att anta att det bara finns fel i $x$ -- alltså att
-$\Delta{y}=\Delta{z}=0$. Då ger en linjär approximation att\footnotemark{} 
+$\Delta{y}=\Delta{z}=0$. Då ger en linjärapproximation att
+\footnote{Derivator med krulliga d:n ($\pd$) används för funktioner av
+  flera variabler, och betder att man deriverar funktionen med
+  avsenende på endast en variabel och betraktar de andra som
+  konstanter.}
+\footnote{Jag sätter beloppstecken på derivatorna för att
+  osäkerheterna $\Delta{G}$ och $\Delta{x}$ av konvension alltid är
+  positiva.} 
 \begin{equation}\label{eq:error_one_variable}
 \frac{\Delta{G}}{\Delta{x}} \approx \abs{ \pdv{G}{x} } 
 \quad\Longleftrightarrow\quad
@@ -602,18 +673,7 @@ $\Delta{y}=\Delta{z}=0$. Då ger en linjär approximation att\footnotemark{}
 \end{equation}
 Härifrån ses att $\Delta{x}$ måste vara ganska litet för att
 approximationen ska vara tillförlitlig, men det är oftas inga problem. 
-\footnotetext{Notationsförklaring:
-\begin{itemize}
-\item Derivator med krulliga d:n ($\pd$) används för funktioner av
-  flera variabler, och betder att man deriverar funktionen med
-  avsenende på endast en variabel och betraktar de andra som
-  konstanter. 
-\item Jag sätter beloppstecken på derivatorna för att osäkerheterna
-  $\Delta{G}$ och $\Delta{x}$ av konvension alltid är positiva.
-% \item I \eqref{eq:error_main} betyder de nedsänkta 
-% ''$x=\bar{x}, y=\bar{y}, z=\bar{z}$'' att derivatornas värde ska
-% beräknas i just de $x$-, $y$- och $z$-värdena.
-\end{itemize}}
+
 
 \begin{figure}
 \centering
@@ -626,29 +686,33 @@ approximationen ska vara tillförlitlig, men det är oftas inga problem.
 \end{figure}
 
 Det här ska nu utvidgas till resten av variablerna. Detta görs genom
-att använda det andra av de två uttrycken ovan.
-Men för att inte hamna i samma situation som med maxfelet, att alla
-felen drar åt samma håll, räcker det inte med att addera ihop felen
-från varje variabel. 
-Man tänker sig ungefär istället att felen drar åt varisitt håll i
+att använda det andra av de två uttrycken ovan. Bidragen från varje
+invariabel bestäms på ett analogt sätt med hur det gjordes för bara
+$x$. 
+Men för att inte hamna i samma situation som med insättningsmetoden,
+(att alla felen drar åt samma håll) räcker det inte med att addera
+ihop felen från varje variabel. 
+Man tänker sig istället ungefär att felen drar åt varisitt håll fast i
 flera dimensioner som i \figref{fig:3D}. Det totala felet i
-slutresultatet fås då som en slags ''Pythagoras sats'':
+slutresultatet fås då som en slags ''Pythagoras sats'': 
+\footnote{Beloppstecknen i \eqref{eq:error_one_variable} har
+  försvunnit hät. Det är för att kvadraten ändå alltid är positiv. }
+
+\Large
 \begin{equation}\label{eq:error_main}
-\Delta{G} \approx
-%\left(
-\sqrt{
+\Delta{G} \approx \sqrt{
 \left(\pdv{G}{x}\Delta{x}\right)^2
 +\left(\pdv{G}{y}\Delta{y}\right)^2
 +\left(\pdv{G}{z}\Delta{z}\right)^2
 }.
-%\,\right)_{x=\bar{x}, y=\bar{y}, z=\bar{z}}
 \end{equation}
-Det här uttrycket kan självklart utvidgas till vilket antal
-invariabler som helst. 
-
+\normalsize
 När man beräknar ett propagerat fel med den här formeln ska man komma
 ihåg att alla derivatorna ska beräknas med $x=\bar{x}$, $y=\bar{y}$
 och $ z=\bar{z}$.
+Det här uttrycket kan självklart utvidgas till vilket antal
+invariabler som helst. 
+
 
 \begin{exempel}
 Nu kan vi beräkna osäkerheten på rektangelarean från det förra
@@ -668,8 +732,8 @@ vilket med \eqref{eq:error_main} ger
 }
 = \unit[13]{cm^2}.
 \]
-Den här osäkerheten är betydligt mindre jämfört med maxfelet
-$\hat{\Delta}{A}=\unit[36]{cm^2}$ från exempel~\ref{ex:maxfel}. 
+Den här osäkerheten är betydligt mindre jämfört med det från insättningsmetoden:
+$\hat{\Delta}{A}=\unit[36]{cm^2}$ från exempel~\ref{ex:fel_insattning}. 
 
 Tittar man på de relativa\footnotemark{} osäkerheterna så ligger de på
 20--25\,\% för $a$ och $b$, medan man får
@@ -684,7 +748,7 @@ arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
 
 \subsubsection{Potenssamband}
 Det kanske känns som att metoden i \eqref{eq:error_main} inte är
-mycket enklare att använda än maxfelet, men den här metoden har en
+mycket enklare att använda än insättningsmetoden, men den här metoden har en
 stor styrka: med rena potenssamband blir den väldigt enkel. Och ärligt
 talat så är ganska många fysikaliska samband någon form av
 potenssamband. 
@@ -692,30 +756,35 @@ potenssamband.
 Antag nu att sambandet i \eqref{eq:some_function} är ett
 potenssamband:
 \begin{equation}
-G=G\big(x, y, z \big) = x^\alpha\, y^\beta \,z^\gamma.
+G=G\big(x, y, z \big) = c\:x^\alpha\, y^\beta \,z^\gamma,
 \end{equation}
+där $c$, $\alpha$, $\beta$ och $\gamma$ är konstanter.
 Då kan derivatorna skrivas
 \begin{equation}
-\pdv{G}{x} = \alpha x^{\alpha-1}\, y^\beta \,z^\gamma = \alpha\, \frac{G}{x}
+\pdv{G}{x} = c\,\alpha x^{\alpha-1}\, y^\beta \,z^\gamma = \alpha\, \frac{G}{x}
 \end{equation}
 och på samma sätt för $y$ och $z$. Detta ger att
 \eqref{eq:error_one_variable} kan skrivas om till 
 (med $\Delta{y}=\Delta{z}=0$) 
 \begin{equation}
-\frac{\Delta{G}}{G} \approx \alpha\,\frac{\Delta{x}}{x}.
+\frac{\Delta{G}}{G} \approx \abs{\alpha}\,\frac{\Delta{x}}{x}.
 \end{equation}
 Det som står här är en \emph{formel för det relativa felet}, vilket
 enkelt kan utvidgas till (för godtyckliga $\Delta{y}$ och $\Delta{z}$)
+
+\Large
 \begin{equation}\label{eq:error_rel}
-\frac{\Delta{G}}{\bar{G}} \approx
-\sqrt{
+\frac{\Delta{G}}{\bar{G}} \approx \sqrt{
 \left(\alpha\,\frac{\Delta{x}}{\bar{x}}\right)^2
 +\left(\beta\,\frac{\Delta{y}}{\bar{y}}\right)^2
 +\left(\gamma\,\frac{\Delta{z}}{\bar{z}}\right)^2
 }.
 \end{equation}
+\normalsize
 Och den här formeln är betydligt trevligare att arbeta med än någon av
-de tidigare.
+de tidigare. Notera också att beloppstecken på $\alpha$, $\beta$ och
+$\gamma$ inte används här eftersom kvadreringen tar bort eventuella
+minustecken. 
 
 \begin{exempel}
 Vi tar en titt på rektangeln igen. Med \eqref{eq:error_rel} fås
@@ -738,7 +807,7 @@ vilket är det samma som vi fick i  det förra exemplet
 
 
 
-\section{Regression}
+\section{Regression}\label{sec:regression}
 Ibland räcker det dock inte med att bara använda en mätpunkt och göra
 flera mätningar där. Då brukar man försöka göra någon form av
 kurvanpassning. Oftast försöker man göra en linjäranpassning för att
@@ -749,7 +818,7 @@ storheten hamnar som linjens lutning.
 
 Vidare är kurvanpassning att föredra före att beräkna ett värde från
 en datapunkt. Dels för att en kurvanpassning betyder att
-flermätpunkter har använts, dels för att det är lättare att upptäcka
+fler mätpunkter har använts, dels för att det är lättare att upptäcka
 om någon enstaka mätpunkt råkade bli väldigt fel så att man kan bortse
 från den. 
 
@@ -759,6 +828,14 @@ att den ska göra det, så kan man utgå från en linje i origo och sen
 försöka anpassa lutningen till datapunkterna. Men om linjen inte
 behöver gå genom origo behöver man anpassa \emph{både} lutning och var
 den skär $y$-axeln. 
+
+
+\begin{quote}
+  \textbf{Tips: } Det kan vara bra att ha med sig en
+  \emph{genomskinlig} linjal så att man kan se alla sina utmarkerade
+  mätpunkter när man gör sina anpassningar. 
+\end{quote}
+
 
 \subsection{Olika sorts linjärisering}
 \paragraph{Logaritmering}
@@ -772,7 +849,7 @@ så kan man få ett linjärt samband genom att logartimera båda leden
 \log(y) = \log(c) + \alpha\,\log(x).
 \end{equation}
 Här kan ''log'' betyda vilken logaritm man vill, men den vanligaste
-att använda är den naturligalogaritlen ''ln''. 
+att använda är den naturliga logaritlen ''ln''. 
 
 \paragraph{Konstruera ''egna'' linjära samband}
 Man ska också komma ihåg att man själv får arrangera om uttryck så att
@@ -798,12 +875,18 @@ en linje vars lutning är $\nicefrac{k}{2\pi}$. Sedan är det bara att
 multiplicera lutningen med $2\pi$ för att få $k$.
 \end{exempel}
 
-\subsection{Osäkerhet i lutningen}
+\subsection{Felgränser }
 Det är linte lika lätt att göra fenanalys på värden som man (medvetet)
 varierar för att få en linjeanpassning. Det enklaste sättet när man
 gör en analys för hand är att göra en huvudanpassning och sen försöka
-göra två som lutar så mycket/lite som det går men fortfarande passa
-någotlunda.
+göra två linjer till som ligger på gränsen till vad datan tillåter.
+
+Ska man ta reda på lutningen gör man två linjer som lutar så
+mycket/lite som det går men fortfarande passar någotlunda. Ska man
+istället ta reda på en skärningspunkt med någon axel kan det vara bra
+att även försöka flytta runt lite på linjen (inte bar ändra
+lutningen). Båda dessa typerna av feluppskattnigar är exempel på
+insättningsmetoden där den faktiskt funkar bra.
 
 \begin{exempel}
 Se \figref{fig:vattenparabel} hörande till exempelproblemet i
@@ -814,10 +897,99 @@ uppskatta osäkerheten i lutningen.
 
 
 
-\section{Exempelproblem}
+\section{Exempelproblem}\label{sec:exempel}
 Här presenteras lite större exempel än de som har förekommit tidigare
 i texten. De här problemen är ganska lätta (och mycket av fysiken
-utlämnas), men betoningen ligger här på felanalysen.
+utlämnas), så betoningen ligger här på felanalyser och
+linjäranpassningar. 
+
+\subsection{Mätning av $g$ med pendel}
+Som vi alla känner till så ges periodtiden för en matematisk pendel
+(punktmassa som hänger i ett masslöst snöre) av
+\begin{equation}\label{eq:pendel}
+T=2\pi\sqrt{\frac{l}{g}},
+\end{equation}
+där $l$ är punktmassans avstånd från upphängningspunkten. Notera att
+den här formeln bara gäller för pendlar med små utslag.
+\begin{quote}
+Mät upp $g$ genom att använda en pendel. Hur stor osäkerhet får du i
+ditt resultat? 
+\end{quote}
+
+\paragraph{Lösning}
+Till att börja med skriver vi om \eqref{eq:pendel} till:
+\begin{equation}\label{eq:g_pendel}
+g=4\pi^2\; l\,T^{-2}.
+\end{equation}
+Därefter är det bara att börja mäta.
+Uppställningen som jag använde bestod av en (ganska stor) mutter
+upphängd i en bit sytråd. 
+
+För att mäta längden använde jag min långa linjal. Den är visserligen
+graderad i mm, men på grund av att muttern är så stor är det inte
+rimligt att använda $\pm\unit[0,5]{mm}$ som osäkerhet. För att vara på
+den säkra sidan tog jag en osäkerhet på $\Delta{l}=\unit[2]{cm}$, som
+motsvarade storleken på muttern (det kanske är lite väl mycket, men
+hellre lite för mycket än för lite). pendelns längd var alltså
+\[
+l=\bar{l}\pm\Delta{l} = \unit[94\pm2]{cm}.
+\]
+
+För att mäta periodtiden använde jag det gamla knepet att mäta tiden
+för 10~svängningar och dela på 10 för att i varje mätning få ett
+medelvärde på periodtiden. Med 5 mätningar fick jag värdena:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|} \hline
+$10T$ /[s] & 19,2 & 19,5 & 19,2 & 19,0 &19,4 \\ \hline
+$T$ /[s] &  1,92 & 1,95 & 1,92 & 1,90 &1,94 \\ \hline
+$\bar{T}\pm\Delta{T}$ /[s] $\phantom{\hspace{-8pt}\Big)}$
+   & \multicolumn{5}{c|}{$1,93 \pm 0,01$}
+\\\hline
+\end{tabular}
+\end{center}
+Här har medelvärdet och osäkerheten räknats ut genom att använda
+miniräknarens inbyggda statistikfunktion.
+
+Med \eqref{eq:g_pendel} fås
+\begin{equation}
+\bar{g} = 4\pi^2\,\frac{\bar{l}}{\bar{T}} 
+= 4\pi^2\,\frac{\unit[0,94]{m}}{(\unit[1,93]{s})^2}
+= \unit[9,96]{m/s^2},
+\end{equation}
+och osäkerheten ges med \eqref{eq:error_rel} till
+\begin{equation}
+\begin{aligned}
+\Delta{g} &= \bar{g}\:\sqrt{
+\left(1\times\frac{\Delta{l}}{\bar{l}}\right)^2 + 
+\left(2\times\frac{\Delta{T}}{\bar{T}}\right)^2
+}\\
+&= \sqrt{
+\left(1\times\frac{2}{94}\right)^2 + 
+\left(2\times\frac{0,01}{1,93}\right)^2
+}
+\times\unit[9,96]{m/s^2}
+=\unit[0,24]{m/s^2}.
+\end{aligned}
+\end{equation}
+Det slutgiltiga svaret blir då:
+\[ g=\unit[9,96 \pm 0,24]{m/s^2}.\]
+
+\paragraph{Anmärkningar}
+\begin{enumerate}
+\item Resultatet ser ut att kunna stämma överens med vad vi förväntar
+  oss. 
+\item  Kom ihåg \textbf{enheter!}
+\item Ha med lagom många värdesiffror i svaret. En tumregel är att
+  inte ha med mer än två\footnotemark{} värdesiffror i osäkerheten,
+  och sen inte ha fler decimaler än vad den angivna osäkerheten har. 
+\end{enumerate}
+\footnotetext{Helst ska man bara ha med en värdesiffra i osäkerheten,
+  men jag tycker att man kan ha med två om avrundningsfelet blir
+  stort. T.ex. är det inte så stor skilnad (ca 5\,\%) på $0,95$ och
+  $1$, men mellan $0,15$ och $0,2$ är avrundningsfelet över 30\,\%. Så
+  jag skulle ha två värdesiffor i det senare fallet men en i det
+  första. }
+
 
 \subsection{Mätning av $g$ med vattenparabel}\label{sec:vattenparabel}
 Det visar sig att vattenytan i en roterande skål med vatten kommer att
@@ -832,9 +1004,10 @@ Här är $\omega$ rotationens vinkelhastighet.
   en utförligare beskrivning av teorin och
   experimentuppställningen. (Artikeln ligger under:
   \texttt{text/Rotating\_bowl.pdf}, för att ladda ner trycker man på
-  ''\texttt{raw}''.) 
+  ''raw''.) 
 }
 
+\paragraph{Lösning}
 Från sambandet ser vi att det är lämpligt att plotta $h$ mot
 $(2\omega^2)^{-1}$. Det är en bra idé att tänka ut detta i förväg
 innan man börja mäta så att man vet vad man som ska mätas. Sen gör man
@@ -871,11 +1044,11 @@ gränsen blev en osäkerhet på $\Delta{g}=\unit[0,4]{m/s^2}$. Och det
 slutgiltiga svaret blir:
 \[g=\unit[9,8\pm0,4]{m/s^2}.\]
 
-\paragraph{Anmärkningar:}
+\paragraph{Anmärkningar}
 \begin{enumerate}
-\item Kom alltid ihåg \textbf{enheter} på allt som ska ha det
-  (tabellhuvuden, axlar till plottar, enstaka värden som används
-  någonstans \ldots)
+\item Även här verkar resultatet stämma, men här är osäkerheten lite
+  större än med pendeln. 
+\item Glöm inte \textbf{enheter}!
 \item Man behöver inte göra livet för krångligt med enheterna. I
   \figref{fig:vattenparabel} är $g$ angiven i enheten $\unit{cm/s^2}$
   för att axlarnas enheter var just $\unit{cm}$ och $\unit{s^2}$. Om
@@ -887,7 +1060,29 @@ slutgiltiga svaret blir:
   det är de två sista som ska användas i plotten. 
 \end{enumerate}
 
+
 \subsection{Diod och serieresistor}
+\newcommand{\Vf}{\ensuremath{}V_\text{f}}
+
+En diod är en elektrisk komponent som fungerar som en backventil --
+ström kan bara flöda genom den i en riktning. Idealt skulle dioder
+kunna betrakts som att ström börjar flyta genom dem så fort spänningen
+är positiv. 
+Verkliga dioder har dock ett \emph{framspänningsfall} $\Vf$,
+vilket betyder att de istället kan approximeras med att strömen börjar
+flyta så fort spänningen över dem överstiger $\Vf$.
+\begin{quote}
+Antag att vi har en svart låda kopplad som i
+\figref{fig:LED_schematics}.
+Ta reda på resistansen $R$ och framspänningsfallet
+$\Vf$, enbart med kännedom om $u$ och $i$.\footnote{Jämför
+  detta med finalexperimentet ''LED-karakteristik'' från Wallenbergs
+  fysikpris~2015. Mer information om detta finns på 
+  \url{https://github.com/andsunds/Fysikpris}, under
+  \texttt{Experiment2015/LED/}. } 
+\end{quote}
+
+\paragraph{Lösning}
 \begin{figure}
 \centering
 \input{figurer/LED_schematics.pdf_t}
@@ -895,62 +1090,118 @@ slutgiltiga svaret blir:
   punktade ramen svarar mot en svart låda.}
 \label{fig:LED_schematics}
 \end{figure}
+Med Kirchhoffs spänningslag fås att (med $u\ge\Vf$)
+\begin{equation}
+u=\Vf+u_R,
+\end{equation}
+men Ohms lag säger att $u_R=iR$. Tillsammans ges dessa två uttrycken
+ett samband för $i$ som funktion av $u$, $\Vf$ och $R$:
+\begin{equation}\label{eq:i}
+i=\begin{cases}
+0 &, u<\Vf\\
+\frac{1}{R}\Big(u-\Vf\Big)&, u\ge\Vf.
+\end{cases}
+\end{equation}
+Alltså ligger $i$ platt $0$ tills $u$ kommer upp till $\Vf$, då börjar den stiga
+linjärt med lutning $\nicefrac{1}{R}$. Vi kan alltså finna de
+eftersökta storheterna genom att ta reda på linjens lutning och var
+den korsar $x$-axeln.
 
-En diod är en elektrisk komponent som fungerar som en backventil --
-ström kan bara flöda genom den i en riktning. Idealt skulle dioder
-kunna betrakts som att ström börjar flyta genom dem så fort spänningen
-är positiv. 
-Verkliga dioder har dock ett \emph{framspänningsfall} $V_\text{f}$,
-vilket betyder att de istället kan approximeras med att strömen börjar
-flyta så fort spänningen över dem överstiger $V_\text{f}$.
-\begin{quote}
-Antag att vi har en svart låda kopplad som i
-\figref{fig:LED_schematics}.
-Ta reda på resistansen $R$ och framspänningsfallet
-$V_\text{f}$, enbart med kännedom om $u$ och $i$.\footnote{Jämför
-  detta med finalexperimentet ''LED-karakteristik'' från Wallenbergs
-  fysikpris~2015. Mer information om detta finns på 
-  \url{https://github.com/andsunds/Fysikpris}, under
-  \texttt{Experiment2015/LED/}. } 
-\end{quote}
-
-
-
-
-
+Mäter man ström-spänning-karakteristiken för den svarta lådan får man
+ett utseende som i \figref{fig:LED}. Detta ser ut att stämma väl
+överens med beskrivningen av \eqref{eq:i}. Notera dock att de
+uppmätta mätpunkterna avviker något från linjäranpassningen för de
+allra lägsta strömmarna, vlket beror på att den approximationen som
+används inte heller är helt korrekt. 
 
 \begin{figure}
 \centering
 \input{figurer/LED.tex}
-\caption{}
+\caption{Ström-spänning-karakteristik för en diod med en serieresistor
+som i \figref{fig:LED_schematics}. Linjäranpassningen är gjord efte de
+mätpunkter med $u$ från ca 3\,V och uppåt.}
 \label{fig:LED}
 \end{figure}
 
-\subsection{Radioaktivt sönderfall av två silverisotoper}
-Det finns två naturligt förekommande isotoper av silver. GEnom att
-bestråla dessa med neutroner kan man skapa två nya, radioaktiva
-isotoper med varsina halveringstider.\footnote{För vidare läsning, se
-  \url{https://github.com/andsunds/Fysikpris} under \texttt{K6}, men
-  du måste själv kompilera \texttt{tex}-filen. (Jag lägger inte upp
-  pdf-filen för att göra trösken att försöka kopiera min rapport något
-  högre.) } 
+Från linjäranpassningen avläses sedan resultaten
+\begin{equation*}
+\begin{aligned}
+\Vf &= \unit[1,8]{V}\\
+R &= \unit[1,1]{k\Omega}.
+\end{aligned}
+\end{equation*}
+\paragraph{Anmärkningar} 
+\begin{enumerate}
+\item Från bygget av uppställnigen vet jag att resistansen skulle vara
+  $\unit[1]{k\Omega}$, men toleransen på de resistorerna är 10\,\%. Så
+  resistansen verkar stämma.
+\item När det gäller att bestämma $\Vf$ är det bättre att använda
+  linjäranpassningen hellre än att försöka titta på när man kan börja
+  se ström gå. Detta är för att dioden inte riktigt beter sig som i
+  modellen precis när den börjar släppa igenom strömmen.
+\end{enumerate}
 
-\begin{figure}
-\centering
-\input{figurer/silverisotoper.tex}
-\caption{}
-\label{fig:silverisotoper}
-\end{figure}
 
+% \subsection{Radioaktivt sönderfall av två silverisotoper}
+% Det finns två naturligt förekommande isotoper av silver. Genom att
+% bestråla dessa med neutroner kan man skapa två nya, radioaktiva
+% isotoper med varsina halveringstider.\footnote{För vidare läsning, se
+%   \url{https://github.com/andsunds/Fysikpris} under \texttt{K6}, men
+%   du måste själv kompilera \texttt{tex}-filen. (Jag lägger inte upp
+%   pdf-filen för att göra trösken att försöka kopiera min rapport något
+%   högre.) } 
 
+% \paragraph{Lösning}
+% \begin{figure}
+% \centering
+% \input{figurer/silverisotoper.tex}
+% \caption{}
+% \label{fig:silverisotoper}
+% \end{figure}
 
+\newpage
 \section{Sammanfattning}
-
-
-
-
-
-
+Det finns många saker att tänka på när man ska göra
+experiment. Felanalys är en av dem, men i grund och botten är det inte
+mer än två eller tre formler att kunna. 
+\\[16pt]
+Den första formeln är den för standardfelet i medelvärdet
+\[
+\Delta{x} = \frac{s}{\sqrt{N}} 
+= \frac{1}{\sqrt{N}}\sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
+\]
+Den ska användas för att beräkna osäkerheten i ett medelvärde
+($\bar{x}$) av upprepade mätningar ($x_i$) av någon storhet. Det finns
+även inbyggt i många lite mer avancerade miniränkare att automatiskt
+räkna ut $s$ från en serie inmatade värden. Kom bara ihåg att dela med
+$\sqrt{N}$. 
+\\[16pt]
+Sen är det formeln för hur man propagerar fel från uppmätta variabler
+genom ett samband. Osäkerheten i den uträknade parametern blir då
+\[
+\Delta{G} \approx \sqrt{
+\left(\pdv{G}{x}\Delta{x}\right)^2
++\left(\pdv{G}{y}\Delta{y}\right)^2
++\left(\pdv{G}{z}\Delta{z}\right)^2
+}.
+\]
+Den här formeln ska användas om man har något godtyckligt samband
+mellan de uppmätta storheterna ($x$, $y$ och $z$) och slutparametern
+som söks ($G$). Om det däremot rör sig om ett potenssamband kan man
+använda den lite enklare formeln:
+\[
+\frac{\Delta{G}}{\bar{G}} \approx \sqrt{
+\left(\alpha\,\frac{\Delta{x}}{\bar{x}}\right)^2
++\left(\beta\,\frac{\Delta{y}}{\bar{y}}\right)^2
++\left(\gamma\,\frac{\Delta{z}}{\bar{z}}\right)^2
+},
+\]
+där $\alpha$, $\beta$ och $\gamma$ är exponenterna på $x$, $y$
+respektive $z$.
+\\[16pt]
+Det sista man ska ta med sig härifrån är att om man tar upp en
+mätserie är det bra om man kan försöka plotta upp sin mätdata på ett
+sätt så att man får linjära samband. De är oftast enkare att hantera. 
 
 
 
@@ -961,13 +1212,66 @@ isotoper med varsina halveringstider.\footnote{För vidare läsning, se
 \clearpage
 \appendix
 
-\section{Taylorutvecklingar}\label{sec:Taylor}
+% \section{Hur man använder miniräknaren för statistik}
+% \label{sec:calculator}
+% Det här en kort guide i hur man kan använda sin
+% IPhO-miniräknare\footnotemark{}
 
+% \footnotetext{Jag har tillgång till mina två olika IPhO-miniräknare:
+%   \texttt{Casio~fx-82MS} och \texttt{HP~10s+}. Guiden gäller för dessa
+% ock liknande modeller (tyvärr har \texttt{TI-30~ECO~RS} ett lite
+% annorlunda gränssnitt).}
+
+
+
+\section{Taylorutvecklingar}\label{sec:Taylor}
 \begin{figure}
 \centering
 \input{figurer/taylor_sin.tex}
 \caption{}
-\label{fig_taylor_sin}
+\label{fig:taylor_sin}
 \end{figure}
 
+Ibland är det svårt att hantera exakta uttryck, antingen för att de är
+jobbiga att beräkna numeriskt eller att de lätt blir vädigt svåra att
+hantera matematiskt. Därför är det nyttigt att kunna approximera. En
+av de vanligaste approximationerna som används i fysiken är
+Taylorutvecklingar\footnotemark{}. De används för att approximera
+funktioner med polynom av olika hög grad, Taylorpolynomen. Till
+exempel visar \figref{fig:taylor_sin} de tre första (unika)
+Taylorpolynomen för $\sin(x)$ kring $x=0$.
+\footnotetext{Mer eller mindre all fysik bygger på en Taylorutveckling
+någonstans. Ett extremfal är Newtonsk mekanik som egentligen bara är en
+första ordningens Taylorutveckling av Einsteins relativitetsteori. }
+
+Har man en funktion $f$ (som är tillräckligt många gånger deriverbar)
+kan man uttrycka den $n$:te ordningens Taylorpolynom, $p_n$, kring punkten
+$a$ som:
+\begin{equation}
+\begin{aligned}
+p_n(x) =& f(a) + f'(a)\,(x-a) + \frac{1}{2} f''(a)\,(x-a)^2 
+ + \frac{1}{6} f^{(3)}(a)(x-a)^3 + \ldots\\
+ & \ldots + \frac{1}{n!}f^{(n)}(a)\,(x-a)^n\\
+=& \sum_{i=0}^{n} \frac{f^{(i)}(x-a)^i}{i!}.
+\end{aligned}
+\end{equation}
+Ju fler termer som tas med destu bättre blir approximationen, men
+destu snårigare blir också uttrycket. 
+Oftas nöjer man sig dock med första ordningens
+Taylorutveckling/Taylorpolynom, vilket är samma som att
+linjärapproximera funktionen med dess tangent:
+\begin{equation}
+p_1(x) = f(a) + f'(a)\,(x-a).
+\end{equation}
+
+En trevlig sak med att göra en linjärapproximation är att uttrycket
+$\nicefrac{\Delta{p_1}}{\Delta{x}}$ blir samma som derivatan
+$f'(a)$. Med andra ord så är 
+\begin{equation}
+f'(a)\,\Delta{x} = \Delta{p_1} \approx \Delta{f}.
+\end{equation}
+Detta kan användas för att uppskatta osäkerheten i ett beräknat uttryck,
+$f$, givet osäkerheten i inparametern, $x$.
+
 \end{document}
+
