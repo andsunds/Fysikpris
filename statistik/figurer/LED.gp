@@ -13,7 +13,7 @@ set decimalsign ','
 
 set output 'LED.tex'
 
-set key t l width 4
+set key t l width -0.5
 
 fil='LED.tsv'
 
