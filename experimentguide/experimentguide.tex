@@ -52,7 +52,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,1.1.1}}
+\date{\today, \quad\texttt{v\,1.2}}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -98,309 +98,11 @@ Göteborg, 2016-06-16
 \clearpage
 \thispagestyle{empty}
 \tableofcontents
+
 \clearpage
 \setcounter{page}{1}
 
 
-
-\setcounter{section}{-1}
-\section{Sannolihetslära och statistik (överkurs)}\label{sec:statistik}
-När man gör mätningar vill man oftast ta reda på någon storhets värde
--- exempelvis periodtiden på en pendel. Med endast en mätning kan man
-dock inte säga något om hur bra mätningen var. Men med flera mätningar
-kan vi börja göra statistik över dem. Då kan man börja uppskatta hur
-säker man kan vara på ens resutat.
-
-Jag vill även betona vikten av statistik i framtida vetenskapliga och
-tekniska karriärer. \emph{Statistik är ett mycket kraftfullt verktyg.}
-Statistiken, när man börjar behärska den, är mycket mer än bara
-''medelvärden och standardavvikelser''; den spelar en väsentlig roll i
-mer eller mindre all experimentell vetenskap -- särskilt vid
-feluppskattningar. 
-
-\subsection{Stokastiska variabler}
-Precis som vanliga variabler används stokastiska variabler för att
-beteckna något okänt. Men i fallet med stokastiska variabler saknar de
-ett värde. De är mer tänkta som ett koncept för att betecka en
-slumpartad händelse eller process. Man kan göra en observation/mätning
-av en stokastisk variabel och få ett värde, men det är bara ett ensilt 
-mätvärde som man får och inte den stokastiska variabelns värde. 
-
-\begin{exempel}
-Ett tärningskast är ett exempel som kan beskrivas med en (diskret)
-stokastisk variabel. Låt den stokastiska variabeln $X$ beskriva
-tärningskastet. Den kan då mätas till ett visst utfall 
-$x$. I fallet med tärningen $X$ finns ett utfallsrum som består av
-talen 1 till 6: $\{1, 2, 3, 4, 5, 6\}$. Varje element i utfallsrummet
-har också en viss sannolikhet, $\nicefrac{1}{6}$ i det här fallet.
- 
-Själva variablen $X$ (tärningen) kan alltså inte i sig ha ett värde.
-Men när man gör en observation (kastar tärningen) kan man få ett
-mätresultat $x$, som (när tärningen är kastad) har ett fast värde för
-just det kastet. 
-\end{exempel}
-
-Fördelen med att ha stokastiska variabler är att man, likt vanliga
-variabler, kan börja räkna med dem mer generellt än om man bara har
-vissa specialfall. I det här avsnittet kommer de att användas för att
-uttrycka statistiska och stokastiska samband, men det läggs inte så
-stor vikt vid dem. 
-
-\subsection{Sannolikhetsfördelningar och täthetsfunktioner}
-Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
-för det mesta vara diskret (och ändlig). Alltså att det finns ett
-ändligt antal möjliga utfall och varje utfall är distinkt. Exempel på
-detta är tärningskast, lottdragning och kortlekar. 
-
-Verkligheten är dock oftast mer komplicerad än så. När man gör
-mätningar handlar det oftas om mätnigar av en reellvärd storhet som
-t.ex. en längd\footnotemark{}. Detta betyder att längden kommer att
-anta ett reellt antal milimetrar och inte vara begränsad till ett
-ändligt antal möjliga värden. För att analysera detta behövs statistik
-för kontinuerliga fördelningar.  
-\footnotetext{''Aha!'' tänker ni: atomer och kvantfysik gör att det
-  bara finns diskreta längder. ''Nähä!'' säger jag: som fysiker måste
-  man kunna hantera approximationer och veta begränsningarna i sina
-  mätningar. Med en linjal eller skujtmått finns det ingen chans i
-  världen att man skulle kunna stöta på problem orsakade av
-  kvantfysik. Man kan alltså betrakta det som om de möjliga värden
-  som längden kan anta ligger kontinuerligt.}
-
-Sannolikhetsfördelningar karakteriseras av sin täthetsfunktion, som
-brukar betecknas~$f$. Täthetsfunktionen talar om hur sannolikt det är
-att få ett värde i ett visst intervall. Notera dock att den
-\emph{inte} ger sannolikheten att få ett specifikt värde. 
-Eftersom det finns (ouppräknerligt) oändligt många möjliga utfall så
-är sannolikheten att få ett visst exakt värde
-\begin{equation}
-\PP{X=x}\; \text{''=''}\; \frac{1}{\infty}\; \text{''=''}\;0.
-\end{equation}
-För att istället beräkna sannolikheten att få sitt utfall $X$ i ett
-visst intervall $[a, b]$ måste man integrera:
-\begin{equation}\label{eq:dist_P}
-\PP{a<X<b} = \int_a^b f(x) \id{x}.
-\end{equation}
-Sannolikheten att få $a<X<b$ bestäms alltså av arean under $f(x)$.
-
-\begin{exempel}
-Sannolikheten för att en radioaktiv kärna ska sönderfalla kan
-beskrivas med den så kallade exponentialfördelningen:
-\begin{equation*}
-f(t)=
-\begin{cases}
-\lambda\ee^{-\lambda t},& t>0\\
-0 ,& t\le0,
-\end{cases}
-\end{equation*}
-där $\lambda$ är en konstant som kallas isotopens
-sönderfallskonstant. 
-Vad är sannolikheten att kärnan har sönderfallit vid tiden
-$\tau=\nicefrac{\ln(2)}{\lambda}$? 
-
-Sannolikheten att en kärna sönderfaller mellan tiden $0$ och $\tau$
-ges enligt \eqref{eq:dist_P} helt enkelt av integralen
-\begin{equation*}
-\PP{0<T_\text{sönderfall}<\tau} 
-= \int_0^\tau\lambda\ee^{-\lambda t}\id{t} 
-= \lambda\,\frac{\ee^{0}-\ee^{-\lambda \tau}}{\lambda}
-= 1-\ee^{-\lambda \tau}
-=1-\frac{1}{2} = \frac{1}{2}.
-\end{equation*}
-Tolkningen av detta är att om man har väldigt många kärnor, så kommer
-hälften av dem att ha sönderfallit vid tiden
-$\nicefrac{\ln(2)}{\lambda}$. Detta är alltså vad man kallar isotopens
-\emph{halveringstid}.
-\end{exempel}
-
-
-
-\subsubsection{Normalfördelningen}
-En av de vanligaste fördelningarna är normalfördelningen. Den
-har täthesfunktionen
-\begin{equation}
-f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \, \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},
-\end{equation}
-där $\mu$ kallas fördelningens \emph{väntevärde} och $\sigma$ är dess
-\emph{standardavvikelse}. I \figref{fig:normal_dist} visas
-täthetsfunktionen för några olika val av $\mu$ och $\sigma$. Där ser
-vi att $\mu$ svarar mot var någonstans fördelnigen är centrerad, och
-att $\sigma$ svarar mot hur bred fördelningen blir. 
-
-% Som kan ses i \figref{fig:normal_dist} går sannolikhetsfördelningen
-% ner och blir väldigt liten för värden långt ifrån $\mu$. Till exempel
-% ligger ca 98\,\% av all sannolikhet/area under kurvan inom $\mu\pm
-% 2\sigma$, men sen går det snabbt -- fortsätter man uppåt så ligger
-% 99,99997\,\% inom $\mu\pm 5\sigma$.
-
-\begin{figure}
-\centering
-\input{figurer/normal_dist.tex}
-\caption{Täthetsfunktioner till normalfördelningar med olika värden på
-väntevärdet $\mu$ och standardavvikelsen $\sigma$. Varje kurva har den
-klassiska Gau\ss{}iska klockformen.}\label{fig:normal_dist}
-\end{figure}
-
-Kvadraten i exponentialen ger täthetsfunktionen den
-klassiska klockformen hos en Gau\ss{}isk kurva, och faktorn framför
-säkerställer att den totala integralen
-\begin{equation}
-\int_{-\infty}^{\infty} f(x)\id{x} = 1.
-\end{equation}
-Detta är något som \emph{gäller för alla täthetsfunktioner}. 
-
-Normalfördelningen kallas just ''normal'' för att det finns en sats
-som säger att i princip alla slumpfenomen blir normalfördelade om
-samma process upprepas väldigt många gånger. Ett exempel på detta är
-om man sannolikheten att få ett visst antal ''klave'' efter flera
-slantsinglingar. Den här egenskapen gör att de allra flesta 
-mätfelen antas vara normalfördelade.
-
-% Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
-% med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
-% normalfördelade och oberoende med väntevärde $\mu_X$ och
-% standardavvikelse $\sigma_X$ respektive $\mu_Y$ och $\sigma_Y$, så är 
-% \begin{equation}
-% Z=\alpha X + \beta Y
-% \end{equation}
-% också normalfördelad med väntevärde $(\alpha\mu_X+\beta\mu_Y)$ och
-% standardavvikelse $\sqrt{\alpha^2\sigma_X^2 + \beta^2\sigma_Y^2}$. 
-% Med andra ord funkar väntevärdena som man kan tro och
-% standardavvikelserna fungerar lite som Pythagoras sats. 
-
-
-\subsection{Väntevärden, varianser och standardavvikelser}
-De vanligaste fördelningarna har, som normalfördelningen, väntevärde
-och varians. Dessa beräknas med hjälp av täthetsfunktionen. I
-felanalys används främst den så kallade standardavvikelsen, som 
-är roten ur variansen.
-
-Väntevärdet av den stokastiska variabeln $X$, med täthetsfunktion $f$,
-definieras som 
-\begin{equation}\label{eq:ev}
-\ev{X} = \mu = \int_{-\infty}^\infty x f(x)\id{x}.
-\end{equation}
-Det är inte helt kart vad tolkningen ska vara direkt från
-definitionen, men man kan jämföra väntevärdesintegralen med en slags
-tyngdpunktsberäkning. Man lägger ihop varje punkts
-''sannolikhetsmassa'', $f(x)\dd{x}$, gånger punktes avstånd, $x$, från
-origo; till slut får man den sammanlagda tyngdpunkten. Man kan
-faktiskt, om man vill, hitta en fördelnings väntevärde genom att kippa
-ut en (styv) pappersbit formad efter ytan under kurvan och balanseta
-den utklippta formen. 
-
-Sedan kan variansen definieras med hjälp av väntevärden:
-\begin{equation}\label{eq:var}
-\VAR{X} = \sigma^2 =\ev{(X-\mu)^2}. %\ev{X^2} - \mu^2.
-\end{equation}
-%Det sista ledet ovan är ett sätt som man kan skriva om variansen, men
-%det används mest i teoretiska analyser och är inte så viktigt i
-%nuläget. 
-Tolkningen av variansen är att det är ett väntevärde på hur
-mycket avvikelse man får från $\mu$, men för att inte positiva
-och negativa avvikelser ska ta utvarandra, kvadreras de innan man tar
-väntevärdet. Detta ger dock ett mått som är
-''kvadratiskt''\footnotemark{}, så för att få något som kan jämföras
-med själva värdena man får från $X$ använder man
-\emph{standardavvikelsen som är roten ur variansen}. 
-\footnotetext{Om till exempel $X$ är en sorts längd, med enhet meter,
-  bli $\VAR{X}$ en storhet som är en längd i kvadrat, med enhet
-  kvadratmeter. }
-
-\subsubsection{Några nyttiga satser}\label{sec:satser}
-Det viktigaste man behöver veta om väntevärden är att de är
-linjära. Alltså att
-\begin{equation}\label{eq:ev_lin}
-\Big\langle \alpha X + \beta Y + \gamma \Big\rangle 
-= \alpha\ev{X} + \beta\ev{Y} + \gamma,
-\end{equation}
-för godtyckliga stokastiska variabler $X$ och $Y$ samt några
-konstanter $\alpha$, $\beta$ och $\gamma$. Den här regen kan utvidgas
-till ett godtyckligt antal variabler. 
-
-För variansen gäller en liknande regel 
-\begin{equation}\label{eq:var_lin}
-\text{var}\!\Big[ \alpha X + \beta Y + \gamma \Big] 
-= \alpha^2\VAR{X} + \beta^2\VAR{Y}, 
-\end{equation}
-men här måste $X$ och $Y$ vara statistiskt
-oberoende\footnotemark{}. Även här kan man utvidga regeln till ett
-godtyckligt antal oberoende variabler.
-\footnotetext{Statistiskt oberoende är en ganska knepig term att
-  deffiniera. Men enkelt sett så betyder det ungefär vad magkänslan
-  säger: att resultatet av en mätning på den ena ska inte påverka
-  resultatet på den andra. }
-
-Speciellt gäller att om man har $N$ stycken oberoende stokastiska variabler
-$X_i$ med lika fördelning och man vill ta ett medelvärde 
-\begin{equation} 
-\bar{X} = \frac{X_1+X_2+\cdots+X_N}{N} = \frac{1}{N}\sum_{i=1}^N X_i
-\end{equation}
-så kan man beräkna dess väntevärde och varians med hjälp av reglerna
-ovan. 
-Väntevärdet ges då från \eqref{eq:ev_lin} som
-\begin{equation}\label{eq:ev_mean}
-\ev{\bar{X}} = \ev{\frac{1}{N} \sum_{i=1}^N X_i} 
-= \frac{1}{N} \sum_{i=1}^N \overbrace{\ev{X_i}}^{=\mu} 
-= \mu,
-\end{equation}
-där $\mu$ är väntevärdet av varje enskild variabel från den givna
-fördelningen. 
-Variansen får man med \eqref{eq:var_lin} sedan som
-\begin{equation}\label{eq:var_mean}
-\VAR{\bar{X}} = \VAR{\frac{1}{N} \sum_{i=1}^N X_i}
-= \VAR{\sum_{i=1}^N \frac{1}{N} X_i}
-= \sum_{i=1}^N \frac{1}{N^2}\overbrace{\VAR{X_i}}^{=\sigma^2}
-= \frac{\sigma^2}{N}.
-\end{equation}
-
-Dessa resultat kommer att användas i feluppsattningar genom att
-betrakta varje $X_i$ som en mätning av en viss storhet.
-
-\subsubsection{Skattning från mätdata}
-Har man ett stokastiskt system och vill försöka mäta dess väntevärde
-och standardavvikelse, så måste man ha många mätningar på det. Det är
-nu som statistiken kommer in i bilden.
-
-Från \eqref{eq:ev_mean} visade det sig att väntevärdet av ett
-medelvärde är samma som väntevärdet av det man mäter på. Vidare visade
-det sig att variansen av medelvärdet minskade som
-$\nicefrac{1}{N}$. Tillsammans ger detta att \emph{ju fler mätningar
-  man gör desto större är sannolikheten att medelvärdet ligger nära
-  väntevärdet}. 
-Detta betyder att man kan skatta väntevärdet med
-\begin{equation}\label{eq:ev_approx}
-\ev{X} = \mu \approx \bar{x} = \frac{1}{N}\sum_{i=1}^N x_i.
-\end{equation}
-Här användes små bokstäver $x_i$ för att beteckna att de redan är
-uppmätta värden.
-
-Om nu väntevärden gick att skatta som medelvärden bör man väl kunna
-göra det samma för varianser. Definitionen av varians i \eqref{eq:var}
-består ju av två väntevärden (två stycken eftersom $\mu=\ev{X}$), så
-det borde gå att skatta variansen med medelvärdet av
-$(x_i-\bar{x})^2$. Svaret är att det  nästan går. Eftersom man bara
-får ett ungefärligt värde på $\mu$ från \eqref{eq:ev_approx} måste
-medelvärdet justeras något. Det visar sig att man ska använda
-\begin{equation}\label{eq:var_approx}
-\VAR{X} = \sigma^2 \approx s^2 = \frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2
-\end{equation}
-för att skatta variansen. Standardavvikelsen fås enkelt genom att dra
-roten ur skattningen av variansen:
-\begin{equation}\label{eq:std_approx}
-\sigma \approx s = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
-\end{equation}
-Detta kallas \emph{standardfelet} och är det namn som man har gett
-till skattningen av standardavvikelsen.
-Notera att $s$ är standardfelet i uppsättnigen av alla
-mätpunkter. För att få \emph{standardfelet i medelvärdet}
-använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
-
-
-
-
-
-
-\newpage
 \section{Innan man börjar felanalysen}
 Det finns ett par saker som är bra att tänka på innan, under och efter
 man börjar göra sina mätningar.
@@ -1221,6 +923,302 @@ sätt så att man får linjära samband. De är oftast enklare att hantera.
 %   \texttt{Casio~fx-82MS} och \texttt{HP~10s+}. Guiden gäller för dessa
 % ock liknande modeller (tyvärr har \texttt{TI-30~ECO~RS} ett lite
 % annorlunda gränssnitt).}
+
+
+
+
+\section{Sannolihetslära och statistik}\label{sec:statistik}
+När man gör mätningar vill man oftast ta reda på någon storhets värde
+-- exempelvis periodtiden på en pendel. Med endast en mätning kan man
+dock inte säga något om hur bra mätningen var. Men med flera mätningar
+kan vi börja göra statistik över dem. Då kan man börja uppskatta hur
+säker man kan vara på ens resutat.
+
+Jag vill även betona vikten av statistik i framtida vetenskapliga och
+tekniska karriärer. \emph{Statistik är ett mycket kraftfullt verktyg.}
+Statistiken, när man börjar behärska den, är mycket mer än bara
+''medelvärden och standardavvikelser''; den spelar en väsentlig roll i
+mer eller mindre all experimentell vetenskap -- särskilt vid
+feluppskattningar. 
+
+\subsection{Stokastiska variabler}
+Precis som vanliga variabler används stokastiska variabler för att
+beteckna något okänt. Men i fallet med stokastiska variabler saknar de
+ett värde. De är mer tänkta som ett koncept för att betecka en
+slumpartad händelse eller process. Man kan göra en observation/mätning
+av en stokastisk variabel och få ett värde, men det är bara ett ensilt 
+mätvärde som man får och inte den stokastiska variabelns värde. 
+
+\begin{exempel}
+Ett tärningskast är ett exempel som kan beskrivas med en (diskret)
+stokastisk variabel. Låt den stokastiska variabeln $X$ beskriva
+tärningskastet. Den kan då mätas till ett visst utfall 
+$x$. I fallet med tärningen $X$ finns ett utfallsrum som består av
+talen 1 till 6: $\{1, 2, 3, 4, 5, 6\}$. Varje element i utfallsrummet
+har också en viss sannolikhet, $\nicefrac{1}{6}$ i det här fallet.
+ 
+Själva variablen $X$ (tärningen) kan alltså inte i sig ha ett värde.
+Men när man gör en observation (kastar tärningen) kan man få ett
+mätresultat $x$, som (när tärningen är kastad) har ett fast värde för
+just det kastet. 
+\end{exempel}
+
+Fördelen med att ha stokastiska variabler är att man, likt vanliga
+variabler, kan börja räkna med dem mer generellt än om man bara har
+vissa specialfall. I det här avsnittet kommer de att användas för att
+uttrycka statistiska och stokastiska samband, men det läggs inte så
+stor vikt vid dem. 
+
+\subsection{Sannolikhetsfördelningar och täthetsfunktioner}
+Den statistik och sannolikhetslära man får lära sig i gymnasiet brukar
+för det mesta vara diskret (och ändlig). Alltså att det finns ett
+ändligt antal möjliga utfall och varje utfall är distinkt. Exempel på
+detta är tärningskast, lottdragning och kortlekar. 
+
+Verkligheten är dock oftast mer komplicerad än så. När man gör
+mätningar handlar det oftas om mätnigar av en reellvärd storhet som
+t.ex. en längd\footnotemark{}. Detta betyder att längden kommer att
+anta ett reellt antal milimetrar och inte vara begränsad till ett
+ändligt antal möjliga värden. För att analysera detta behövs statistik
+för kontinuerliga fördelningar.  
+\footnotetext{''Aha!'' tänker ni: atomer och kvantfysik gör att det
+  bara finns diskreta längder. ''Nähä!'' säger jag: som fysiker måste
+  man kunna hantera approximationer och veta begränsningarna i sina
+  mätningar. Med en linjal eller skujtmått finns det ingen chans i
+  världen att man skulle kunna stöta på problem orsakade av
+  kvantfysik. Man kan alltså betrakta det som om de möjliga värden
+  som längden kan anta ligger kontinuerligt.}
+
+Sannolikhetsfördelningar karakteriseras av sin täthetsfunktion, som
+brukar betecknas~$f$. Täthetsfunktionen talar om hur sannolikt det är
+att få ett värde i ett visst intervall. Notera dock att den
+\emph{inte} ger sannolikheten att få ett specifikt värde. 
+Eftersom det finns (ouppräknerligt) oändligt många möjliga utfall så
+är sannolikheten att få ett visst exakt värde
+\begin{equation}
+\PP{X=x}\; \text{''=''}\; \frac{1}{\infty}\; \text{''=''}\;0.
+\end{equation}
+För att istället beräkna sannolikheten att få sitt utfall $X$ i ett
+visst intervall $[a, b]$ måste man integrera:
+\begin{equation}\label{eq:dist_P}
+\PP{a<X<b} = \int_a^b f(x) \id{x}.
+\end{equation}
+Sannolikheten att få $a<X<b$ bestäms alltså av arean under $f(x)$.
+
+\begin{exempel}
+Sannolikheten för att en radioaktiv kärna ska sönderfalla kan
+beskrivas med den så kallade exponentialfördelningen:
+\begin{equation*}
+f(t)=
+\begin{cases}
+\lambda\ee^{-\lambda t},& t>0\\
+0 ,& t\le0,
+\end{cases}
+\end{equation*}
+där $\lambda$ är en konstant som kallas isotopens
+sönderfallskonstant. 
+Vad är sannolikheten att kärnan har sönderfallit vid tiden
+$\tau=\nicefrac{\ln(2)}{\lambda}$? 
+
+Sannolikheten att en kärna sönderfaller mellan tiden $0$ och $\tau$
+ges enligt \eqref{eq:dist_P} helt enkelt av integralen
+\begin{equation*}
+\PP{0<T_\text{sönderfall}<\tau} 
+= \int_0^\tau\lambda\ee^{-\lambda t}\id{t} 
+= \lambda\,\frac{\ee^{0}-\ee^{-\lambda \tau}}{\lambda}
+= 1-\ee^{-\lambda \tau}
+=1-\frac{1}{2} = \frac{1}{2}.
+\end{equation*}
+Tolkningen av detta är att om man har väldigt många kärnor, så kommer
+hälften av dem att ha sönderfallit vid tiden
+$\nicefrac{\ln(2)}{\lambda}$. Detta är alltså vad man kallar isotopens
+\emph{halveringstid}.
+\end{exempel}
+
+
+
+\subsubsection{Normalfördelningen}
+En av de vanligaste fördelningarna är normalfördelningen. Den
+har täthesfunktionen
+\begin{equation}
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \, \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\end{equation}
+där $\mu$ kallas fördelningens \emph{väntevärde} och $\sigma$ är dess
+\emph{standardavvikelse}. I \figref{fig:normal_dist} visas
+täthetsfunktionen för några olika val av $\mu$ och $\sigma$. Där ser
+vi att $\mu$ svarar mot var någonstans fördelnigen är centrerad, och
+att $\sigma$ svarar mot hur bred fördelningen blir. 
+
+% Som kan ses i \figref{fig:normal_dist} går sannolikhetsfördelningen
+% ner och blir väldigt liten för värden långt ifrån $\mu$. Till exempel
+% ligger ca 98\,\% av all sannolikhet/area under kurvan inom $\mu\pm
+% 2\sigma$, men sen går det snabbt -- fortsätter man uppåt så ligger
+% 99,99997\,\% inom $\mu\pm 5\sigma$.
+
+\begin{figure}
+\centering
+\input{figurer/normal_dist.tex}
+\caption{Täthetsfunktioner till normalfördelningar med olika värden på
+väntevärdet $\mu$ och standardavvikelsen $\sigma$. Varje kurva har den
+klassiska Gau\ss{}iska klockformen.}\label{fig:normal_dist}
+\end{figure}
+
+Kvadraten i exponentialen ger täthetsfunktionen den
+klassiska klockformen hos en Gau\ss{}isk kurva, och faktorn framför
+säkerställer att den totala integralen
+\begin{equation}
+\int_{-\infty}^{\infty} f(x)\id{x} = 1.
+\end{equation}
+Detta är något som \emph{gäller för alla täthetsfunktioner}. 
+
+Normalfördelningen kallas just ''normal'' för att det finns en sats
+som säger att i princip alla slumpfenomen blir normalfördelade om
+samma process upprepas väldigt många gånger. Ett exempel på detta är
+om man sannolikheten att få ett visst antal ''klave'' efter flera
+slantsinglingar. Den här egenskapen gör att de allra flesta 
+mätfelen antas vara normalfördelade.
+
+% Vidare är normalfördelningen en väldigt trevlig fördelning att arbeta
+% med. Regeln för normalfördelningar är att om $X$ och $Y$ båda är
+% normalfördelade och oberoende med väntevärde $\mu_X$ och
+% standardavvikelse $\sigma_X$ respektive $\mu_Y$ och $\sigma_Y$, så är 
+% \begin{equation}
+% Z=\alpha X + \beta Y
+% \end{equation}
+% också normalfördelad med väntevärde $(\alpha\mu_X+\beta\mu_Y)$ och
+% standardavvikelse $\sqrt{\alpha^2\sigma_X^2 + \beta^2\sigma_Y^2}$. 
+% Med andra ord funkar väntevärdena som man kan tro och
+% standardavvikelserna fungerar lite som Pythagoras sats. 
+
+
+\subsection{Väntevärden, varianser och standardavvikelser}
+De vanligaste fördelningarna har, som normalfördelningen, väntevärde
+och varians. Dessa beräknas med hjälp av täthetsfunktionen. I
+felanalys används främst den så kallade standardavvikelsen, som 
+är roten ur variansen.
+
+Väntevärdet av den stokastiska variabeln $X$, med täthetsfunktion $f$,
+definieras som 
+\begin{equation}\label{eq:ev}
+\ev{X} = \mu = \int_{-\infty}^\infty x f(x)\id{x}.
+\end{equation}
+Det är inte helt kart vad tolkningen ska vara direkt från
+definitionen, men man kan jämföra väntevärdesintegralen med en slags
+tyngdpunktsberäkning. Man lägger ihop varje punkts
+''sannolikhetsmassa'', $f(x)\dd{x}$, gånger punktes avstånd, $x$, från
+origo; till slut får man den sammanlagda tyngdpunkten. Man kan
+faktiskt, om man vill, hitta en fördelnings väntevärde genom att kippa
+ut en (styv) pappersbit formad efter ytan under kurvan och balanseta
+den utklippta formen. 
+
+Sedan kan variansen definieras med hjälp av väntevärden:
+\begin{equation}\label{eq:var}
+\VAR{X} = \sigma^2 =\ev{(X-\mu)^2}. %\ev{X^2} - \mu^2.
+\end{equation}
+%Det sista ledet ovan är ett sätt som man kan skriva om variansen, men
+%det används mest i teoretiska analyser och är inte så viktigt i
+%nuläget. 
+Tolkningen av variansen är att det är ett väntevärde på hur
+mycket avvikelse man får från $\mu$, men för att inte positiva
+och negativa avvikelser ska ta utvarandra, kvadreras de innan man tar
+väntevärdet. Detta ger dock ett mått som är
+''kvadratiskt''\footnotemark{}, så för att få något som kan jämföras
+med själva värdena man får från $X$ använder man
+\emph{standardavvikelsen som är roten ur variansen}. 
+\footnotetext{Om till exempel $X$ är en sorts längd, med enhet meter,
+  bli $\VAR{X}$ en storhet som är en längd i kvadrat, med enhet
+  kvadratmeter. }
+
+\subsubsection{Några nyttiga satser}\label{sec:satser}
+Det viktigaste man behöver veta om väntevärden är att de är
+linjära. Alltså att
+\begin{equation}\label{eq:ev_lin}
+\Big\langle \alpha X + \beta Y + \gamma \Big\rangle 
+= \alpha\ev{X} + \beta\ev{Y} + \gamma,
+\end{equation}
+för godtyckliga stokastiska variabler $X$ och $Y$ samt några
+konstanter $\alpha$, $\beta$ och $\gamma$. Den här regen kan utvidgas
+till ett godtyckligt antal variabler. 
+
+För variansen gäller en liknande regel 
+\begin{equation}\label{eq:var_lin}
+\text{var}\!\Big[ \alpha X + \beta Y + \gamma \Big] 
+= \alpha^2\VAR{X} + \beta^2\VAR{Y}, 
+\end{equation}
+men här måste $X$ och $Y$ vara statistiskt
+oberoende\footnotemark{}. Även här kan man utvidga regeln till ett
+godtyckligt antal oberoende variabler.
+\footnotetext{Statistiskt oberoende är en ganska knepig term att
+  deffiniera. Men enkelt sett så betyder det ungefär vad magkänslan
+  säger: att resultatet av en mätning på den ena ska inte påverka
+  resultatet på den andra. }
+
+Speciellt gäller att om man har $N$ stycken oberoende stokastiska variabler
+$X_i$ med lika fördelning och man vill ta ett medelvärde 
+\begin{equation} 
+\bar{X} = \frac{X_1+X_2+\cdots+X_N}{N} = \frac{1}{N}\sum_{i=1}^N X_i
+\end{equation}
+så kan man beräkna dess väntevärde och varians med hjälp av reglerna
+ovan. 
+Väntevärdet ges då från \eqref{eq:ev_lin} som
+\begin{equation}\label{eq:ev_mean}
+\ev{\bar{X}} = \ev{\frac{1}{N} \sum_{i=1}^N X_i} 
+= \frac{1}{N} \sum_{i=1}^N \overbrace{\ev{X_i}}^{=\mu} 
+= \mu,
+\end{equation}
+där $\mu$ är väntevärdet av varje enskild variabel från den givna
+fördelningen. 
+Variansen får man med \eqref{eq:var_lin} sedan som
+\begin{equation}\label{eq:var_mean}
+\VAR{\bar{X}} = \VAR{\frac{1}{N} \sum_{i=1}^N X_i}
+= \VAR{\sum_{i=1}^N \frac{1}{N} X_i}
+= \sum_{i=1}^N \frac{1}{N^2}\overbrace{\VAR{X_i}}^{=\sigma^2}
+= \frac{\sigma^2}{N}.
+\end{equation}
+
+Dessa resultat kommer att användas i feluppsattningar genom att
+betrakta varje $X_i$ som en mätning av en viss storhet.
+
+\subsubsection{Skattning från mätdata}
+Har man ett stokastiskt system och vill försöka mäta dess väntevärde
+och standardavvikelse, så måste man ha många mätningar på det. Det är
+nu som statistiken kommer in i bilden.
+
+Från \eqref{eq:ev_mean} visade det sig att väntevärdet av ett
+medelvärde är samma som väntevärdet av det man mäter på. Vidare visade
+det sig att variansen av medelvärdet minskade som
+$\nicefrac{1}{N}$. Tillsammans ger detta att \emph{ju fler mätningar
+  man gör desto större är sannolikheten att medelvärdet ligger nära
+  väntevärdet}. 
+Detta betyder att man kan skatta väntevärdet med
+\begin{equation}\label{eq:ev_approx}
+\ev{X} = \mu \approx \bar{x} = \frac{1}{N}\sum_{i=1}^N x_i.
+\end{equation}
+Här användes små bokstäver $x_i$ för att beteckna att de redan är
+uppmätta värden.
+
+Om nu väntevärden gick att skatta som medelvärden bör man väl kunna
+göra det samma för varianser. Definitionen av varians i \eqref{eq:var}
+består ju av två väntevärden (två stycken eftersom $\mu=\ev{X}$), så
+det borde gå att skatta variansen med medelvärdet av
+$(x_i-\bar{x})^2$. Svaret är att det  nästan går. Eftersom man bara
+får ett ungefärligt värde på $\mu$ från \eqref{eq:ev_approx} måste
+medelvärdet justeras något. Det visar sig att man ska använda
+\begin{equation}\label{eq:var_approx}
+\VAR{X} = \sigma^2 \approx s^2 = \frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2
+\end{equation}
+för att skatta variansen. Standardavvikelsen fås enkelt genom att dra
+roten ur skattningen av variansen:
+\begin{equation}\label{eq:std_approx}
+\sigma \approx s = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
+\end{equation}
+Detta kallas \emph{standardfelet} och är det namn som man har gett
+till skattningen av standardavvikelsen.
+Notera att $s$ är standardfelet i uppsättnigen av alla
+mätpunkter. För att få \emph{standardfelet i medelvärdet}
+använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
+
+
 
 
 
