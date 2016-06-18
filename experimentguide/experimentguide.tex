@@ -52,7 +52,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,1.1}}
+\date{\today, \quad\texttt{v\,1.1.1}}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -268,7 +268,7 @@ mätfelen antas vara normalfördelade.
 % standardavvikelserna fungerar lite som Pythagoras sats. 
 
 
-\subsection{Väntevärden, varianser och standradavvikelser}
+\subsection{Väntevärden, varianser och standardavvikelser}
 De vanligaste fördelningarna har, som normalfördelningen, väntevärde
 och varians. Dessa beräknas med hjälp av täthetsfunktionen. I
 felanalys används främst den så kallade standardavvikelsen, som 
@@ -389,9 +389,9 @@ roten ur skattningen av variansen:
 \begin{equation}\label{eq:std_approx}
 \sigma \approx s = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i-\bar{x})^2}.
 \end{equation}
-Detta kallas \emph{standradfelet} och är det namn som man har gett
+Detta kallas \emph{standardfelet} och är det namn som man har gett
 till skattningen av standardavvikelsen.
-Notera att $s$ är standradfelet i uppsättnigen av alla
+Notera att $s$ är standardfelet i uppsättnigen av alla
 mätpunkter. För att få \emph{standardfelet i medelvärdet}
 använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
@@ -576,7 +576,7 @@ Här syns att antagandet $\mu=0$ betydet att det inte finns något
 systematiskt fel.
 
 För att sedan ta reda på precisionen i mätningarna behövs
-standardavvikelsen av $\delta{x}$. Denna fås enkelt som standradfelet
+standardavvikelsen av $\delta{x}$. Denna fås enkelt som standardfelet
 från \eqref{eq:std_approx}. Men eftersom det beräknade värdet
 $\bar{x}$ är ett medelvärde betyder det att osäkerheten är mindre i
 $\bar{x}$ än i varje enskilt $\widetilde{x}_i$. Standardfelet från
@@ -609,7 +609,7 @@ avsnitt~\ref{sec:satser} visar att man ska göra det.
 
 
 \section{Felpropagering}
-Oftast kan man inte mäta den eftersökta storheten direk. Man brukar
+Oftast kan man inte mäta den eftersökta storheten direkt. Man brukar
 istället mäta ett antal andra storheter och utnyttja något teoretiskt
 samband för att få värdet på den eftersökta storheten. Då kan man
 utnyttja feluppskattningarna ovan för att ta reda på felet i varje
@@ -664,7 +664,7 @@ $\Delta{y}=\Delta{z}=0$. Då ger en linjärapproximation att
   avsenende på endast en variabel och betraktar de andra som
   konstanter.}
 \footnote{Jag sätter beloppstecken på derivatorna för att
-  osäkerheterna $\Delta{G}$ och $\Delta{x}$ av konvension alltid är
+  osäkerheterna $\Delta{G}$ och $\Delta{x}$ av konvention alltid är
   positiva.} 
 \begin{equation}\label{eq:error_one_variable}
 \frac{\Delta{G}}{\Delta{x}} \approx \abs{ \pdv{G}{x} } 
@@ -692,11 +692,11 @@ $x$.
 Men för att inte hamna i samma situation som med insättningsmetoden,
 (att alla felen drar åt samma håll) räcker det inte med att addera
 ihop felen från varje variabel. 
-Man tänker sig istället ungefär att felen drar åt varisitt håll fast i
+Man tänker sig istället ungefär att felen drar åt var sitt håll fast i
 flera dimensioner som i \figref{fig:3D}. Det totala felet i
 slutresultatet fås då som en slags ''Pythagoras sats'': 
 \footnote{Beloppstecknen i \eqref{eq:error_one_variable} har
-  försvunnit hät. Det är för att kvadraten ändå alltid är positiv. }
+  försvunnit här för att kvadraten ändå alltid är positiv. }
 
 \Large
 \begin{equation}\label{eq:error_main}
@@ -741,7 +741,7 @@ ${\Delta{A}}/{\bar{A}}=32\,\%$ respektive
 ${\hat{\Delta}{A}}/{\bar{A}}=90\,\%$ som relativ osäkerhet i
 arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
 överens med hur stora fel vi hade från början. 
-\footnotetext{En relativt osäkerhet är bara osäkerheten uttryckt i
+\footnotetext{En relativ osäkerhet är bara osäkerheten uttryckt i
   procent istället för absoluta värden.}
 \end{exempel}
 
@@ -849,7 +849,7 @@ så kan man få ett linjärt samband genom att logartimera båda leden
 \log(y) = \log(c) + \alpha\,\log(x).
 \end{equation}
 Här kan ''log'' betyda vilken logaritm man vill, men den vanligaste
-att använda är den naturliga logaritlen ''ln''. 
+att använda är den naturliga logaritmen ''ln''. 
 
 \paragraph{Konstruera ''egna'' linjära samband}
 Man ska också komma ihåg att man själv får arrangera om uttryck så att
@@ -930,7 +930,7 @@ graderad i mm, men på grund av att muttern är så stor är det inte
 rimligt att använda $\pm\unit[0,5]{mm}$ som osäkerhet. För att vara på
 den säkra sidan tog jag en osäkerhet på $\Delta{l}=\unit[2]{cm}$, som
 motsvarade storleken på muttern (det kanske är lite väl mycket, men
-hellre lite för mycket än för lite). pendelns längd var alltså
+hellre lite för mycket än för lite). Pendelns längd var alltså
 \[
 l=\bar{l}\pm\Delta{l} = \unit[94\pm2]{cm}.
 \]
@@ -1201,7 +1201,7 @@ respektive $z$.
 \\[16pt]
 Det sista man ska ta med sig härifrån är att om man tar upp en
 mätserie är det bra om man kan försöka plotta upp sin mätdata på ett
-sätt så att man får linjära samband. De är oftast enkare att hantera. 
+sätt så att man får linjära samband. De är oftast enklare att hantera. 
 
 
 
