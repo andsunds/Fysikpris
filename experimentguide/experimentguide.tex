@@ -52,7 +52,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,1.2}}
+\date{\today, \quad\texttt{v\,1.2.2}}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -63,10 +63,14 @@ Andréas Sundström\footnote{
 \small
 Det här kompendiet är skrivet som en introduktion i experimentella
 mätningar, med fokus på feluppskattningar, för det svenska
-IPhO-laget. Jag har försökt fatta mig kort, men jag har en tendens att
-kunna dra iväg när jag skriver. Jag har försökt lägga innehållet på en
-nivå för att kunna förstås av en gymnasieelev, men det är inte alltid
-det går så bra\ldots{} Ni är de första som läser det här
+IPhO-laget. Men tanken är också att det här kompendiet ska vara mer
+allmät än IPhO och kunna vara en första introduktion för någon som
+ämnar studera vidare inom fysik/naturvetenskap eller teknik. 
+
+Jag har försökt fatta mig kort, men jag har en tendens att
+kunna dra iväg när jag skriver. Jag har också försökt lägga innehållet
+på en nivå för att kunna förstås av en gymnasieelev, men det är inte
+alltid det går så bra\ldots{} Ni är de första som läser det här
 kompendiet. Tycker du att det det här var för svårförståeligt så har
 \textbf{jag} skrivit för komplicerat, och du är inte ensam om att
 tycka att kompediet var svårt. \emph{Så säg till om det var krångligt!} 
@@ -77,15 +81,15 @@ Sedan kommer huvudinnehållet, med felanalys och regression, i
 avsnitt~\ref{sec:matfel}--\ref{sec:regression}. 
 Men jag tyckte att det även kunde vara intressant med en liten
 teoretisk bakgrund till varför man gör felanalysen som man gör
-den. Bakgrunden finns i avsnitt~\ref{sec:statistik}, men man behöver
+den. Bakgrunden finns i bilaga~\ref{sec:statistik}, men man behöver
 inte läsa det för att hänga med i resten av kompendiet.
 Avslutningsvis räknas ett par exempel, med lite feluppskattning och
 regresion/linjärisering, i avsnitt~\ref{sec:exempel}
 
-Sedan har jag även lagt till en bilaga om
-Taylorutvecklingar. Den hör inte så mycket ihop med resten av det här
-kompendiet, men det är matnyttigt att kunna göra uppskattningar både
-för teoretiska och experimentella beräkningar. 
+Utöver en bakgrund i statistik har jag även lagt till en bilaga om
+Taylorutvecklingar, bilaga~\ref{sec:Taylor}. Den hör inte så mycket
+ihop med resten av det här kompendiet, men det är matnyttigt att kunna
+göra uppskattningar både för teoretiska och experimentella beräkningar. 
 
 \begin{flushright}
 Andréas Sunsdtröm\\ 
@@ -942,6 +946,15 @@ mer eller mindre all experimentell vetenskap -- särskilt vid
 feluppskattningar. 
 
 \subsection{Stokastiska variabler}
+\begin{quote}
+»{\it Stoka\!´stisk (grekiska stochastiko\!´s 'som hör till gissning';
+  'skicklig på att gissa', av stocha\!´zomai 'gissa'}» (NE)
+\end{quote}
+Om något är \emph{stokastiskt} betder det att det är
+slumpmässigt. Alltså att det inte går att förutspå dess utslag eller
+fölopp med säkerhet. Däremot kan man fortfarande analysera något som
+är stokastiskt, men då utifrån ett sannolikhetsperspektiv. 
+
 Precis som vanliga variabler används stokastiska variabler för att
 beteckna något okänt. Men i fallet med stokastiska variabler saknar de
 ett värde. De är mer tänkta som ett koncept för att betecka en
@@ -1226,7 +1239,9 @@ använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 \begin{figure}
 \centering
 \input{figurer/taylor_sin.tex}
-\caption{}
+\caption{Funktionen $\sin(x)$ och några av dess Taylorpolynom kring
+  $x=0$. Det syns att approximationeerna är som bäst nära just $x=0$,
+  och att ju högre ordnings polynom desto bättre approximation.  }
 \label{fig:taylor_sin}
 \end{figure}
 
@@ -1245,7 +1260,7 @@ första ordningens Taylorutveckling av Einsteins relativitetsteori. }
 Har man en funktion $f$ (som är tillräckligt många gånger deriverbar)
 kan man uttrycka den $n$:te ordningens Taylorpolynom, $p_n$, kring punkten
 $a$ som:
-\begin{equation}
+\begin{equation}\label{eq:taylorpolynom}
 \begin{aligned}
 p_n(x) =& f(a) + f'(a)\,(x-a) + \frac{1}{2} f''(a)\,(x-a)^2 
  + \frac{1}{6} f^{(3)}(a)(x-a)^3 + \ldots\\
@@ -1258,18 +1273,50 @@ destu snårigare blir också uttrycket.
 Oftas nöjer man sig dock med första ordningens
 Taylorutveckling/Taylorpolynom, vilket är samma som att
 linjärapproximera funktionen med dess tangent:
-\begin{equation}
+\begin{equation}\label{eq:linjarappoximation}
 p_1(x) = f(a) + f'(a)\,(x-a).
 \end{equation}
 
 En trevlig sak med att göra en linjärapproximation är att uttrycket
 $\nicefrac{\Delta{p_1}}{\Delta{x}}$ blir samma som derivatan
 $f'(a)$. Med andra ord så är 
-\begin{equation}
+\begin{equation}\label{eq:Delta_p}
 f'(a)\,\Delta{x} = \Delta{p_1} \approx \Delta{f}.
 \end{equation}
 Detta kan användas för att uppskatta osäkerheten i ett beräknat uttryck,
 $f$, givet osäkerheten i inparametern, $x$.
+
+
+\begin{exempel}
+En solcells effekt beror bl.a. på solstrålarnas infallsvinkel. Det
+följer direkt av att mängden solstrålning som träffar panelen beror på
+vinkeln. Det går lätt att visa att beroendet blir $\cos(\theta)$, där
+$\theta$ mäts från normalen. \\
+Med hur många procent minskar effekten från solcellen om solen sjunker
+lite, så att $\theta$ går från $30^\circ$ till $35^\circ$? 
+
+Vi kan börja med att ta fram första ordningens Taylorutveckling med
+\eqref{eq:linjarappoximation}. Vi får då
+\[
+p_1(\theta) = cos(\theta_0) - \sin(\theta_0)(\theta-\theta_0).
+\]
+
+Och förändringen kan approximeras med förändringen i taylorpolynomet:
+\[
+\Delta(\cos\theta) \approx \Delta{p_1} 
+= \Big| p_1(\theta_0+\Delta\theta) - p_1(\theta_0\theta) \Big|
+= \sin(\theta_0)\,\Delta\theta.
+\]
+Med $\sin30^\circ=\nicefrac{1}{2}$ och $\Delta\theta=5^\circ\approx
+\unit[0,09]{rad}$, blir den absoluta förändringen 
+$\Delta(\cos\theta)\approx 0,045$, vilket skulle svara mot en relativ
+förändring på 
+\[
+\frac{\Delta(\cos\theta)}{\cos{\theta_0}} \approx
+\frac{0,045}{\nicefrac{\sqrt{3}}{2}} \approx 
+0,052 \approx 5\,\%. 
+\] 
+\end{exempel}
 
 \end{document}
 
