@@ -52,7 +52,12 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,1.2.2}}
+\date{\today, \quad\texttt{v\,2.1}}
+%% Kommentar på versionsnumreringssystemet (a.b.c):
+%% a -- större revision, t.ex. lägga till/ta bort/flytta \section{} 
+%% b -- innehållsändring, t.ex. lägga till/ta bort/flytta 
+%%      \subsection{} eller subsubsection{}
+%% c -- små ändringar -- t.ex. stavning, grammatik eller formuleringar
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -283,13 +288,13 @@ systematiskt fel.
 
 För att sedan ta reda på precisionen i mätningarna behövs
 standardavvikelsen av $\delta{x}$. Denna fås enkelt som standardfelet
-från \eqref{eq:std_approx}. Men eftersom det beräknade värdet
-$\bar{x}$ är ett medelvärde betyder det att osäkerheten är mindre i
-$\bar{x}$ än i varje enskilt $\widetilde{x}_i$. Standardfelet från
-\eqref{eq:std_approx} ger däremot en mått på hur spridda värden man
-har fått. Som nämnts tidigare får man standardavvikelsen i
-\emph{medelvärdet} genom att dela med
-$\sqrt{N}$. Mätosäkerheten\footnotemark{} $\Delta{x}$ blir då
+från \eqref{eq:std_approx} i bilaga~\ref{sec:satser}. Men eftersom det
+beräknade värdet $\bar{x}$ är ett medelvärde betyder det att
+osäkerheten är mindre i $\bar{x}$ än i varje enskilt
+$\widetilde{x}_i$. Standardfelet från \eqref{eq:std_approx} ger
+däremot en mått på hur spridda värden man har fått. Som nämnts
+tidigare får man standardavvikelsen i \emph{medelvärdet} genom att
+dela med $\sqrt{N}$. Mätosäkerheten\footnotemark{} $\Delta{x}$ blir då
 
 {\Large
 \begin{equation} \label{eq:Delta_x}
@@ -307,7 +312,8 @@ att göra precis den här beräkningen, men bara nästan: man får $s$, sen
 måste man själv dela med $\sqrt{N}$. Samtidigt känns det lite som fusk
 att man bara kan ''slänga in ett extra $\sqrt{N}$ och så blev
 osäkerheten plötsligt mindre''.\footnotemark{} Men matten i
-avsnitt~\ref{sec:satser} visar att man ska göra det.
+bilaga~\ref{sec:statistik} (särskilt \ref{sec:satser}) visar att man
+ska göra det.
 \footnotetext{
   Det här var en av de svåraste sakerna att acceptera med felanalys
   när jag började med sånt. Men allt följer från \eqref{eq:var_mean}.
@@ -1166,6 +1172,17 @@ godtyckligt antal oberoende variabler.
   säger: att resultatet av en mätning på den ena ska inte påverka
   resultatet på den andra. }
 
+Med hjälp av \eqref{eq:ev_lin} kan man även skriva om uttrycket för
+variansens definition till
+\begin{equation}
+\VAR{X} =\ev{(X-\mu)^2}
+= \ev{X^2+\mu^2-2\mu X}
+= \ev{X^2} - \mu^2.
+\end{equation}
+Det här uttrycket kan vara bra att kunna, särkilt om man vill göra
+fler teoretiska analyser. 
+
+\paragraph{Medelvärden}
 Speciellt gäller att om man har $N$ stycken oberoende stokastiska variabler
 $X_i$ med lika fördelning och man vill ta ett medelvärde 
 \begin{equation} 
@@ -1192,17 +1209,18 @@ Variansen får man med \eqref{eq:var_lin} sedan som
 Dessa resultat kommer att användas i feluppsattningar genom att
 betrakta varje $X_i$ som en mätning av en viss storhet.
 
+
 \subsubsection{Skattning från mätdata}
 Har man ett stokastiskt system och vill försöka mäta dess väntevärde
 och standardavvikelse, så måste man ha många mätningar på det. Det är
 nu som statistiken kommer in i bilden.
 
-Från \eqref{eq:ev_mean} visade det sig att väntevärdet av ett
-medelvärde är samma som väntevärdet av det man mäter på. Vidare visade
-det sig att variansen av medelvärdet minskade som
-$\nicefrac{1}{N}$. Tillsammans ger detta att \emph{ju fler mätningar
-  man gör desto större är sannolikheten att medelvärdet ligger nära
-  väntevärdet}. 
+\paragraph{Väntevärde}
+Det visade det sig att väntevärdet av ett medelvärde är samma som
+väntevärdet av det man mäter på. Vidare visade det sig att variansen
+av medelvärdet minskade som $\nicefrac{1}{N}$. Tillsammans ger detta
+att \emph{ju fler mätningar man gör desto större är sannolikheten att
+  medelvärdet ligger nära väntevärdet}.  
 Detta betyder att man kan skatta väntevärdet med
 \begin{equation}\label{eq:ev_approx}
 \ev{X} = \mu \approx \bar{x} = \frac{1}{N}\sum_{i=1}^N x_i.
@@ -1210,6 +1228,10 @@ Detta betyder att man kan skatta väntevärdet med
 Här användes små bokstäver $x_i$ för att beteckna att de redan är
 uppmätta värden.
 
+Beviset av detta föjler direkt från \eqref{eq:ev_mean}
+och \eqref{eq:var_mean}. 
+
+\paragraph{Standardavvikelse}
 Om nu väntevärden gick att skatta som medelvärden bör man väl kunna
 göra det samma för varianser. Definitionen av varians i \eqref{eq:var}
 består ju av två väntevärden (två stycken eftersom $\mu=\ev{X}$), så
@@ -1231,7 +1253,63 @@ Notera att $s$ är standardfelet i uppsättnigen av alla
 mätpunkter. För att få \emph{standardfelet i medelvärdet}
 använder man \eqref{eq:var_mean} och får $\nicefrac{s}{\sqrt{N}}$.
 
+För att bevisa att \eqref{eq:var_approx} är en riktig skattning av
+variansen betraktar man återigen $N$ stycken oberoende likafördelade
+stokastiska variabler $X_i$ och deras medelvärde
+$\bar{X}=(X_1+\ldots+X_N)/N$. Sedan betraktar man summan
+\begin{equation}
+\hat{S} = \sum_{i=1}^N \big(X_i-\bar{X}\big)^2 
+= \sum_{i=1}^N \Big( (X_i-\mu) - (\Bar{X}-\mu) \Big)^2
+\end{equation}
+vars väntevärde kan beräknas med generaliseringen av
+\eqref{eq:ev_lin}. Man får då
+\begin{equation}\label{eq:ev_std_err}
+\ev{\hat{S}} 
+= \sum_{i=1}^N \overbrace{\ev{(X_i-\mu)^2}}^{=\sigma^2, \text{ per def.}}
+ +\sum_{i=1}^N \overbrace{\ev{(\bar{X}-\mu)^2}}^{=\sigma^2/N, \text{
+     enl. \eqref{eq:var_mean}}} 
+ -2\sum_{i=1}^N \ev{(X_i-\mu)(\bar{X}-\mu)}.
+\end{equation}
+De två första uttrycken är ganska lätthanterliga, men det sista kräver
+mer behandling. Här kommer det in att $X_i$ skulle vara
+\emph{oberoende}; det ger att $(X_i-\mu)$ och $(\bar{X}-\mu)$ bara
+''överlappar'' varandra i en $N$:tedel av fallen\footnotemark{},
+vilket betyder att
+\begin{equation}
+\ev{(X_i-\mu)(\bar{X}-\mu)} =
+\ev{(X_i-\mu)\left(\frac{X_i-\mu}{N}\right)} = \frac{\sigma^2}{N}.
+\end{equation}
+\footnotetext{Kom ihåg att $\bar{X}=(X_1+\ldots+X_N)/N$, vilket gör
+  att $\bar{X}$ till en $N$:tedel består av just $X_i$ för varje
+  $i$. Det krävs egentligen lite mer utförligare argument, men de
+  slutar i rätt så långa och trista algebraiska manövrer. }
+Det går nu att till slut knyta ihop säcken för \eqref{eq:ev_std_err}:
+\begin{equation}
+\ev{\hat{S}} = N\sigma^2 + N\frac{\sigma^2}{N} - 2N\frac{\sigma^2}{N} 
+= (N-1)\sigma^2.
+\end{equation}
+Detta visar att väntevärdet man förväntas få när man gör skattningen
+i \eqref{eq:var_approx} faktiskt är variansen
+$\sigma^2$.\footnotemark{} Detta kallas att skattningen är
+väntevärdesriktig. 
+\footnotetext{Det går även att bevisa att $\VAR{\hat{S}}$ minskar
+  ungefär som $\nicefrac{1}{N}$, men det är en betydligt längre och
+  snårigare väg att vandra än det vi visade här. }
 
+% Betrakta nu en term i den sista summan:
+% \begin{equation}
+% \begin{aligned}
+% \ev{(X_i-\mu)(\bar{X}-\mu)} 
+% &= \ev{(X_i-\mu)
+% \left( \frac{X_1+\ldots+X_i+\ldots+X_N}{N}-\mu\right)}\\
+% &= \ev{(X_i-\mu)
+% \left(\frac{X_i-\mu}{N}+
+%  \frac{\sum_{(j=1, j\neq i)}^NX_j}{N} -\frac{(N-1)\mu}{N}-\right)}\\
+% &= \overbrace{\ev{(X_i-\mu)\frac{X_i-\mu}{N}}}^{=\sigma^2/N, \text{ med \eqref{eq:ev_lin} och def.}} 
+% +\frac{\sum_{(j=1, j\neq i)}^N\ev{X_j}}{N}-\frac{(N-1)\mu}{N}
+% }
+% \end{aligned}
+% \end{equation}
 
 
 
