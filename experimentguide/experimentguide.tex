@@ -52,7 +52,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,2.1}}
+\date{\today, \quad\texttt{v\,2.2}}
 %% Kommentar på versionsnumreringssystemet (a.b.c):
 %% a -- större revision, t.ex. lägga till/ta bort/flytta \section{} 
 %% b -- innehållsändring, t.ex. lägga till/ta bort/flytta 
@@ -313,11 +313,32 @@ måste man själv dela med $\sqrt{N}$. Samtidigt känns det lite som fusk
 att man bara kan ''slänga in ett extra $\sqrt{N}$ och så blev
 osäkerheten plötsligt mindre''.\footnotemark{} Men matten i
 bilaga~\ref{sec:statistik} (särskilt \ref{sec:satser}) visar att man
-ska göra det.
+ska göra det. 
 \footnotetext{
   Det här var en av de svåraste sakerna att acceptera med felanalys
   när jag började med sånt. Men allt följer från \eqref{eq:var_mean}.
 }
+
+\begin{figure}
+\centering
+%\resizebox{0.5\textwidth}{!}{
+\input{figurer/std_mean.pdf_t}
+%}
+\caption{Jämförelse mellan spridningen bland alla mätpunkterna och i
+  medelvärdet. Med hög noggrannhet bör medelvärdet hamna nära mitten,
+  men det bör också hamna närmare mitten än vad vaje enskild mätpunkt
+  förväntas göra. }
+\label{fig:std_mean}
+\end{figure}
+
+Det går också att visualisera varför medelvärdet bör ha en mindre
+standardavvikelse.
+I \figref{fig:std_mean} syns ett sätt att se på varför man ska använda
+$s/\sqrt{N}$ för att skatta osäkerheten i medelvärdet. Medelvärdet bör
+helt enkelt ligga närmare det ''sanna'' värdet än vad man förväntar
+sig av en enskild märpunkt. Alltså att $s$ ger hur spridda \emph{alla}
+mätpunkterna är. Medan medelvärdet bör ha lägre sannolikhet att vara
+spritt, och det visar sig att den spridningen är just $s/\sqrt{N}$. 
 
 
 \section{Felpropagering}
@@ -341,8 +362,9 @@ dess sidlängder som $a=\unit[5\pm1]{cm}$ och $b=\unit[8\pm2]{cm}$. Då
 blir arean $\bar{A}=\unit[40]{cm^2}$. Men maximalt skulle den kunna vara
 $A_\text{max}=\unit[6]{cm}\times\unit[10]{cm}=\unit[60]{cm^2}$ och minimalt
 $A_\text{min}=\unit[4]{cm}\times\unit[6]{cm}=\unit[24]{cm^2}$, vilket skulle ge
-en osäkerhet på $\hat\Delta{A}=\unit[(60-24)]{cm^2}=\unit[36]{cm^2}$. 
-Detta är en \emph{väldig stor} osäkerhet.
+en osäkerhet på
+$\hat\Delta{A}=\unit[\frac{1}{2}(60-24)]{cm^2}=\unit[18]{cm^2}$.  
+Detta är en ganska stor osäkerhet i förhållande till arean.
 \end{exempel}
 
 Som exemplet visar så blev osäkerheten väldigt stor. Detta beror på
@@ -450,9 +472,9 @@ $\hat{\Delta}{A}=\unit[36]{cm^2}$ från exempel~\ref{ex:fel_insattning}.
 Tittar man på de relativa\footnotemark{} osäkerheterna så ligger de på
 20--25\,\% för $a$ och $b$, medan man får
 ${\Delta{A}}/{\bar{A}}=32\,\%$ respektive
-${\hat{\Delta}{A}}/{\bar{A}}=90\,\%$ som relativ osäkerhet i
-arean. Här verkar ju alternativet med 32\,\% stämma betydligt bättre
-överens med hur stora fel vi hade från början. 
+${\hat{\Delta}{A}}/{\bar{A}}=45\,\%$ som relativ osäkerhet i
+arean. Här verkar ju alternativet med 32\,\% stämma bättre överens med
+hur stora fel vi hade från början. 
 \footnotetext{En relativ osäkerhet är bara osäkerheten uttryckt i
   procent istället för absoluta värden.}
 \end{exempel}
