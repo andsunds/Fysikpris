@@ -25,6 +25,7 @@
 
 \newcommand{\VAR}[1]{\ensuremath\text{var}\!\left[#1\right]}
 
+\usepackage[stable]{footmisc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcounter{exempel_counter}%[section]
@@ -52,7 +53,8 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,2.2.2}\footnote{Den senaste versionen finns att hämta här: \url{https://github.com/andsunds/Fysikpris/blob/master/experimentguide/experimentguide.pdf}.}}
+\date{\today, \quad\texttt{v\,2.2.3}\footnote{Jag uppdaterar ständigt
+    det hät dokumentet, så den senaste versionen finns här: \url{https://github.com/andsunds/Fysikpris/blob/master/experimentguide/experimentguide.pdf}.}}
 %% Kommentar på versionsnumreringssystemet (a.b.c):
 %% a -- större revision, t.ex. lägga till/ta bort/flytta \section{} 
 %% b -- innehållsändring, t.ex. lägga till/ta bort/flytta 
@@ -728,18 +730,21 @@ Det slutgiltiga svaret blir då:
 
 \subsection{Mätning av $g$ med vattenparabel}\label{sec:vattenparabel}
 Det visar sig att vattenytan i en roterande skål med vatten kommer att
-forma en parabel\footnotemark{}. Vidare gäller att en parabel kommer
+forma en parabel.\footnotemark{} Vidare gäller att en parabel kommer
 att folusera plant infallande ljus till en fokalpunkt som visar sig
 ligga på höjden
 \begin{equation}\label{eq:vattenparabel}
 h=\frac{g}{2\omega^2}.
 \end{equation}
 Här är $\omega$ rotationens vinkelhastighet.
-\footnotetext{Se \url{https://github.com/andsunds/Rotating_Bowl} för
-  en utförligare beskrivning av teorin och
-  experimentuppställningen. (Filen heter
-  \texttt{Sundstrom-Adawi\_2016.pdf}, för att ladda ner trycker man på
-  ''raw''.) 
+
+\footnotetext{För att inte bli anklagad för plagiat bör här nämnas
+  att det här avsnittet är baserat på innehållet i artikeln
+  A. Sundström \& T. Adawi, 2016, \textit{Measuring g using a rotating
+    liquid mirror: enhancing laboratory learning}, Physics education,
+  \textbf{51}. (Det finns en kopia av artikeln här:
+  \url{https://github.com/andsunds/Rotating_Bowl} filen heter
+  \texttt{Sundstrom-Adawi\_2016.pdf}).
 }
 
 \paragraph{Lösning}
