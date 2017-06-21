@@ -1,0 +1,235 @@
+\documentclass[11pt,a4paper, 
+english, swedish %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figurer/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Cange the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+            left   = 2.5cm, right  = 2.5cm %% left and right margins
+]{geometry}
+
+
+%% If you want to chage the formating of the section headers
+%\renewcommand{\thesection}{...}
+
+
+%\setlength{\parindent}{0pt} % Default is 15pt.
+%\setlength{\parskip}{9pt plus3pt minus2pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you want to use an external file for the title page
+%\input{titlepages.tex}
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Lägerrapport \\
+{\Large Experimenttränigslägret i Lund, juni 2017} }
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+\section*{Utrustning}
+På fredagen, 9 juni, hämtade jag och Erik ut experimentutrustningarna
+från Bosses föråd och bar ner dem till de bokade experimentlokalerna i
+Fysicum, på Lunds universitet. 
+Vi hämtade:
+\begin{itemize}
+\item Elmätövningarna 
+      \\ -- 3 uppställningar i 3 lådor
+\item Thailandsexperimenten 
+(''Electrical Blackbox: Capacitive Displacement Sensor'' och
+ ''Mechanical Blackbox: a cylinder with a ball inside'') 
+      \\ -- 4 uppställningar av vardera experiment i 1 låda och 1 kartong
+\item Estlandsexperimenten 
+(''The magnetic permeability of water'' och
+ ''Nonlinear Black Box'')
+      \\ -- 2 uppställningar av vardera experiment i 2 lådor och 1 kartong
+\item 2 diverselådor innehållande verktyg, reservbatterier och förlängningssladdar. 
+\end{itemize}
+Med reservation för eventuella fel i antalet lådor.
+
+\subsubsection*{Defekt utrustning}
+En väggadapter till en tongenerator i elmätövningarna fungerar
+inte. Detta går att kringgå, men vi bör skaffa en ny inför nästa
+läger. 
+
+\subsubsection*{Förbrukingsartiklar}
+En säkring (200\,mA) byttes i en av multimetrarna.
+
+Det finns fortfarande många säkringar och reservbatterier kvar. Inga
+förbrukningsvaror behöver köpas in. 
+
+
+\section*{Genomförande}
+Experimentträningslägret pågick från omkring klockan 9 på lördagen
+till 17 på söndagen. Nedan visas en grov översik av planeringen.
+\begin{center}
+\begin{tabular}{|l|c|c|}\hline
+ & förmiddag &  eftermiddag
+\\\hline
+lördag & elmätövningar & Thailandsexperiment
+\\\hline
+söndag & statistik- och mätfelsgenomgång & Estlandsexperiment 
+\\\hline
+\end{tabular}
+\end{center}
+
+Deltagarna hade väldigt fria händer under lägret, förut på vilka
+experiment de skulle göra. När de väl har fått ett experiment och
+uppgiftspapper blir de lämnade för sig själva om de inte har några
+frågor. 
+
+\subsubsection*{Elmätövningarna}
+Elmätövningarna gjordes i tre grupper om två och två. Deltagarna
+jobbade med elmätövningarna från klockan 10 till 13, med fikapauser. 
+Det var lite för lite tid för att hinna med hela häftet. Alla
+grupperna hann testa de olika momenten, men ingen av dem hann med
+den sista övningen, i linjärisering.  
+
+I min mening
+är det dock inte någon större risk att linjäriseringsuppgiften inte
+hanns med. Man behöver inte heller ta bort den eftersom utrustningen
+redan finns och det kan vara bra med en extraövning om någon är
+lite snabbare. 
+
+\subsubsection*{Thailandsexperimenten}
+Efter lunchen fick deltagarna sitta ensamma med varsitt
+Thailandsexperiment. De var uppdelade så att tre jobbade med
+kondensatorn och de andra tre jobbade med pendeln. 
+
+Efter omkring 1,5--2~timmar fick de som jobbade med samma experiment
+gå samman och jobba tillsammans. Efter ytterligare 20--40~minuter fick
+de lösningar och rättningsmallar utdelade. Därefter bytte de experiment
+och gjorde om samma procedur med det nya experimentet. 
+
+Allt som allt pågick eftermiddagens övningar mellan klockan
+14--19, även här med fikapauser. Inga lyckes helt lösa några
+experiment, men det var väntat då de här övningarna mest är till för
+att de ska få känna på hur IPhO kommer att bli. Det var ungefär lagom
+med tid -- mycket mer än 5~timmar kan bli för mycket för att hålla
+koncentrationen uppe. 
+
+
+\subsubsection*{Statistik- och mätfelsgenomgång}
+Jag höll en genomgång av statistik och hur man uppskattar mätfel
+samt hur man propagerar osäkerheter från flera olika mätvärden till
+ett slutvärde. Detta tog drygt 2~timmar till klockan 12. Genomgången
+var till stor del byggd på häftet\footnotemark{} som jag skrev förra
+året, och deltagarna har fått varsin kopia. 
+\footnotetext{\url{
+https://github.com/andsunds/Fysikpris/blob/master/experimentguide/experimentguide.pdf}}
+
+Utav genomgången kändes det som om statistiken var på för hög nivå
+för deltagarna. Till nästa år bör nog statistikdelen kortas ner 
+från genomgången. Samtidigt är feluppskattningar från en mätserie svår
+att presentera utan att antingen lägga en grund inom statistik eller
+bara ge formlerna utan något sammanhang.
+
+Propagering av mätfel var lättare för deltagarna att förstå rent
+intuitivt, men sen är frågan om de kommer ihåg hur man gör det sen. 
+
+Jag glömde att nämna hur IPhO behandlar upplösningen på ett
+instrument. 
+
+
+
+\subsubsection*{Estlandsexperimenten}
+Här delades deltagarna upp så att två deltagare jobbade med varsin
+uppställing av ''magnetic permeability of water'' (den med lasern),
+och de andra fyra jobbade två och två med ''Nonlinear Black Box''.
+
+Här jobbade de med samma experiment hela eftermiddagen, från
+14--17. De var alla lite trötta på att jobba med uppgifter om svarta
+lådor, så fler hade viljat jobba med lasern. Här är vi dock begränsade
+av att vi bara har två uppställningar av vardera Estlandsexperiment. 
+
+Förra året hade vi samma uppdelning av Estlandsexperimenten där varje
+enskild deltagare bara fick testa på ett av experimenten. Då fick
+två av deltagarna låna hem varsin ''Nonlinear Black Box''. Så gjorde
+vi inte i år. 
+
+
+
+\section*{Anmärkningar}
+Över lag gick allt bra. Två punkter att tänka på till nästa år är dock
+att korta ner teorigenomgången något, och att i förväg bestämma var vi
+äter lunch. Vi tappade en del tid med att vela med var vi skulle äta. 
+
+Ovanligt för i år var att vi hade sex deltagar på lägret. Detta
+eftersom även två reserver var inbjudna, men bara en kom. Det är
+kanske bra att bjuda in reserverna i en situation som här, där
+ordinarie lagmedlemmar inte var säkra på om de skulle åka. Men om det
+kommer mer än 5--7 deltagare kan det bli brist på
+experimentuppställningar. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%  Some (useful) templates
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer: ''.
+
+
+%% Including PDF-documents
+\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
+
+%% Figures (pdf, png, jpg, ...)
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=.8\textwidth]{file_name.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figures from xfig's "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+
+%% If you want to add something to the ToC
+%% (Without having an actual header in the text.)
+\stepcounter{section} %For example a 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
