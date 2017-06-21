@@ -53,7 +53,7 @@ Andréas Sundström\footnote{
 \href{mailto:sundstrom.andreas@gmail.com}{\nolinkurl{sundstrom.andreas@gmail.com}}
 \: Jag tar gärna emot synpunkter och förslag.}
 }
-\date{\today, \quad\texttt{v\,2.2.3}\footnote{Jag uppdaterar ständigt
+\date{\today, \quad\texttt{v\,2.2.4}\footnote{Jag uppdaterar ständigt
     det hät dokumentet, så den senaste versionen finns här: \url{https://github.com/andsunds/Fysikpris/blob/master/experimentguide/experimentguide.pdf}.}}
 %% Kommentar på versionsnumreringssystemet (a.b.c):
 %% a -- större revision, t.ex. lägga till/ta bort/flytta \section{} 
@@ -162,7 +162,7 @@ man börjar göra sina mätningar.
 När man vill uppskatta hur stora experimentella fel/osäkerheter man
 har finns det två typer av fel och två typer av feluppskattningar. De
 två typerna av fel som finns är systematiska och statistiska. Sedan är
-de två typerna av feluppskattningar som man behöver kunna. Dels direkt
+de två typerna av feluppskattningar som man behöver kunna, dels direkt
 feluppskattning (av statistiska fel), dels propagering av osäkerhet. 
 
 I det här avsnittet presenteras de två typerna av fel och direkt
@@ -231,9 +231,10 @@ på ett hårstrå kommer man bara att få 0\,mm som resultat.
   flera mätningar. }
 
 Sättet att hantera detta på är att erkänna att man har ett
-systematiskt fel som kommer från upplösningen, och ta med det i
-beräkningarna. Detta gör man genom att själv uppskatta vad
-avrundningsfelet kan vara i mätningen. Generellt gäller att
+systematiskt fel som kommer från upplösningen och ta med det i
+beräkningarna -- om man sprindningen i mätvärdena är större. Detta gör
+man genom att själv uppskatta vad avrundningsfelet kan vara i
+mätningen. Generellt gäller att 
 \begin{itemize}
 \item analoga intrument har ett avrundningsfel som är halva
   avståndet mellan markörer. Alltså att en linjal som är mm-graderad
@@ -271,11 +272,14 @@ har ett mätfel~$\delta{x}$. Det som mäts blir då
 \begin{equation}
 \widetilde{x}_i=x+\delta{x}_i.
 \end{equation}
-Utan någon mer informationom $\delta{x}$ går det inte att säga så mycket mer
-från mätningen. Men som sagts tidigare antas mätfelet $\delta{x}$ vara
-normalfördelat med $\mu=0$ fast med ett okänt $\sigma$. Det är oftas
-$\sigma$ som man tar reda på för att sen få en osäkerhetsuppskattning av
-ens mätning. 
+Utan någon mer information om $\delta{x}$ går det inte att säga så
+mycket mer från mätningen. Men man antar ofta att mätfelet
+$\delta{x}$ är normalfördelat\footnotemark{} med väntevärde $\mu=0$,
+fast med ett okänt $\sigma$. Det är oftas $\sigma$ som man tar reda på
+för att sen få en osäkerhetsuppskattning av ens mätning. 
+
+\footnotetext{Se bilaga \ref{sec:statistik} för en grundligare
+  behandlig av statistik och speciellt normalfördelningen. }
 
 För att få fram ett värde på $x$ tar man ett medelvärdet av flera
 mätningar. Detta ger
@@ -590,7 +594,7 @@ att använda är den naturliga logaritmen ''ln''.
 
 \paragraph{Konstruera ''egna'' linjära samband}
 Man ska också komma ihåg att man själv får arrangera om uttryck så att
-man får linjära samband. Det kan handla om att göra ett fiffigt val av
+man får linjära samband. Detta handlar om att göra ett fiffigt val av
 vad man ska ha på axlarna. Man måste heller inte ha just exakt den
 eftersökta storheten som lutningen, utan det kan vara någon funktion
 av den.
@@ -972,7 +976,7 @@ dock inte säga något om hur bra mätningen var. Men med flera mätningar
 kan vi börja göra statistik över dem. Då kan man börja uppskatta hur
 säker man kan vara på ens resutat.
 
-Jag vill även betona vikten av statistik i framtida vetenskapliga och
+Jag vill även betona vikten av statistik i framtida vetenskapliga eller
 tekniska karriärer. \emph{Statistik är ett mycket kraftfullt verktyg.}
 Statistiken, när man börjar behärska den, är mycket mer än bara
 ''medelvärden och standardavvikelser''; den spelar en väsentlig roll i
